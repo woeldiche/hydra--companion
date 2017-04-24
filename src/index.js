@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import SpellCalculator from './App';
+import Data from './hydraConfig';
 import './index.css';
 
 ReactDOM.render(
-  <App />,
+  <SpellCalculator data={Data} />,
   document.getElementById('root')
 );
