@@ -92,7 +92,7 @@ class SpellCalculator extends Component {
 
             {/* Delivery */}
             <SelectField underlineShow={false}  className="form-select col-main" /* value={this.state.value} onChange={this.handleChange} */ name="delivery" floatingLabelText="Delivery" >
-              {this.returnItems(this.props.data.browsers)}
+              {this.returnItems(this.props.data.delivery)}
             </SelectField>
             <TextField underlineShow={false}  className="form-input col-right" defaultValue="0" name="deliveryDiff" floatingLabelText="Diff." />
             <Divider />
@@ -106,7 +106,7 @@ class SpellCalculator extends Component {
 
             {/* Area */}
             <SelectField underlineShow={false}  className="form-select col-main" name="area" floatingLabelText="Area" >
-              {this.returnItems(this.props.data.browsers)}
+              {this.returnItems(this.props.data.area)}
             </SelectField>
             <TextField underlineShow={false}  className="form-input col-right" defaultValue="0" name="areaDiff" floatingLabelText="Diff." />
             <Divider />

@@ -85,7 +85,67 @@ Data.range = new Map([
 ]);
 
 Data.area = new Map([
-
+  ["None", 0],
+  ["Cone 1.5 m, 30 grader", {diff: 3}],
+  ["Cone 2.5 m, 30 grader", {diff: 6}],
+  ["Cone 5.0 m, 30 grader", {diff: 8}],
+  ["Cone 10.0 m, 30 grader", {diff: 12}],
+  ["Cone 20.0 m, 30 grader", {diff: 18}],
+  ["Line 1.5 m", {diff: 2}],
+  ["Line 2.5 m, diameter 1.5 m", {diff: 4}],
+  ["Line 10.0 m, diameter 1.5 m", {diff: 8}],
+  ["Line 20.0 m, diameter 1.5 m", {diff: 10}],
+  ["Line 40.0 m, diameter 1.5 m", {diff: 20}],
+  ["0.5 m3./skill", {diff: 3, value: function(skill) {
+      let area = (skill * 0.5);
+      return area + ' m3.';
+    }
+  }],
+  ["3.0 m3./skill", {diff: 6, value: function(skill) {
+      let area = (skill * 3);
+      return area + ' m3.';
+    }
+  }],
+  ["10 m3/skill", {diff: 12, value: function(skill) {
+      let area = (skill * 10);
+      return area + ' m3.';
+    }
+  }],
+  ["Pillar 2.5 m Diameter, 13.0 m High", {diff: 4}],
+  ["Pillar 5.0 m Diameter, 13.0 m High", {diff: 8}],
+  ["Pillar 10.0 m Diameter, 13.0 m High", {diff: 12}],
+  ["Pillar 15.0 m Diameter, 13.0 m High", {diff: 20}],
+  ["Sphere 1,5 m Radius", {diff: 4}],
+  ["Sphere 2,5 m Radius", {diff: 8}],
+  ["Sphere 5.0 m Radius", {diff: 12}],
+  ["Sphere 10.0 m Radius", {diff: 16}],
+  ["Sphere 20.0 m Radius", {diff: 24}],
+  ["Wall 1.5 m high, 1.5 m Long, 0.5 m Wide", {diff: 4}],
+  ["Wall 3.0 m high, 3.0 m Long, 0.5 m Wide", {diff: 8}],
+  ["Wall 0.5 m high, 0.5 m long, 0.5 m wide/skill", {diff: 16, value: function(skill) {
+      let area = (skill * 0.5);
+      return 'Wall 0.5 m high, 0.5 m long, ' + area + ' m wide.';
+    }
+  }],
+  ["Wall 1.5 m high, 1.5 m Long,1.5 m Wide/skill", {diff: 24, value: function(skill) {
+      let area = (skill * 1.5);
+      return 'Wall 0.5 m high, 0.5 m long, ' + area + ' m wide.';
+    }
+  }],
+  ["Wall Hemisphere 0.5 m square/skill, radius up to 0.5 m/skill, 0.5 m/skill high", {diff: 12, value: function(skill) {
+      let square = (skill * 0.5);
+      let radius = (skill * 0.5);
+      let height = (skill * 0.5);
+      return "Wall Hemisphere " + square + " m square, radius up to " + radius + " m, " + height + " high";
+    }
+  }],
+  ["Wall ring 0.5 m long/skill, radius of up to 0.5 m/skill, 0.5 m/skill high", {diff: 12, value: function(skill) {
+      let long = (skill * 0.5);
+      let radius = (skill * 0.5);
+      let height = (skill * 0.5);
+      return "Wall ring " + long + " m long, radius up to " + radius + " m, " + height + " high";
+    }
+  }],
 ]);
 
 Data.addon = new Map([
