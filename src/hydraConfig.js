@@ -261,11 +261,11 @@ Data.effect = new Map([
 
   Curse		Necro	10
   Baleful Polymorph
-  	Bestow Curse Trap
-  	Curse of the Ages
-  	Mummy Rot
-  	Unluck
-  	Werewolf Lycanthropy
+  Bestow Curse Trap
+  Curse of the Ages
+  Mummy Rot
+  Unluck
+  Werewolf Lycanthropy
 
   Poison	Name 	Necro	5
   Arsenic
@@ -305,7 +305,7 @@ Data.effect = new Map([
   Wyvern Poison
   */
 
-  ["Transmutationation",
+  ["Transmutation",
     {children: new Map([
       ["Dimension Door", {diff: 10}],
       ["Fly", {diff: 5}],
@@ -319,11 +319,11 @@ Data.effect = new Map([
       ["Temporal Stasis", {diff: 5}],
       ["Transmutation touch: Entangle", {diff: 5}],
       ["Transmutation touch: Petrify", {diff: 10}],
-      ["Web", {diff: 10}],
+      /*["Web", {diff: 10}],*/
     ])
   }],
 
-  ["Transmutationation (Body Enhancement)",
+  ["Transmutation (Body Enhancement)",
     {children: new Map([
       ["Stat enhancement", {diff: 5}],
       ["All-Around", {diff: 5}],
