@@ -113,35 +113,35 @@ class SpellCalculator extends Component {
 
             {/* Add-on */}
             <SelectField underlineShow={false}  className="form-select col-main" name="addon" floatingLabelText="Add-on" >
-              {this.returnItems(this.props.data.browsers)}
+              {this.returnItems(this.props.data.addon)}
             </SelectField>
             <TextField underlineShow={false}  className="form-input col-right" defaultValue="0" name="addonDiff" floatingLabelText="Diff."  />
             <Divider />
 
             {/* Duration */}
             <SelectField underlineShow={false}  className="form-select col-main" name="duration" floatingLabelText="Duration" >
-              {this.returnItems(this.props.data.browsers)}
+              {this.returnItems(this.props.data.duration)}
             </SelectField>
             <TextField underlineShow={false}  className="form-input col-right" defaultValue="0" name="durationDiff" floatingLabelText="Diff." />
             <Divider />
 
             {/* Save */}
             <SelectField underlineShow={false}  className="form-select col-main" name="save" floatingLabelText="Save" >
-              {this.returnItems(this.props.data.browsers)}
+              {this.returnItems(this.props.data.save)}
             </SelectField>
             <TextField underlineShow={false}  className="form-input col-right" name="dcValue" floatingLabelText="DC." />
             <Divider />
 
-            {/* Duration */}
+            {/* Damage */}
             <SelectField underlineShow={false}  className="form-select col-main" name="damage" floatingLabelText="Damage" >
-              {this.returnItems(this.props.data.browsers)}
+              {this.returnItems(this.props.data.damage)}
             </SelectField>
             <TextField underlineShow={false}  className="form-input col-right" defaultValue="0" name="damageDiff" floatingLabelText="Diff." />
             <Divider />
 
-            {/* Duration */}
+            {/* SR */}
             <SelectField underlineShow={false}  className="form-select col-main" name="sr" floatingLabelText="Spell Resistance" >
-              {this.returnItems(this.props.data.browsers)}
+              {this.returnItems(this.props.data.sr)}
             </SelectField>
             <TextField underlineShow={false}  className="form-input col-right" defaultValue="0" name="srDiff" floatingLabelText="Diff." />
             <Divider />
