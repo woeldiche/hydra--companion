@@ -5,8 +5,13 @@
 }
 .page {
   margin: 10px auto;
-  padding: 20px 0;
+
   max-width: 600px;
+}
+
+.section {
+  padding: 20px 0;
+  margin-bottom: 40px;
 }
 
 .form-select {

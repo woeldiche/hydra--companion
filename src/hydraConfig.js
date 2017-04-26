@@ -1,11 +1,5 @@
 const Data = {};
 
-Data.browsers = new Map([
-  ["Chrome Som er en browser", 1],
-  ["Firefox", 2],
-  ["Edge", 3]
-]);
-
 Data.school = new Map([
   ["Abjuration"],
   ["Conjuration"],
@@ -20,7 +14,7 @@ Data.school = new Map([
 ]);
 
 Data.effect = new Map([
-  ["Arcana/Divine Esoterica",
+  ["Arcana & Divine Esoterica",
     {children: new Map([
       ["Arcane Mark", {diff: 1}],
       ["Prestidigitation", {diff: 1}],
@@ -426,23 +420,26 @@ Data.delivery = new Map([
 ]);
 
 Data.range = new Map([
-  ["Melee/Personal", {diff: 0, value: 0}],
-  ["Close 5.0 m + 2 m/2skill", {diff: 3, value: function(skill) {
+  ["Melee & Personal", {diff: 0, label: function() {
+      return 0;
+    }
+  }],
+  ["Close 5.0 m + 2 m/2skill", {diff: 3, label: function(skill) {
       let range = 5 + (Math.floor(skill/2) * 2);
       return range + ' meters.';
     }
   }],
-  ["Local 25.0 m + 5.0 m/skill", {diff: 6, value: function(skill) {
+  ["Local 25.0 m + 5.0 m * skill", {diff: 6, label: function(skill) {
       let range = 25 + (skill * 5);
       return range + ' meters.';
     }
   }],
-  ["Remote 125.0 m + 15.0 m/skill", {diff: 12, value: function(skill) {
+  ["Remote 125.0 m + 15.0 m * skill", {diff: 12, label: function(skill) {
       let range = 5 + (skill * 2);
       return range + ' meters.';
     }
   }],
-  ["Unlimited", {diff: 40, value: function(skill) {
+  ["Unlimited", {diff: 40, label: function(skill) {
       return 'Unlimited.';
     }
   }],
@@ -460,17 +457,17 @@ Data.area = new Map([
   ["Line 10.0 m, diameter 1.5 m", {diff: 8}],
   ["Line 20.0 m, diameter 1.5 m", {diff: 10}],
   ["Line 40.0 m, diameter 1.5 m", {diff: 20}],
-  ["0.5 m3./skill", {diff: 3, value: function(skill) {
+  ["0.5 m3. * skill", {diff: 3, label: function(skill) {
       let area = (skill * 0.5);
       return area + ' m3.';
     }
   }],
-  ["3.0 m3./skill", {diff: 6, value: function(skill) {
+  ["3.0 m3. * skill", {diff: 6, label: function(skill) {
       let area = (skill * 3);
       return area + ' m3.';
     }
   }],
-  ["10 m3/skill", {diff: 12, value: function(skill) {
+  ["10 m3 * skill", {diff: 12, label: function(skill) {
       let area = (skill * 10);
       return area + ' m3.';
     }
@@ -486,24 +483,24 @@ Data.area = new Map([
   ["Sphere 20.0 m Radius", {diff: 24}],
   ["Wall 1.5 m high, 1.5 m Long, 0.5 m Wide", {diff: 4}],
   ["Wall 3.0 m high, 3.0 m Long, 0.5 m Wide", {diff: 8}],
-  ["Wall 0.5 m high, 0.5 m long, 0.5 m wide/skill", {diff: 16, value: function(skill) {
+  ["Wall 0.5 m high, 0.5 m long, 0.5 m wide * skill", {diff: 16, label: function(skill) {
       let area = (skill * 0.5);
       return 'Wall 0.5 m high, 0.5 m long, ' + area + ' m wide.';
     }
   }],
-  ["Wall 1.5 m high, 1.5 m Long,1.5 m Wide/skill", {diff: 24, value: function(skill) {
+  ["Wall 1.5 m high, 1.5 m Long,1.5 m Wide * skill", {diff: 24, label: function(skill) {
       let area = (skill * 1.5);
       return 'Wall 0.5 m high, 0.5 m long, ' + area + ' m wide.';
     }
   }],
-  ["Wall Hemisphere 0.5 m square/skill, radius up to 0.5 m/skill, 0.5 m/skill high", {diff: 12, value: function(skill) {
+  ["Wall Hemisphere 0.5 m square * skill, radius up to 0.5 m * skill, 0.5 m * skill high", {diff: 12, label: function(skill) {
       let square = (skill * 0.5);
       let radius = (skill * 0.5);
       let height = (skill * 0.5);
       return "Wall Hemisphere " + square + " m square, radius up to " + radius + " m, " + height + " high";
     }
   }],
-  ["Wall ring 0.5 m long/skill, radius of up to 0.5 m/skill, 0.5 m/skill high", {diff: 12, value: function(skill) {
+  ["Wall ring 0.5 m long * skill, radius of up to 0.5 m * skill, 0.5 m * skill high", {diff: 12, label: function(skill) {
       let long = (skill * 0.5);
       let radius = (skill * 0.5);
       let height = (skill * 0.5);
@@ -519,43 +516,43 @@ Data.addon = new Map([
   ["Charged 1pr 3 skill", {diff: 10}],
   ["Charged 1pr 2 skill", {diff: 20}],
   ["Charged 1pr 1 skill", {diff: 30}],
-  ["Chain 1pr 3/skill max 3 m apart", {diff: 5}],
-  ["Chain 1pr 3/skill max 6 m apart", {diff: 10}],
-  ["Chain 1pr 3/skill max 12 m apart", {diff: 15}],
-  ["Chain 1pr 3/skill max 15 m apart", {diff: 20}],
-  ["Chain 1pr 3/skill max 18 m apart", {diff: 25}],
+  ["Chain 1pr 3 * skill max 3 m apart", {diff: 5}],
+  ["Chain 1pr 3 * skill max 6 m apart", {diff: 10}],
+  ["Chain 1pr 3 * skill max 12 m apart", {diff: 15}],
+  ["Chain 1pr 3 * skill max 15 m apart", {diff: 20}],
+  ["Chain 1pr 3 * skill max 18 m apart", {diff: 25}],
   ["Ranged Touch 1 attack ", {diff: 1}],
-  ["Ranged Touch 1 atk/6skil max 3 m apart", {diff: 5}],
-  ["Ranged Touch 1 atk/3skil max 3 m apart", {diff: 10}],
-  ["Ranged Touch 1 atk/2skil max 3 m apart", {diff: 20}],
-  ["Ranged Touch 1 atk/1skil max 3 m apart", {diff: 30}],
+  ["Ranged Touch 1 atk * 6skil max 3 m apart", {diff: 5}],
+  ["Ranged Touch 1 atk * 3skil max 3 m apart", {diff: 10}],
+  ["Ranged Touch 1 atk * 2skil max 3 m apart", {diff: 20}],
+  ["Ranged Touch 1 atk * 1skil max 3 m apart", {diff: 30}],
 ]);
 
 Data.duration = new Map([
   ["Instant", {diff: 1}],
-  ["Concentration Skill/5 rounds", {diff: 10}],
+  ["Concentration Skill * 5 rounds", {diff: 10}],
   ["Permanent", {diff: 100}],
-  ["1 round/per 2 skill (D)", {diff: 5, value: function(skill) {
+  ["1 round per 2 skill (D)", {diff: 5, label: function(skill) {
       let duration = (Math.floor(skill/2));
       return duration + ' rounds.';
     }
   }],
-  ["1 min/per 2 skill (D)", {diff: 10, value: function(skill) {
+  ["1 min per 2 skill (D)", {diff: 10, label: function(skill) {
       let duration = (Math.floor(skill/2));
       return duration + ' minutes.';
     }
   }],
-  ["10 min/per 2 skill (D)", {diff: 20, value: function(skill) {
+  ["10 min per 2 skill (D)", {diff: 20, label: function(skill) {
       let duration = (Math.floor(skill/2) * 10);
       return duration + ' minutes.';
     }
   }],
-  ["1 hour/per 2 skill (D)", {diff: 30, value: function(skill) {
+  ["1 hour per 2 skill (D)", {diff: 30, label: function(skill) {
       let duration = (Math.floor(skill/2));
       return duration + ' hour(s).';
     }
   }],
-  ["1 day /per 2 skill (D)", {diff: 60, value: function(skill) {
+  ["1 day per 2 skill (D)", {diff: 60, label: function(skill) {
       let duration = (Math.floor(skill/2));
       return duration + ' day(s).';
     }
