@@ -580,9 +580,43 @@ Data.sr = new Map([
   ["No"]
 ]);
 
-/*
-let rangeValue = Data.range.get("Close 5.0 m + 2 m/2skill").value(10);
-console.log(rangeValue);
-*/
+// Get values from config data to update other states as needed.
+Data.get = function (name, key) {
+  // Check if hierarchy of keys exists to get the second level.
+  const keyArray = key.split("/");
+  const selectedKeyValue = keyArray.length > 1 ? Data[name].get(keyArray[0]).children.get(keyArray[1]) : Data[name].get(keyArray[0]);
+  let newDiff = 0;
+  let newLabel = key;
+  let damage = true;
+  let area = true;
 
+  // Check if object exists, otherwise fall back to defaults.
+  if (selectedKeyValue === Object(selectedKeyValue)) {
+    // If diff exists use it, otherwise leave as default (0)
+    if (selectedKeyValue.hasOwnProperty('diff')) {
+      newDiff = selectedKeyValue.diff;
+    }
+
+    // If special calculated value exists use it, other reuse key as label
+    if (selectedKeyValue.hasOwnProperty('label')) {
+      newLabel = selectedKeyValue.label;
+    }
+
+    if (selectedKeyValue.hasOwnProperty('area')) {
+      area = selectedKeyValue.area;
+    }
+
+    if (selectedKeyValue.hasOwnProperty('damage')) {
+      damage = selectedKeyValue.damage;
+    }
+  }
+
+  return {
+    diff: newDiff,
+    label: newLabel,
+    key: key,
+    allowDamage: damage,
+    allowArea: area
+  }
+}
 export default Data;
