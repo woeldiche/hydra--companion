@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SpellCalculator from './SpellCalculator';
 // import SpellCard from './SpellCard';
-import HydraData from './hydraConfig';
+import HydraData from './HydraData';
 
 
 import './App.css';
