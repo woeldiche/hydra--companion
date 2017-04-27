@@ -148,234 +148,191 @@ class SpellCalculator extends Component {
 
   render() {
     return (
+      <Paper className="section">
+        <TextField
+          name="spellName"
+          value={this.state.spellName}
+          onChange={this.handleChange("flat", "spellName")}
+          className="form-input col-main"
+          floatingLabelText="Spell name"
+        />
 
-          <Paper className="section">
+        <SelectField
+          name="school"
+          value={this.state.school}
+          onChange={this.handleChange("flat", "school")}
+          className="form-input col-main"
+          floatingLabelText="School of magic"
+        >
+          {this.returnItems(this.props.data.school)}
+        </SelectField>
 
-              {/* Spell name */}
-              <TextField
-                name="spellName"
-                value={this.state.spellName}
-                onChange={this.handleChange("flat", "spellName")}
-                className="form-input col-main"
-                floatingLabelText="Spell name"
-                // underlineShow={false}
-              />
-              {/* <Divider /> */}
+        <Divider style={{marginTop: '25px',}} />
 
-              {/* Magic School */}
-              <SelectField
-                name="school"
-                value={this.state.school}
-                onChange={this.handleChange("flat", "school")}
-                className="form-input col-main"
-                //underlineShow={false}
-                floatingLabelText="School of magic"
-              >
-                {this.returnItems(this.props.data.school)}
-              </SelectField>
-              <Divider style={{marginTop: '25px',}} />
+        <SelectField
+          name="effect"
+          value={this.state.effect.value}
+          onChange={this.handleChange("deep", "effect")}
+          className="form-select col-main"
+          floatingLabelText="Base effect"
+        >
+          {this.returnItems(this.props.data.effect)}
+        </SelectField>
 
-              {/* Base effect */}
-              <SelectField
-                name="effect"
-                value={this.state.effect.value}
-                onChange={this.handleChange("deep", "effect")}
-                //underlineShow={false}
-                className="form-select col-main"
-                floatingLabelText="Base effect"
-              >
-                {this.returnItems(this.props.data.effect)}
-              </SelectField>
-              <TextField
-                name="effectDiff"
-                value={this.state.diff.effect}
-                onChange={this.handleDiffChange}
-                //underlineShow={false}
-                className="form-input col-right"
-                floatingLabelText="Diff."
-              />
-              {/*<Divider />*/}
+        <TextField
+          name="effectDiff"
+          value={this.state.diff.effect}
+          onChange={this.handleDiffChange}
+          className="form-input col-right"
+          floatingLabelText="Diff."
+        />
 
-              {/* Casting time */}
-              <SelectField
-                name="time"
-                value={this.state.time.value}
-                onChange={this.handleChange("deep", "time")}
-                //underlineShow={false}
-                className="form-select col-main"
-                floatingLabelText="Casting time"
-              >
-                {this.returnItems(this.props.data.time)}
-              </SelectField>
-              <TextField
-                name="timeDiff"
-                value={this.state.diff.time}
-                onChange={this.handleDiffChange}
-                //underlineShow={false}
-                className="form-input col-right"
-                floatingLabelText="Diff."
-              />
-              {/* <Divider /> */}
+        <SelectField
+          name="time"
+          value={this.state.time.value}
+          onChange={this.handleChange("deep", "time")}
+          className="form-select col-main"
+          floatingLabelText="Casting time"
+        >
+          {this.returnItems(this.props.data.time)}
+        </SelectField>
+        <TextField
+          name="timeDiff"
+          value={this.state.diff.time}
+          onChange={this.handleDiffChange}
+          className="form-input col-right"
+          floatingLabelText="Diff."
+        />
 
-              {/* Components */}
-              <SelectField
-                name="components"
-                value={this.state.components.value}
-                onChange={this.handleChange("deep", "components")}
-                //underlineShow={false}
-                className="form-select col-main"
-                floatingLabelText="Components"
-              >
-                {this.returnItems(this.props.data.components)}
-              </SelectField>
-              <TextField
-                name="componentsDiff"
-                value={this.state.diff.components}
-                onChange={this.handleDiffChange}
-                //underlineShow={false}
-                className="form-input col-right"
-                floatingLabelText="Diff."
-              />
-              {/* <Divider /> */}
+        <SelectField
+          name="components"
+          value={this.state.components.value}
+          onChange={this.handleChange("deep", "components")}
+          className="form-select col-main"
+          floatingLabelText="Components"
+        >
+          {this.returnItems(this.props.data.components)}
+        </SelectField>
+        <TextField
+          name="componentsDiff"
+          value={this.state.diff.components}
+          onChange={this.handleDiffChange}
+          className="form-input col-right"
+          floatingLabelText="Diff."
+        />
 
-              {/* Delivery */}
-              <SelectField
-                name="delivery"
-                value={this.state.delivery.value}
-                onChange={this.handleChange("deep", "delivery")}
-                //underlineShow={false}
-                className="form-select col-main"
-                floatingLabelText="Delivery"
-              >
-                {this.returnItems(this.props.data.delivery)}
-              </SelectField>
-              <TextField
-                //underlineShow={false}
-                name="deliveryDiff"
-                value={this.state.diff.delivery}
-                onChange={this.handleDiffChange}
-                className="form-input col-right"
-                floatingLabelText="Diff."
-              />
-              {/* <Divider /> */}
+        <SelectField
+          name="delivery"
+          value={this.state.delivery.value}
+          onChange={this.handleChange("deep", "delivery")}
+          className="form-select col-main"
+          floatingLabelText="Delivery"
+        >
+          {this.returnItems(this.props.data.delivery)}
+        </SelectField>
+        <TextField
+          name="deliveryDiff"
+          value={this.state.diff.delivery}
+          onChange={this.handleDiffChange}
+          className="form-input col-right"
+          floatingLabelText="Diff."
+        />
 
-              {/* Range */}
-              <SelectField
-                name="range"
-                value={this.state.range.value}
-                onChange={this.handleChange("deep", "range")}
-                //underlineShow={false}
-                className="form-select col-main"
-                floatingLabelText="Range"
-              >
-                {this.returnItems(this.props.data.range)}
-              </SelectField>
-              <TextField
-                name="rangeDiff"
-                value={this.state.diff.range}
-                onChange={this.handleDiffChange}
-                //underlineShow={false}
-                className="form-input col-right"
-                floatingLabelText="Diff."
-              />
-              {/* <Divider /> */}
+        <SelectField
+          name="range"
+          value={this.state.range.value}
+          onChange={this.handleChange("deep", "range")}
+          className="form-select col-main"
+          floatingLabelText="Range"
+        >
+          {this.returnItems(this.props.data.range)}
+        </SelectField>
+        <TextField
+          name="rangeDiff"
+          value={this.state.diff.range}
+          onChange={this.handleDiffChange}
+          className="form-input col-right"
+          floatingLabelText="Diff."
+        />
 
-              {/* Area */}
-              <SelectField
-                name="area"
-                value={this.state.area.value}
-                onChange={this.handleChange("deep", "area")}
-                //underlineShow={false}
-                className="form-select col-main"
-                floatingLabelText="Area"
-              >
-                {this.returnItems(this.props.data.area)}
-              </SelectField>
-              <TextField
-                name="areaDiff"
-                value={this.state.diff.area}
-                onChange={this.handleDiffChange}
-                //underlineShow={false}
-                className="form-input col-right"
-                floatingLabelText="Diff."
-              />
-              {/* <Divider /> */}
+        <SelectField
+          name="area"
+          value={this.state.area.value}
+          onChange={this.handleChange("deep", "area")}
+          className="form-select col-main"
+          floatingLabelText="Area"
+        >
+          {this.returnItems(this.props.data.area)}
+        </SelectField>
+        <TextField
+          name="areaDiff"
+          value={this.state.diff.area}
+          onChange={this.handleDiffChange}
+          className="form-input col-right"
+          floatingLabelText="Diff."
+        />
 
-              {/* Add-on */}
-              <SelectField
-                name="addon"
-                value={this.state.addon.value}
-                onChange={this.handleChange("deep", "addon")}
-                //underlineShow={false}
-                className="form-select col-main"
-                floatingLabelText="Add-on"
-              >
-                {this.returnItems(this.props.data.addon)}
-              </SelectField>
-              <TextField
-                name="addonDiff"
-                value={this.state.diff.addon}
-                onChange={this.handleDiffChange}
-                //underlineShow={false}
-                className="form-input col-right"
-                floatingLabelText="Diff."  />
-              {/* <Divider /> */}
+        <SelectField
+          name="addon"
+          value={this.state.addon.value}
+          onChange={this.handleChange("deep", "addon")}
+          className="form-select col-main"
+          floatingLabelText="Add-on"
+        >
+          {this.returnItems(this.props.data.addon)}
+        </SelectField>
+        <TextField
+          name="addonDiff"
+          value={this.state.diff.addon}
+          onChange={this.handleDiffChange}
+          className="form-input col-right"
+          floatingLabelText="Diff."
+        />
 
-              {/* Duration */}
-              <SelectField
-                name="duration"
-                value={this.state.duration.value}
-                onChange={this.handleChange("deep", "duration")}
-                //underlineShow={false}
-                className="form-select col-main"
-                floatingLabelText="Duration"
-              >
-                {this.returnItems(this.props.data.duration)}
-              </SelectField>
-              <TextField
-                name="durationDiff"
-                value={this.state.diff.duration}
-                onChange={this.handleDiffChange}
-                //underlineShow={false}
-                className="form-input col-right"
-                floatingLabelText="Diff."
-              />
-              {/* <Divider /> */}
+        <SelectField
+          name="duration"
+          value={this.state.duration.value}
+          onChange={this.handleChange("deep", "duration")}
+          className="form-select col-main"
+          floatingLabelText="Duration"
+        >
+          {this.returnItems(this.props.data.duration)}
+        </SelectField>
+        <TextField
+          name="durationDiff"
+          value={this.state.diff.duration}
+          onChange={this.handleDiffChange}
+          className="form-input col-right"
+          floatingLabelText="Diff."
+        />
 
-              {/* Save */}
-              <SelectField
-                name="save"
-                value={this.state.save.value}
-                onChange={this.handleChange("deep", "save")}
-                //underlineShow={false}
-                className="form-select col-main"
-                floatingLabelText="Save"
-              >
-                {this.returnItems(this.props.data.save)}
-              </SelectField>
-              {/* <Divider /> */}
+        <SelectField
+          name="save"
+          value={this.state.save.value}
+          onChange={this.handleChange("deep", "save")}
+          className="form-select col-main"
+          floatingLabelText="Save"
+        >
+          {this.returnItems(this.props.data.save)}
+        </SelectField>
 
-              {/* Damage */}
-              <SelectField
-                name="damage"
-                value={this.state.damage.value}
-                onChange={this.handleChange("deep", "damage")}
-                //underlineShow={false}
-                className="form-select col-main"
-                floatingLabelText="Damage"
-              >
-                {this.returnItems(this.props.data.damage)}
-              </SelectField>
-              <TextField
-                name="damageDiff"
-                value={this.state.diff.damage}
-                onChange={this.handleDiffChange}
-                //underlineShow={false}
-                className="form-input col-right"
-                floatingLabelText="Diff."
-              />
-
-          </Paper>
+        <SelectField
+          name="damage"
+          value={this.state.damage.value}
+          onChange={this.handleChange("deep", "damage")}
+          className="form-select col-main"
+          floatingLabelText="Damage"
+        >
+          {this.returnItems(this.props.data.damage)}
+        </SelectField>
+        <TextField
+          name="damageDiff"
+          value={this.state.diff.damage}
+          onChange={this.handleDiffChange}
+          className="form-input col-right"
+          floatingLabelText="Diff."
+        />
+      </Paper>
     );
   }
 }

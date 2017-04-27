@@ -420,26 +420,36 @@ Data.delivery = new Map([
 ]);
 
 Data.range = new Map([
-  ["Melee & Personal", {diff: 0, label: function() {
+  ["Melee & Personal", {
+    diff: 0,
+    label: function() {
       return 0;
     }
   }],
-  ["Close 5.0 m + 2.0 m per 2 skill", {diff: 3, label: function(skill) {
+  ["Close 5.0 m + 2.0 m per 2 skill", {
+    diff: 3,
+    label: function(skill) {
       let range = 5 + (Math.floor(skill/2) * 2);
       return range + ' meters.';
     }
   }],
-  ["Local 25.0 m + 5.0 m per skill", {diff: 6, label: function(skill) {
+  ["Local 25.0 m + 5.0 m per skill", {
+    diff: 6,
+    label: function(skill) {
       let range = 25 + (skill * 5);
       return range + ' meters.';
     }
   }],
-  ["Remote 125.0 m + 15.0 m per skill", {diff: 12, label: function(skill) {
+  ["Remote 125.0 m + 15.0 m per skill", {
+    diff: 12,
+    label: function(skill) {
       let range = 5 + (skill * 2);
       return range + ' meters.';
     }
   }],
-  ["Unlimited", {diff: 40, label: function(skill) {
+  ["Unlimited", {
+    diff: 40,
+    label: function(skill) {
       return 'Unlimited.';
     }
   }],
