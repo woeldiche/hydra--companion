@@ -14,7 +14,7 @@ class SpellCard extends Component {
       difficulty: function (values) {
         let sum = 0;
         for (let prop in values) {
-          sum += values[prop];
+          sum += Number.isNaN(parseInt(values[prop], 10)) ? 0 : parseInt(values[prop], 10);
         }
         return sum;
       },

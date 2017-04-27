@@ -11,17 +11,22 @@ class SpellCalculator extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.returnItems = this.returnItems.bind(this);
+  }
+
+  returnEffectItems (data, school = "") {
+    return school !== "" ? this.returnItems(data.get(school).children, true) : this.returnItems(data, false);
   }
 
   // Create Array of MenuItems for SelectFields
-  returnItems (data) {
+  returnItems (data, shallow = false) {
     let items = [];
     let groupingStyles = { fontWeight: "bold", };
     let childStyles = { paddingLeft: "2px", };
 
     data.forEach(function(value, key, map) {
       // Check if returned value from map is an object with child entries.
-      if (value === Object(value) && value.hasOwnProperty('children')) {
+      if (value === Object(value) && shallow === false && value.hasOwnProperty('children')) {
         let parent = key;
 
         items.push(<MenuItem key={key} style={groupingStyles} value={key} primaryText={key} />);
@@ -72,18 +77,13 @@ class SpellCalculator extends Component {
       case "diff":
         newState = {
           diff: {
-            [name]: parseFloat(newValue)
+            [name]: Number.isNaN(parseInt(newValue, 10)) ? "" : parseInt(newValue, 10)
           }
         }
       break;
       default:
     }
     this.props.updateState (newState);
-
-    // this.setState ((prevState) => ({
-    //   diff: Object.assign(prevState.diff, newState.diff),
-    //   [name]: newState[name]
-    // }));
   }
 
   render() {
@@ -104,7 +104,7 @@ class SpellCalculator extends Component {
           className="form-input col-main"
           floatingLabelText="School of magic"
         >
-          {this.returnItems(this.props.data.school)}
+          {this.returnItems(this.props.data.effect, true)}
         </SelectField>
 
         <Divider style={{marginTop: '25px',}} />
@@ -116,7 +116,8 @@ class SpellCalculator extends Component {
           className="form-select col-main"
           floatingLabelText="Base effect"
         >
-          {this.returnItems(this.props.data.effect)}
+          {this.returnEffectItems(this.props.data.effect, this.props.spell.school)}
+          {/* {this.returnItems(this.props.data.effect[this.props.spell.school].children)} */}
         </SelectField>
 
         <TextField
