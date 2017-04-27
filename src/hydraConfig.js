@@ -424,17 +424,17 @@ Data.range = new Map([
       return 0;
     }
   }],
-  ["Close 5.0 m + 2 m/2skill", {diff: 3, label: function(skill) {
+  ["Close 5.0 m + 2.0 m per 2 skill", {diff: 3, label: function(skill) {
       let range = 5 + (Math.floor(skill/2) * 2);
       return range + ' meters.';
     }
   }],
-  ["Local 25.0 m + 5.0 m * skill", {diff: 6, label: function(skill) {
+  ["Local 25.0 m + 5.0 m per skill", {diff: 6, label: function(skill) {
       let range = 25 + (skill * 5);
       return range + ' meters.';
     }
   }],
-  ["Remote 125.0 m + 15.0 m * skill", {diff: 12, label: function(skill) {
+  ["Remote 125.0 m + 15.0 m per skill", {diff: 12, label: function(skill) {
       let range = 5 + (skill * 2);
       return range + ' meters.';
     }
@@ -573,11 +573,6 @@ Data.damage = new Map([
   ["3d6", {diff: 12}],
   ["4d6", {diff: 18}],
   ["5d6", {diff: 24}],
-]);
-
-Data.sr = new Map([
-  ["Yes"],
-  ["No"]
 ]);
 
 // Get values from config data to update other states as needed.
