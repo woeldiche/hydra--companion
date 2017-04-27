@@ -1,6 +1,7 @@
 const Data = {};
 
 Data.school = new Map([
+  ["Arcana & Divine Esoterica"],
   ["Abjuration"],
   ["Conjuration"],
   ["Conjuration (Healing)"],
@@ -10,7 +11,7 @@ Data.school = new Map([
   ["Illusion"],
   ["Necromancy"],
   ["Transmutation"],
-  ["Universal"],
+  ["Transmutation (Body Enhancement)"],
 ]);
 
 Data.effect = new Map([
@@ -39,6 +40,11 @@ Data.effect = new Map([
   ],
   ["Conjuration",
     {children: new Map([
+      ["Conjure Cold", {diff: 0}],
+      ["Conjure Fire", {diff: 0}],
+      ["Conjure Acid", {diff: 0}],
+      ["Conjure Air", {diff: 0}],
+      ["Conjure Holy/Unholy", {diff: 0}],
       ["Obscuring Mist", {diff: 1}],
       ["Unseen Servant", {diff: 1}],
       ["Glitterdust", {diff: 5}],
@@ -60,97 +66,80 @@ Data.effect = new Map([
       ["Cure Wounds, 3D6", {diff: 12}],
       ["Cure Wounds, 4D6", {diff: 18}],
       ["Cure Wounds, 5D6 (touch only)", {diff: 24, area: false}],
-      ["Blinded", {diff: 5}],
+      ["Cure Blinded", {diff: 5}],
       ["Breath of life", {diff: 15}],
       ["Confused", {diff: 5}],
-      ["Curse", {diff: 10}],
-      ["Dazed", {diff: 5}],
-      ["Dazzled", {diff: 1}],
-      ["Deafened", {diff: 5}],
-      ["Diseased", {diff: 5}],
+      ["Remove Curse", {diff: 10}],
+      ["Cure Dazed", {diff: 5}],
+      ["Cure Dazzled", {diff: 1}],
+      ["Cure Deafened", {diff: 5}],
+      ["Cure Diseased", {diff: 5}],
       ["Restoration Lesser (Ability damage)", {diff: 10}],
-      ["Exhausted", {diff: 5}],
-      ["Fatigued", {diff: 1}],
-      ["Feebleminded", {diff: 5}],
-      ["Insanity", {diff: 5}],
-      ["Nauseated", {diff: 5}],
+      ["Cure Exhausted", {diff: 5}],
+      ["Cure Fatigued", {diff: 1}],
+      ["Cure Feebleminded", {diff: 5}],
+      ["Cure Insanity", {diff: 5}],
+      ["Cure Nauseated", {diff: 5}],
       ["Restoration Greater (Negativ levels)", {diff: 5}],
-      ["Poisoned", {diff: 5}],
-      ["Sickened", {diff: 5}],
-      ["Stunned", {diff: 5}],
+      ["Cure Poisoned", {diff: 5}],
+      ["Cure Sickened", {diff: 5}],
+      ["Cure Stunned", {diff: 5}],
     ])}
   ],
-  /*
-  Conjuration touch
-
-  dog kun fire cold electricity acid air
-  Un-/Holy dam only faith
-
-  Damage			diff
-  none			0
-  1d6			3
-  2d6			6
-  3d6			12
-  4d6 max area		18
-  5d6 max touch		24
-
-  Conditions school		diff
-  none		-	0
-  Nauseate	Conjur		5
-
-  Divination
-  True Strike		5
-  See Invisibility		5
-  Clairaudience/
-  Clairvoyance		5
-  Comprehend Language	1
-  Tongues			5
-  Arcane Eye		10
-  Telepathic Bond		5
-  Legend Lore		10
-  True Seeing		10
-
-  Divination (Detection)
-  Alignment	1
-  Poison		5
-  Desease		5
-  Magic		5
-  Identify		10
-  Undead		5
-  Secret doors	5
-  Thoughts	5		Scrying		5
-  Object		5
-  Creature		5
-
-  Enchanment Charm
-  Charm Person		5
-  Hypnotism		5
-  Sleep			5
-  Hideous Laughter		10
-  Touch of Idiocy		15
-  Heroism			5/
-  Rage			5
-  Suggestion		10
-  Confusion		10
-  Crushing Despair		5
-  Feeblemind		15
-  Mind Fog		15
-  Symbol of Sleep		10
-  Symbol of Persuasion	10
-  Symbol of Stunning	10
-  Antipathy		5
-  Binding			5
-  Power Word Stun		10
-  Symbol of Insanity		15
-  Sympathy		5
-
-  Enchanment touch
-  Confuse, 5
-  Daze, 5
-  Feeblemind, 5
-  Insanity, 5
-  Paralyse, 10
-  */
+  ["Divination",
+    {children: new Map([
+      ["Cure Wounds, 1D6", {diff: 3}],
+      ["True Strike", {diff: 5}],
+      ["See Invisibility", {diff: 5}],
+      ["Clairaudience or Clairvoyance", {diff: 5}],
+      ["Comprehend Language", {diff: 1}],
+      ["Detect Alignment", {diff: 1}],
+      ["Detect Poison", {diff: 5}],
+      ["Detect Disease", {diff: 5}],
+      ["Detect Magic", {diff: 5}],
+      ["Detect Undead", {diff: 5}],
+      ["Detect Secret doors", {diff: 5}],
+      ["Detect Thoughts", {diff: 5}],
+      ["Detect Scrying", {diff: 5}],
+      ["Detect Object", {diff: 5}],
+      ["Detect Creature", {diff: 5}],
+      ["Tongues", {diff: 5}],
+      ["Identify", {diff: 10}],
+      ["Arcane Eye", {diff: 10}],
+      ["Telepathic Bond", {diff: 5}],
+      ["Legend Lore", {diff: 10}],
+      ["True Seeing", {diff: 10}],
+    ])}
+  ],
+  ["Enchantment Charm",
+    {children: new Map([
+      ["Charm Person", {diff: 5}],
+      ["Hypnotism", {diff: 5}],
+      ["Sleep", {diff: 5}],
+      ["Hideous Laughter", {diff: 10}],
+      ["Touch of Idiocy", {diff: 15}],
+      ["Heroism", {diff: 5}],
+      ["Rage", {diff: 5}],
+      ["Suggestion", {diff: 10}],
+      ["Confusion", {diff: 10}],
+      ["Crushing Despair", {diff: 5}],
+      ["Feeblemind", {diff: 15}],
+      ["Mind Fog", {diff: 15}],
+      ["Symbol of Sleep", {diff: 10}],
+      ["Symbol of Persuasion", {diff: 10}],
+      ["Symbol of Stunning", {diff: 10}],
+      ["Antipathy", {diff: 5}],
+      ["Binding", {diff: 5}],
+      ["Power Word Stun", {diff: 10}],
+      ["Symbol of Insanity", {diff: 15}],
+      ["Sympathy", {diff: 5}],
+      ["Enchanment Touch: Confuse", {diff: 10}],
+      ["Enchanment Touch: Daze", {diff: 5}],
+      ["Enchanment Touch: Feeblemind", {diff: 5}],
+      ["Enchanment Touch: Insanity", {diff: 5}],
+      ["Enchanment Touch: Paralyse", {diff: 10}],
+    ])}
+  ],
   ["Evocation",
     {children: new Map([
       ["Light", {diff: 1}],
@@ -163,10 +152,12 @@ Data.effect = new Map([
       ["Elemental Fire", {diff: 0, damage: true}],
       ["Elemental Force", {diff: 0, damage: true}],
       ["Elemental Sonic", {diff: 0, damage: true}],
+      ["Flare", {diff: 1}],
       ["Floating Disk", {diff: 1}],
       ["Gust of Wind", {diff: 1}],
       ["Shatter", {diff: 5}],
       ["Sending", {diff: 5}],
+      ["Stun", {diff: 5}],
       ["Contingency", {diff: 10}],
       ["Mage's Sword", {diff: 15}],
       ["Wind Wall", {diff: 5}],
@@ -174,93 +165,70 @@ Data.effect = new Map([
       ["Interposing Hand", {diff: 5}],
     ])}
   ],
+  ["Illusion",
+    {children: new Map([
+      ["Light", {diff: 1}],
+      ["Ghost Sound", {diff: 1}],
+      ["Disguise Self", {diff: 1}],
+      ["Silent Image", {diff: 5}],
+      ["Ventriloquism", {diff: 1}],
+      ["Blur", {diff: 5}],
+      ["Hypnotic Pattern", {diff: 5}],
+      ["Invisibility", {diff: 1}],
+      ["Invisibility, Greater", {diff: 5}],
+      ["Misdirection", {diff: 5}],
+      ["Phantom Trap", {diff: 5}],
+      ["Phantasmal Killer", {diff: 10}],
+      ["Rainbow Pattern", {diff: 5}],
+      ["Dream", {diff: 5}],
+      ["False Vision", {diff: 5}],
+      ["Silence", {diff: 5}],
+      ["Simulacrum", {diff: 75}],
+    ])}
+  ],
+  ["Necromancy",
+    {children: new Map([
+      ["Animate Dead", {diff: 5}],
+      ["Command Undead", {diff: 5}],
+      ["Create Undead: Ghoul", {diff: 10}],
+      ["Create Undead: Ghast", {diff: 15}],
+      ["Create Undead: Mummy", {diff: 20}],
+      ["Create Undead: Mohrg", {diff: 25}],
+      ["Create Greater Undead: Shadow", {diff: 30}],
+      ["Create Greater Undead: Wraith", {diff: 35}],
+      ["Create Greater Undead: Spectre", {diff: 40}],
+      ["Create Greater Undead: Devourer", {diff: 45}],
+      ["False Life", {diff: 5}],
+      ["Gentle Repose", {diff: 5}],
+      ["Halt Undead", {diff: 5}],
+      ["Spectral Hand", {diff: 5}],
+      ["Blight", {diff: 5}],
+      ["Magic Jar", {diff: 15}],
+      ["Symbol of Pain", {diff: 5}],
+      ["Symbol of Fear", {diff: 5}],
+      ["Control Undead", {diff: 5}],
+      ["Symbol of Weakness", {diff: 5}],
+      ["Clone", {diff: 100}],
+      ["Symbol of Death", {diff: 5}],
+      ["Cause Wounds", {diff: 0, damage: true}],
+      ["Necro Touch: Ability damage", {diff: 10}],
+      ["Necro Touch: Blind", {diff: 5}],
+      ["Necro Touch: Deafen", {diff: 5}],
+      ["Necro Touch: Disease", {diff: 5}],
+      ["Necro Touch: Exhauste", {diff: 10}],
+      ["Necro Touch: Fatigue", {diff: 5}],
+      ["Necro Touch: Negativ levels", {diff: 10}],
+      ["Necro Touch: Sicken", {diff: 5}],
+      ["Curse: Baleful Polymorph", {diff: 10}],
+      ["Curse: Bestow Curse Trap", {diff: 10}],
+      ["Curse: Curse of the Ages", {diff: 10}],
+      ["Curse: Mummy Rot", {diff: 10}],
+      ["Curse: Unluck", {diff: 10}],
+      ["Curse: Werewolf Lycanthropy", {diff: 10}],
+    ])}
+  ],
+
   /*
-  Conditions	school		diff
-  none		-		0
-  Flare		Evocation	1
-  Stun		Evocation	5
-  Illusion
-
-  Effects			diff
-  Ghost Sound		1
-  Disguise Self		1
-  Silent Image		5
-  Ventriloquism		1
-  Blur			5
-  Hypnotic Pattern		5
-  Invisibility		1
-  Invisibility, Greater	5
-  Misdirection		5
-  Phantom Trap		5
-  Phantasmal Killer		10
-  Rainbow Pattern		5
-  Dream			5
-  False Vision		5
-  Silence			5
-  Simulacrum		75
-
-  Necromancy
-
-  Effects			diff
-  Command Undead		5
-  False Life		5
-  Spectral Hand		5
-  Gentle Repose		5
-  Halt Undead		5
-  Animate Dead		5
-  */
-
-  /**
-  * Question:
-  * Is Create (greater) undead on effect with different
-  * levels or four/five different effects?
-  *
-
-  Create Undead
-  Ghoul                  		10
-  Ghast                  		15
-  Mummy            		20
-  Mohrg              		25
-
-  Create Greater Undead
-  Shadow                      	30
-  Wraith                      	35
-  Spectre                     	40
-  Devourer                    	45
-  */
-
-
-  /*
-  Blight			5
-  Magic Jar		15
-  Symbol of Pain		5
-  Symbol of Fear		5
-  Control Undead		5
-  Symbol of Weakness	5
-  Clone			100
-  Symbol of Death		5
-
-  ["Cause Wounds", {diff: 0, damage: true}],
-
-  Conditions	school	diff
-  none		-	0
-  Ability damage	Necro	10
-  Blind		Necro	5
-  Deafen		Necro	5
-  Disease		Necro	5
-  Exhauste		Necro	10
-  Fatigue		Necro	5
-  Negativ levels	Necro	10
-  Sicken		Necro	5
-
-  Curse		Necro	10
-  Baleful Polymorph
-  Bestow Curse Trap
-  Curse of the Ages
-  Mummy Rot
-  Unluck
-  Werewolf Lycanthropy
-
   Poison	Name 	Necro	5
   Arsenic
   Belladonna
@@ -316,7 +284,6 @@ Data.effect = new Map([
       /*["Web", {diff: 10}],*/
     ])
   }],
-
   ["Transmutation (Body Enhancement)",
     {children: new Map([
       ["Stat enhancement", {diff: 5}],
