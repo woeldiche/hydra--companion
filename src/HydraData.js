@@ -88,7 +88,6 @@ Data.effect = new Map([
   ],
   ["Divination",
     {children: new Map([
-      ["Cure Wounds, 1D6", {diff: 3}],
       ["True Strike", {diff: 5}],
       ["See Invisibility", {diff: 5}],
       ["Clairaudience or Clairvoyance", {diff: 5}],
@@ -227,46 +226,6 @@ Data.effect = new Map([
       ["Curse: Werewolf Lycanthropy", {diff: 10}],
     ])}
   ],
-
-  /*
-  Poison	Name 	Necro	5
-  Arsenic
-  Belladonna
-  Black Adder Venom
-  Black Lotus Extract
-  Bloodroot
-  Blue Whinnis
-  Burnt Othur Fumes
-  Dark Reaver Powder
-  Deathblade
-  Dragon Bile
-  Drow Poison
-  Giant Wasp Poison
-  Greenblood Oil
-  Green Prismatic Poison
-  Hemlock
-  Id Moss
-  Insanity Mist
-  King's Sleep
-  Large Scorpion Venom
-  Lich Dust
-  Malyass Root Paste
-  Medium Spider Venom
-  Nightmare Vapor
-  Nitharit
-  Oil of Taggit
-  Purple Worm Poison
-  Sassone Leaf Residue
-  Shadow Essence
-  Small Centipede Poison
-  Striped Toadstool
-  Tears of Death
-  Terinav Root
-  Ungol Dust
-  Wolfsbane
-  Wyvern Poison
-  */
-
   ["Transmutation",
     {children: new Map([
       ["Dimension Door", {diff: 10}],
@@ -345,6 +304,45 @@ Data.effect = new Map([
       ["Water Breathing", {diff: 5}],
     ])}
   ],
+
+    /*
+    {Poison	Name 	Necro	5
+    Arsenic
+    Belladonna
+    Black Adder Venom
+    Black Lotus Extract
+    Bloodroot
+    Blue Whinnis
+    Burnt Othur Fumes
+    Dark Reaver Powder
+    Deathblade
+    Dragon Bile
+    Drow Poison
+    Giant Wasp Poison
+    Greenblood Oil
+    Green Prismatic Poison
+    Hemlock
+    Id Moss
+    Insanity Mist
+    King's Sleep
+    Large Scorpion Venom
+    Lich Dust
+    Malyass Root Paste
+    Medium Spider Venom
+    Nightmare Vapor
+    Nitharit
+    Oil of Taggit
+    Purple Worm Poison
+    Sassone Leaf Residue
+    Shadow Essence
+    Small Centipede Poison
+    Striped Toadstool
+    Tears of Death
+    Terinav Root
+    Ungol Dust
+    Wolfsbane
+    Wyvern Poison}
+    */
 ]);
 
 Data.time = new Map([
