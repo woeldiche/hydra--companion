@@ -10,79 +10,6 @@ import Paper from 'material-ui/Paper';
 class SpellCalculator extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      spellName: 'Spontaneous Spell',
-      school: '',
-      difficulty: function (values) {
-        let sum = 0;
-        for (let prop in values) {
-          sum += values[prop];
-        }
-        return sum;
-      },
-      cost: function (diff) {
-        return Math.round(diff / 5);
-      },
-      dc: function(diff, stat) {
-        return Math.floor(diff/5 + stat + 10);
-      },
-      caster: {
-        statBonus: 4,
-        skill: 9
-      },
-      diff: {
-        effect: 0,
-        time: 0,
-        components: 0,
-        delivery: 0,
-        range: 0,
-        area: 0,
-        addon: 0,
-        duration: 0,
-        save: 0,
-        damage: 0,
-      },
-      effect: {
-        value: '',
-        label: function() {},
-      },
-      time: {
-        value: '',
-        label: function() {},
-      },
-      components: {
-        value: '',
-        label: function() {},
-      },
-      delivery: {
-        value: '',
-        label: function() {},
-      },
-      range: {
-        value: '',
-        label: function() {},
-      },
-      area: {
-        value: '',
-        label: function() {},
-      },
-      addon: {
-        value: '',
-        label: function() {},
-      },
-      duration: {
-        value: '',
-        label: function() {},
-      },
-      save: {
-        value: '',
-        label: function() {},
-      },
-      damage: {
-        value: '',
-        label: function() {},
-      },
-    };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -119,7 +46,9 @@ class SpellCalculator extends Component {
     switch (type) {
       case "flat":
         newState = {
-          [name]: newValue
+          spell: {
+            [name]: newValue
+          }
         }
       break;
 
@@ -127,9 +56,11 @@ class SpellCalculator extends Component {
         const data = this.props.data.get(name, newValue);
 
         newState = {
-          [name]: {
-            value: data.key, // This should always be the same as newValue...
-            label: data.label
+          spell: {
+            [name]: {
+              value: data.key, // This should always be the same as newValue...
+              label: data.label
+            },
           },
           diff: {
             [name]: data.diff,
@@ -137,13 +68,22 @@ class SpellCalculator extends Component {
         }
 
       break;
+
+      case "diff":
+        newState = {
+          diff: {
+            [name]: parseFloat(newValue)
+          }
+        }
+      break;
       default:
     }
+    this.props.updateState (newState);
 
-    this.setState ((prevState) => ({
-      diff: Object.assign(prevState.diff, newState.diff),
-      [name]: newState[name]
-    }));
+    // this.setState ((prevState) => ({
+    //   diff: Object.assign(prevState.diff, newState.diff),
+    //   [name]: newState[name]
+    // }));
   }
 
   render() {
@@ -151,7 +91,7 @@ class SpellCalculator extends Component {
       <Paper className="section">
         <TextField
           name="spellName"
-          value={this.state.spellName}
+          value={this.props.spell.spellName}
           onChange={this.handleChange("flat", "spellName")}
           className="form-input col-main"
           floatingLabelText="Spell name"
@@ -159,7 +99,7 @@ class SpellCalculator extends Component {
 
         <SelectField
           name="school"
-          value={this.state.school}
+          value={this.props.spell.school}
           onChange={this.handleChange("flat", "school")}
           className="form-input col-main"
           floatingLabelText="School of magic"
@@ -171,7 +111,7 @@ class SpellCalculator extends Component {
 
         <SelectField
           name="effect"
-          value={this.state.effect.value}
+          value={this.props.spell.effect.value}
           onChange={this.handleChange("deep", "effect")}
           className="form-select col-main"
           floatingLabelText="Base effect"
@@ -181,15 +121,15 @@ class SpellCalculator extends Component {
 
         <TextField
           name="effectDiff"
-          value={this.state.diff.effect}
-          onChange={this.handleDiffChange}
+          value={this.props.diff.effect}
+          onChange={this.handleChange("diff", "effect")}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
 
         <SelectField
           name="time"
-          value={this.state.time.value}
+          value={this.props.spell.time.value}
           onChange={this.handleChange("deep", "time")}
           className="form-select col-main"
           floatingLabelText="Casting time"
@@ -198,15 +138,15 @@ class SpellCalculator extends Component {
         </SelectField>
         <TextField
           name="timeDiff"
-          value={this.state.diff.time}
-          onChange={this.handleDiffChange}
+          value={this.props.diff.time}
+          onChange={this.handleChange("diff", "time")}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
 
         <SelectField
           name="components"
-          value={this.state.components.value}
+          value={this.props.spell.components.value}
           onChange={this.handleChange("deep", "components")}
           className="form-select col-main"
           floatingLabelText="Components"
@@ -215,15 +155,15 @@ class SpellCalculator extends Component {
         </SelectField>
         <TextField
           name="componentsDiff"
-          value={this.state.diff.components}
-          onChange={this.handleDiffChange}
+          value={this.props.diff.components}
+          onChange={this.handleChange("diff", "components")}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
 
         <SelectField
           name="delivery"
-          value={this.state.delivery.value}
+          value={this.props.spell.delivery.value}
           onChange={this.handleChange("deep", "delivery")}
           className="form-select col-main"
           floatingLabelText="Delivery"
@@ -232,15 +172,15 @@ class SpellCalculator extends Component {
         </SelectField>
         <TextField
           name="deliveryDiff"
-          value={this.state.diff.delivery}
-          onChange={this.handleDiffChange}
+          value={this.props.diff.delivery}
+          onChange={this.handleChange("diff", "delivery")}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
 
         <SelectField
           name="range"
-          value={this.state.range.value}
+          value={this.props.spell.range.value}
           onChange={this.handleChange("deep", "range")}
           className="form-select col-main"
           floatingLabelText="Range"
@@ -249,15 +189,15 @@ class SpellCalculator extends Component {
         </SelectField>
         <TextField
           name="rangeDiff"
-          value={this.state.diff.range}
-          onChange={this.handleDiffChange}
+          value={this.props.diff.range}
+          onChange={this.handleChange("diff", "range")}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
 
         <SelectField
           name="area"
-          value={this.state.area.value}
+          value={this.props.spell.area.value}
           onChange={this.handleChange("deep", "area")}
           className="form-select col-main"
           floatingLabelText="Area"
@@ -266,15 +206,15 @@ class SpellCalculator extends Component {
         </SelectField>
         <TextField
           name="areaDiff"
-          value={this.state.diff.area}
-          onChange={this.handleDiffChange}
+          value={this.props.diff.area}
+          onChange={this.handleChange("diff", "area")}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
 
         <SelectField
           name="addon"
-          value={this.state.addon.value}
+          value={this.props.spell.addon.value}
           onChange={this.handleChange("deep", "addon")}
           className="form-select col-main"
           floatingLabelText="Add-on"
@@ -283,15 +223,15 @@ class SpellCalculator extends Component {
         </SelectField>
         <TextField
           name="addonDiff"
-          value={this.state.diff.addon}
-          onChange={this.handleDiffChange}
+          value={this.props.diff.addon}
+          onChange={this.handleChange("diff", "addon")}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
 
         <SelectField
           name="duration"
-          value={this.state.duration.value}
+          value={this.props.spell.duration.value}
           onChange={this.handleChange("deep", "duration")}
           className="form-select col-main"
           floatingLabelText="Duration"
@@ -300,15 +240,15 @@ class SpellCalculator extends Component {
         </SelectField>
         <TextField
           name="durationDiff"
-          value={this.state.diff.duration}
-          onChange={this.handleDiffChange}
+          value={this.props.diff.duration}
+          onChange={this.handleChange("diff", "duration")}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
 
         <SelectField
           name="save"
-          value={this.state.save.value}
+          value={this.props.spell.save.value}
           onChange={this.handleChange("deep", "save")}
           className="form-select col-main"
           floatingLabelText="Save"
@@ -318,7 +258,7 @@ class SpellCalculator extends Component {
 
         <SelectField
           name="damage"
-          value={this.state.damage.value}
+          value={this.props.spell.damage.value}
           onChange={this.handleChange("deep", "damage")}
           className="form-select col-main"
           floatingLabelText="Damage"
@@ -327,8 +267,8 @@ class SpellCalculator extends Component {
         </SelectField>
         <TextField
           name="damageDiff"
-          value={this.state.diff.damage}
-          onChange={this.handleDiffChange}
+          value={this.props.diff.damage}
+          onChange={this.handleChange("diff", "damage")}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
