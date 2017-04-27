@@ -41,7 +41,6 @@ class SpellCalculator extends Component {
         duration: 0,
         save: 0,
         damage: 0,
-        sr: 0
       },
       effect: {
         value: '',
@@ -81,10 +80,6 @@ class SpellCalculator extends Component {
       },
       damage: {
         value: '',
-        label: function() {},
-      },
-      sr: {
-        value: 'Yes',
         label: function() {},
       },
     };
@@ -163,9 +158,9 @@ class SpellCalculator extends Component {
                 onChange={this.handleChange("flat", "spellName")}
                 className="form-input col-main"
                 floatingLabelText="Spell name"
-                underlineShow={false}
+                // underlineShow={false}
               />
-              <Divider />
+              {/* <Divider /> */}
 
               {/* Magic School */}
               <SelectField
@@ -173,19 +168,19 @@ class SpellCalculator extends Component {
                 value={this.state.school}
                 onChange={this.handleChange("flat", "school")}
                 className="form-input col-main"
-                underlineShow={false}
+                //underlineShow={false}
                 floatingLabelText="School of magic"
               >
                 {this.returnItems(this.props.data.school)}
               </SelectField>
-              <Divider />
+              <Divider style={{marginTop: '25px',}} />
 
               {/* Base effect */}
               <SelectField
                 name="effect"
                 value={this.state.effect.value}
                 onChange={this.handleChange("deep", "effect")}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-select col-main"
                 floatingLabelText="Base effect"
               >
@@ -195,11 +190,10 @@ class SpellCalculator extends Component {
                 name="effectDiff"
                 value={this.state.diff.effect}
                 onChange={this.handleDiffChange}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-input col-right"
                 floatingLabelText="Diff."
               />
-              <Divider />
               {/*<Divider />*/}
 
               {/* Casting time */}
@@ -207,7 +201,7 @@ class SpellCalculator extends Component {
                 name="time"
                 value={this.state.time.value}
                 onChange={this.handleChange("deep", "time")}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-select col-main"
                 floatingLabelText="Casting time"
               >
@@ -217,18 +211,18 @@ class SpellCalculator extends Component {
                 name="timeDiff"
                 value={this.state.diff.time}
                 onChange={this.handleDiffChange}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-input col-right"
                 floatingLabelText="Diff."
               />
-              <Divider />
+              {/* <Divider /> */}
 
               {/* Components */}
               <SelectField
                 name="components"
                 value={this.state.components.value}
                 onChange={this.handleChange("deep", "components")}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-select col-main"
                 floatingLabelText="Components"
               >
@@ -238,38 +232,39 @@ class SpellCalculator extends Component {
                 name="componentsDiff"
                 value={this.state.diff.components}
                 onChange={this.handleDiffChange}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-input col-right"
                 floatingLabelText="Diff."
               />
-              <Divider />
+              {/* <Divider /> */}
 
               {/* Delivery */}
               <SelectField
                 name="delivery"
                 value={this.state.delivery.value}
                 onChange={this.handleChange("deep", "delivery")}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-select col-main"
                 floatingLabelText="Delivery"
               >
                 {this.returnItems(this.props.data.delivery)}
               </SelectField>
-              <TextField underlineShow={false}
+              <TextField
+                //underlineShow={false}
                 name="deliveryDiff"
                 value={this.state.diff.delivery}
                 onChange={this.handleDiffChange}
                 className="form-input col-right"
                 floatingLabelText="Diff."
               />
-              <Divider />
+              {/* <Divider /> */}
 
               {/* Range */}
               <SelectField
                 name="range"
                 value={this.state.range.value}
                 onChange={this.handleChange("deep", "range")}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-select col-main"
                 floatingLabelText="Range"
               >
@@ -279,18 +274,18 @@ class SpellCalculator extends Component {
                 name="rangeDiff"
                 value={this.state.diff.range}
                 onChange={this.handleDiffChange}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-input col-right"
                 floatingLabelText="Diff."
               />
-              <Divider />
+              {/* <Divider /> */}
 
               {/* Area */}
               <SelectField
                 name="area"
                 value={this.state.area.value}
                 onChange={this.handleChange("deep", "area")}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-select col-main"
                 floatingLabelText="Area"
               >
@@ -300,18 +295,18 @@ class SpellCalculator extends Component {
                 name="areaDiff"
                 value={this.state.diff.area}
                 onChange={this.handleDiffChange}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-input col-right"
                 floatingLabelText="Diff."
               />
-              <Divider />
+              {/* <Divider /> */}
 
               {/* Add-on */}
               <SelectField
                 name="addon"
                 value={this.state.addon.value}
                 onChange={this.handleChange("deep", "addon")}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-select col-main"
                 floatingLabelText="Add-on"
               >
@@ -321,17 +316,17 @@ class SpellCalculator extends Component {
                 name="addonDiff"
                 value={this.state.diff.addon}
                 onChange={this.handleDiffChange}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-input col-right"
                 floatingLabelText="Diff."  />
-              <Divider />
+              {/* <Divider /> */}
 
               {/* Duration */}
               <SelectField
                 name="duration"
                 value={this.state.duration.value}
                 onChange={this.handleChange("deep", "duration")}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-select col-main"
                 floatingLabelText="Duration"
               >
@@ -341,31 +336,31 @@ class SpellCalculator extends Component {
                 name="durationDiff"
                 value={this.state.diff.duration}
                 onChange={this.handleDiffChange}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-input col-right"
                 floatingLabelText="Diff."
               />
-              <Divider />
+              {/* <Divider /> */}
 
               {/* Save */}
               <SelectField
                 name="save"
                 value={this.state.save.value}
                 onChange={this.handleChange("deep", "save")}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-select col-main"
                 floatingLabelText="Save"
               >
                 {this.returnItems(this.props.data.save)}
               </SelectField>
-              <Divider />
+              {/* <Divider /> */}
 
               {/* Damage */}
               <SelectField
                 name="damage"
                 value={this.state.damage.value}
                 onChange={this.handleChange("deep", "damage")}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-select col-main"
                 floatingLabelText="Damage"
               >
@@ -375,31 +370,11 @@ class SpellCalculator extends Component {
                 name="damageDiff"
                 value={this.state.diff.damage}
                 onChange={this.handleDiffChange}
-                underlineShow={false}
+                //underlineShow={false}
                 className="form-input col-right"
                 floatingLabelText="Diff."
               />
-              <Divider />
 
-              {/* SR */}
-              <SelectField
-                name="sr"
-                value={this.state.sr.value}
-                onChange={this.handleChange("deep", "sr")}
-                underlineShow={false}
-                className="form-select col-main"
-                floatingLabelText="Spell Resistance"
-              >
-                {this.returnItems(this.props.data.sr)}
-              </SelectField>
-              <TextField
-                name="srDiff"
-                value={this.state.diff.sr}
-                onChange={this.handleDiffChange}
-                underlineShow={false}
-                className="form-input col-right"
-                floatingLabelText="Diff."
-              />
           </Paper>
     );
   }

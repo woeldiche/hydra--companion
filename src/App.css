@@ -13,8 +13,9 @@
   margin-bottom: 40px;
 }
 
-.form-select {
-
+.form-select,
+.form-input {
+  vertical-align: bottom !important;
 }
 
 
