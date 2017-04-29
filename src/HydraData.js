@@ -40,11 +40,11 @@ Data.effect = new Map([
   ],
   ["Conjuration",
     {children: new Map([
-      ["Conjure Cold", {diff: 0}],
-      ["Conjure Fire", {diff: 0}],
-      ["Conjure Acid", {diff: 0}],
-      ["Conjure Air", {diff: 0}],
-      ["Conjure Holy/Unholy", {diff: 0}],
+      ["Conjure Cold", {diff: 0, damage: true}],
+      ["Conjure Fire", {diff: 0, damage: true}],
+      ["Conjure Acid", {diff: 0, damage: true}],
+      ["Conjure Air", {diff: 0, damage: true}],
+      ["Conjure Holy or Unholy", {diff: 0, damage: true}],
       ["Obscuring Mist", {diff: 1}],
       ["Unseen Servant", {diff: 1}],
       ["Glitterdust", {diff: 5}],
@@ -378,10 +378,10 @@ Data.components = new Map([
 ]);
 
 Data.delivery = new Map([
-  ["Personal", {diff: 0}],
-  ["Melee Touch", {diff: 0}],
-  ["Ranged Touch", {diff: -5}],
-  ["Area", {diff: 0}],
+  ["Personal", {diff: 0, range: false, area: false}],
+  ["Melee Touch", {diff: 0, range: false, area: false}],
+  ["Ranged Touch", {diff: -5, range: true, area: false}],
+  ["Area", {diff: 0, range: true, area: true}],
 ]);
 
 Data.range = new Map([
@@ -547,7 +547,7 @@ Data.damage = new Map([
   ["2d6", {diff: 6}],
   ["3d6", {diff: 12}],
   ["4d6", {diff: 18}],
-  ["5d6", {diff: 24}],
+  ["5d6", {diff: 24, area: false}],
 ]);
 
 // Get values from config data to update other states as needed.
@@ -557,8 +557,9 @@ Data.get = function (name, key) {
   const selectedKeyValue = keyArray.length > 1 ? Data[name].get(keyArray[0]).children.get(keyArray[1]) : Data[name].get(keyArray[0]);
   let newDiff = 0;
   let newLabel = key;
-  let damage = true;
-  let area = true;
+  let damage = null;
+  let area = null;
+  let range = null;
 
   // Check if object exists, otherwise fall back to defaults.
   if (selectedKeyValue === Object(selectedKeyValue)) {
@@ -579,14 +580,19 @@ Data.get = function (name, key) {
     if (selectedKeyValue.hasOwnProperty('damage')) {
       damage = selectedKeyValue.damage;
     }
+
+    if (selectedKeyValue.hasOwnProperty('range')) {
+      range = selectedKeyValue.range;
+    }
   }
 
   return {
     diff: newDiff,
     label: newLabel,
     key: key,
-    allowDamage: damage,
-    allowArea: area
+    damage: damage,
+    area: area,
+    range: range
   }
 }
 export default Data;
