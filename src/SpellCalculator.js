@@ -40,7 +40,6 @@ class SpellCalculator extends Component {
 
     if (key !== "") {
       config = this.props.data.get(controllingField.pop(), key);
-      console.log(config, field);
 
       if (config === Object(config) && config.hasOwnProperty(field)) {
         return config[field];
@@ -108,8 +107,6 @@ class SpellCalculator extends Component {
     } else {
       name = names;
     }
-
-    console.log(dataKey, name);
 
     switch (type) {
       case "flat":
