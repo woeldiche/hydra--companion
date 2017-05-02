@@ -1,9 +1,27 @@
+A personal hobby project created with far too many libraries.
+
+## Views
+- Startpage [/]
+- New Spell
+  - Create Formula (SpellCalculator) [/lab/create]
+  - View Formula (SpellCard) [/lab/view]
+- Spellbook
+  - All spells [/spellbook/list]
+  - View Spell (SpellCard) [/spellbook/formula/:id]
+- Caster
+  - View caster [/caster/:id]
+  - Edit caster / Select effects [/caster/:id/edit]
+
+## Data Model
+
+## Create React App
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
-## Table of Contents
+### Table of Contents
 
 - [Updating to New Releases](#updating-to-new-releases)
 - [Sending Feedback](#sending-feedback)
@@ -1516,17 +1534,17 @@ When you build the project, Create React App will place the `public` folder cont
 2. Install `serve` by running `npm install --save serve`.
 
 3. Add this line to `scripts` in `package.json`:
-    
+
     ```
     "now-start": "serve build/",
     ```
-    
+
 4. Run `now` from your project directory. You will see a **now.sh** URL in your output like this:
-    
+
     ```
     > Ready! https://your-project-dirname-tpspyhtdtk.now.sh (copied to clipboard)
     ```
-    
+
     Paste that URL into your browser when the build is complete, and you will see your deployed app.
 
 Details are available in [this article.](https://zeit.co/blog/now-static)

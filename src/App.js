@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SpellCalculator from './SpellCalculator';
 import SpellCard from './SpellCard';
 import HydraData from './HydraData';
-
 
 import './App.css';
 
@@ -92,11 +92,19 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div className="page">
-          <SpellCalculator data={HydraData} spell={this.state.spell} diff={this.state.diff} updateState={this.handleSpellChange}/>
-          <SpellCard spell={this.state.spell} diff={this.state.diff} caster={this.state.caster}/>
-        </div>
-      </MuiThemeProvider>
+      <Router>
+          <div className="page">
+            <ul>
+              <li><Link to="/">Calculator</Link></li>
+              <li><Link to="/spell">SpellCard</Link></li>
+            </ul>
+            <Route exact path="/" render={(props) => <SpellCalculator data={HydraData} spell={this.state.spell} diff={this.state.diff} updateState={this.handleSpellChange}/>}/>
+            <Route path="/spell" render={(props) => <SpellCard spell={this.state.spell} diff={this.state.diff} caster={this.state.caster}/>}/>
+            {/* <SpellCalculator data={HydraData} spell={this.state.spell} diff={this.state.diff} updateState={this.handleSpellChange}/>
+            <SpellCard spell={this.state.spell} diff={this.state.diff} caster={this.state.caster}/> */}
+          </div>
+      </Router>
+    </MuiThemeProvider>
     );
   }
 }
