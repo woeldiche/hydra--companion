@@ -1,10 +1,13 @@
 A personal hobby project created with far too many libraries.
 
 ## Views
+- Global
+  - ()
 - Startpage [/]
+  - (NewSpell floating button)
 - New Spell
   - Create Formula (SpellCalculator) [/lab/create]
-  - View Formula (SpellCard) [/lab/view]
+  - Name Formula / Confirm (SpellCard) [/lab/view]
 - Spellbook
   - All spells [/spellbook/list]
   - View Spell (SpellCard) [/spellbook/formula/:id]
@@ -13,6 +16,71 @@ A personal hobby project created with far too many libraries.
   - Edit caster / Select effects [/caster/:id/edit]
 
 ## Data Model
+### HydraData
+```
+schema: {
+  types: [
+    school,
+    effect,
+    time,
+    components,
+    delivery,
+    range,
+    area,
+    addon,
+    duration,
+    save,
+    damage,
+    casterType,
+    rule
+  ],
+  indices: {
+    type,
+    school,
+  }
+}
+```
+
+### UserData
+```
+schema: {
+  types: [
+    formula: {
+      _id: ':school/:name/math.rand()',
+      type: 'formula',
+      name: ':name',
+      school,
+      effect,
+      effectLevel,
+      time,
+      delivery,
+      (range),
+      (area),
+      (addon),
+      (damage),
+      save,
+    },
+    caster: {
+      _id: :name + math.rand()
+      name: 'string',
+      type: 'caster',
+      casterType: [wizard, cleric, sorceror, favoured soul, psion],
+      primaryStat: integer,
+      primarySkill: integer,
+      concentrationSkill: integer,
+      knownEffects: [:ids],
+    },
+  ]
+}
+```
+
+### Config
+```
+config: {
+  _id: @@config,
+  type: config;
+}
+```
 
 ## Create React App
 
