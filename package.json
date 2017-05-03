@@ -2,6 +2,9 @@
   "name": "hydra-assistant",
   "version": "0.1.0",
   "private": true,
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "dependencies": {
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
