@@ -9,8 +9,8 @@
   box-sizing: border-box;
 }
 .page {
-  margin: 10px auto;
-  max-width: 600px;
+  margin: 0 auto;
+  /* max-width: 600px; */
 }
 
 .section {
