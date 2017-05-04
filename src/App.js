@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import SpellCalculator from './SpellCalculator';
 import SpellCard from './SpellCard';
 import Spellbook from './Spellbook';
 import HydraData from './HydraData';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import './App.css';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: '#971e25',
+    //primary2Color: cyan700,
+    pickerHeaderColor: '#971e25',
+  },
+});
+
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -91,19 +105,36 @@ class App extends Component {
 
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
       <Router>
-          <div className="page">
-            <Route exact path="/" render={(props) => <SpellCalculator data={HydraData} spell={this.state.spell} diff={this.state.diff} updateState={this.handleSpellChange}/>}/>
+        <div className="flexbox-parent">
+          <AppBar
+            title="Spellbook"
+            iconClassNameRight="muidocs-icon-navigation-expand-more"
+          />
+          <div className="fill-area flexbox-item-grow">
+            <Route exact path="/lab/create" render={(props) => <SpellCalculator data={HydraData} spell={this.state.spell} diff={this.state.diff} updateState={this.handleSpellChange}/>}/>
+
             <Route exact path="/spell" render={(props) => <SpellCard spell={this.state.spell} diff={this.state.diff} caster={this.state.caster}/>}/>
+
             <Route path="/spellbook" component={Spellbook}/>
 
-            <ul>
-              <li><Link to="/">Calculator</Link></li>
+            {/* <FloatingActionButton secondary={true} className="button-action button-main">
+              <Route exact path="/lab/create" render={(props) => <SpellCalculator data={HydraData} spell={this.state.spell} diff={this.state.diff} updateState={this.handleSpellChange}/>}/>
+
+              <Route exact path="/spell" render={(props) => <SpellCard spell={this.state.spell} diff={this.state.diff} caster={this.state.caster}/>}/> */}
+
+              <Route path="/spellbook"  render={(props) => <FloatingActionButton secondary={true} className="button-action button-main"><ContentAdd /></FloatingActionButton>}/>
+
+              <Route path="/spell"  render={(props) => <FloatingActionButton secondary={true} className="button-action button-main"><ModeEdit /></FloatingActionButton>}/>
+
+            {/* <ul>
+              <li><Link to="/lab/new">Calculator</Link></li>
               <li><Link to="/spell">SpellCard</Link></li>
               <li><Link to="/spellbook">Spellbook</Link></li>
-            </ul>
+            </ul> */}
           </div>
+        </div>
       </Router>
     </MuiThemeProvider>
     );
