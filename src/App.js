@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import FloatingActionButton from 'material-ui/FloatingActionButton';
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -7,9 +8,10 @@ import SpellCalculator from './SpellCalculator';
 import SpellCard from './SpellCard';
 import Spellbook from './Spellbook';
 import HydraData from './HydraData';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
+import LinkButton from './LinkButton';
 import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentSave from 'material-ui/svg-icons/content/save';
 
 import './App.css';
 
@@ -112,28 +114,37 @@ class App extends Component {
             title="Spellbook"
             iconClassNameRight="muidocs-icon-navigation-expand-more"
           />
-          <div className="fill-area flexbox-item-grow">
-            <Route exact path="/lab/create" render={(props) => <SpellCalculator data={HydraData} spell={this.state.spell} diff={this.state.diff} updateState={this.handleSpellChange}/>}/>
 
-            <Route exact path="/spell" render={(props) => <SpellCard spell={this.state.spell} diff={this.state.diff} caster={this.state.caster}/>}/>
+          <Route path="/spellbook"  render={(props) =>
+            <div className="fill-area flexbox-item-grow">
+              <Spellbook />
+              <LinkButton newpath="/lab/create" classes="button-action button-main">
+                <ContentAdd />
+              </LinkButton>
+            </div>
+          }/>
 
-            <Route path="/spellbook" component={Spellbook}/>
+          <Route exact path="/spell" render={(props) =>
+            <div className="fill-area flexbox-item-grow">
+              <SpellCard spell={this.state.spell} diff={this.state.diff} caster={this.state.caster}/>
+              <LinkButton newpath="/lab/create" classes="button-action button-main">
+                <ModeEdit />
+              </LinkButton>
+              <LinkButton newpath="/spellbook" classes="button-action button-main">
+                <ModeEdit />
+              </LinkButton>
+            </div>
+          }/>
 
-            {/* <FloatingActionButton secondary={true} className="button-action button-main">
-              <Route exact path="/lab/create" render={(props) => <SpellCalculator data={HydraData} spell={this.state.spell} diff={this.state.diff} updateState={this.handleSpellChange}/>}/>
+          <Route exact path="/lab/create" render={(props) =>
+            <div className="fill-area flexbox-item-grow">
+              <SpellCalculator data={HydraData} spell={this.state.spell} diff={this.state.diff} updateState={this.handleSpellChange}/>
+              <LinkButton newpath="/spell" classes="button-action button-main">
+                <ContentSave />
+              </LinkButton>
+            </div>
+          }/>
 
-              <Route exact path="/spell" render={(props) => <SpellCard spell={this.state.spell} diff={this.state.diff} caster={this.state.caster}/>}/> */}
-
-              <Route path="/spellbook"  render={(props) => <FloatingActionButton secondary={true} className="button-action button-main"><ContentAdd /></FloatingActionButton>}/>
-
-              <Route path="/spell"  render={(props) => <FloatingActionButton secondary={true} className="button-action button-main"><ModeEdit /></FloatingActionButton>}/>
-
-            {/* <ul>
-              <li><Link to="/lab/new">Calculator</Link></li>
-              <li><Link to="/spell">SpellCard</Link></li>
-              <li><Link to="/spellbook">Spellbook</Link></li>
-            </ul> */}
-          </div>
         </div>
       </Router>
     </MuiThemeProvider>

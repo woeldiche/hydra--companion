@@ -8,7 +8,7 @@ class LinkButton extends Component {
   render() {
     return (
       <Route render={({ history}) => (
-        <FloatingActionButton onClick={() => { history.push(this.props.path) }} >
+        <FloatingActionButton className={this.props.classes} onClick={() => { history.push(this.props.newpath) }} >
           {this.props.children}
         </FloatingActionButton>
       )}/>
