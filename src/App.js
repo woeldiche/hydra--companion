@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import FloatingActionButton from 'material-ui/FloatingActionButton';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -109,43 +108,58 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
       <Router>
-        <div className="flexbox-parent">
-          <AppBar
-            title="Spellbook"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
-          />
 
           <Route path="/spellbook"  render={(props) =>
-            <div className="fill-area flexbox-item-grow">
-              <Spellbook />
-              <LinkButton newpath="/lab/create" classes="button-action button-main">
-                <ContentAdd />
-              </LinkButton>
+            //  Spellbook.js
+            <div className="flexbox-parent">
+              <AppBar
+                title="Spellbook"
+                iconClassNameRight="muidocs-icon-navigation-expand-more"
+              />
+              <div className="fill-area flexbox-item-grow">
+                <Spellbook />
+                <LinkButton newpath="/lab/create" classes="button-action button-main">
+                  <ContentAdd />
+                </LinkButton>
+              </div>
             </div>
           }/>
 
           <Route exact path="/spell" render={(props) =>
-            <div className="fill-area flexbox-item-grow">
-              <SpellCard spell={this.state.spell} diff={this.state.diff} caster={this.state.caster}/>
-              <LinkButton newpath="/lab/create" classes="button-action button-main">
-                <ModeEdit />
-              </LinkButton>
-              <LinkButton newpath="/spellbook" classes="button-action button-main">
-                <ModeEdit />
-              </LinkButton>
+            // Spellcard.js
+            <div className="flexbox-parent">
+              <AppBar
+                title="Spellbook"
+                iconClassNameRight="muidocs-icon-navigation-expand-more"
+              />
+              <div className="fill-area flexbox-item-grow">
+                <SpellCard spell={this.state.spell} diff={this.state.diff} caster={this.state.caster}/>
+                <LinkButton newpath="/lab/create" classes="button-action button-main">
+                  <ModeEdit />
+                </LinkButton>
+                <LinkButton newpath="/spellbook" classes="button-action button-main">
+                  <ModeEdit />
+                </LinkButton>
+              </div>
             </div>
           }/>
 
           <Route exact path="/lab/create" render={(props) =>
-            <div className="fill-area flexbox-item-grow">
-              <SpellCalculator data={HydraData} spell={this.state.spell} diff={this.state.diff} updateState={this.handleSpellChange}/>
-              <LinkButton newpath="/spell" classes="button-action button-main">
-                <ContentSave />
-              </LinkButton>
+            // SpellLab.js
+            <div className="flexbox-parent">
+              <AppBar
+                title="Spellbook"
+                iconClassNameRight="muidocs-icon-navigation-expand-more"
+              />
+              <div className="fill-area flexbox-item-grow">
+                <SpellCalculator data={HydraData} spell={this.state.spell} diff={this.state.diff} updateState={this.handleSpellChange}/>
+                <LinkButton newpath="/spell" classes="button-action button-main">
+                  <ContentSave />
+                </LinkButton>
+              </div>
             </div>
           }/>
 
-        </div>
       </Router>
     </MuiThemeProvider>
     );
