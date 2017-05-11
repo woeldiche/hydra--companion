@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+//import { BrowserRouter as Router, Route } from 'react-router-dom'
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import SpellCalculator from './SpellCalculator';
-import SpellCard from './SpellCard';
-import Spellbook from './Spellbook';
-import HydraData from './HydraData';
-import LinkButton from './LinkButton';
-import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import ContentSave from 'material-ui/svg-icons/content/save';
+// import getMuiTheme from 'material-ui/styles/getMuiTheme';
+// import SpellCard from './SpellCard';
+// import Spellbook from './Spellbook';
+// import HydraData from './HydraData';
+// import LinkButton from './LinkButton';
+// import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
+// import ContentAdd from 'material-ui/svg-icons/content/add';
+// import ContentSave from 'material-ui/svg-icons/content/save';
 
 import './App.css';
 
-const muiTheme = getMuiTheme({
-  palette: {
-    primary1Color: '#971e25',
-    //primary2Color: cyan700,
-    pickerHeaderColor: '#971e25',
-  },
-});
+// const muiTheme = getMuiTheme({
+//   palette: {
+//     primary1Color: '#971e25',
+//     //primary2Color: cyan700,
+//     pickerHeaderColor: '#971e25',
+//   },
+// });
 
 
 // Needed for onTouchTap
@@ -106,7 +106,7 @@ class App extends Component {
 
   render() {
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
+      <MuiThemeProvider>
       <Router>
 
           <Route path="/spellbook"  render={(props) =>

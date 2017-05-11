@@ -1,13 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import hydraApp from './reducers'
+import { combineReducers } from 'redux'
+import { UPDATE_PARAMETER, UPDATE_DIFF } from '../actions';
 
-import App from './components/App';
-import './styles/index.css';
-
-const testState =  {
+const initialState = {
   spellLab: {
     name: {
       value: '',
@@ -75,14 +69,53 @@ const testState =  {
       diff: 0,
       items: [ "Option 1", "Option 2", "Option 3" ],
     },
-  },
+  }
 }
 
-let store = createStore(hydraApp, testState);
+function getDiff (type, key) {
+  return 0;
+}
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+function getItems (type) {
+  return [
+    type + ": Option 1",
+    type + ": Option 2",
+    type + ": Option 3",
+    type + ": Option 4",
+  ]
+}
+
+function handleUpdateParameter (state, action) {
+  return Object.assign({}, state, {
+    [action.parameter]: {
+      value: action.value,
+      diff: getDiff(action.parameter, action.value),
+      items: getItems(action.parameter)
+    }
+  });
+}
+
+function spellLab (state = initialState, action) {
+  switch (action.type) {
+    case UPDATE_PARAMETER:
+      return handleUpdateParameter(state, action);
+
+    case UPDATE_DIFF:
+      // If empty string set to zero.
+      const value = !!action.value ? action.value : 0;
+      return Object.assign({}, state, {
+        [action.parameter]: Object.assign({}, state[action.parameter], { diff: parseInt(value, 10) })
+      });
+
+    default:
+    break;
+  }
+
+  return state;
+}
+
+const hydraApp = combineReducers({
+  spellLab
+});
+
+export default hydraApp;

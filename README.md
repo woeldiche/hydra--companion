@@ -15,6 +15,13 @@ A personal hobby project created with far too many libraries.
   - View caster [/caster/:id]
   - Edit caster / Select effects [/caster/:id/edit]
 
+- LabPage
+  - Header
+  - SpellCalculator > SpellParameters
+    - SelectOptions
+  - LabResult > LabFooter
+  - LabStatus > NetworkStatus
+
 ## Data Model
 ### HydraData
 ```
