@@ -57,7 +57,6 @@ function handleUpdateParameter (state, action) {
         [action.parameter]: Object.assign({}, state[action.parameter], { value: action.value, diff: diff })
       });
   }
-
 }
 
 function spellLab (state = initialState, action) {

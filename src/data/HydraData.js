@@ -1449,7 +1449,7 @@ HydraData.options = function (param, filter = false) {
   HydraData[param].forEach((value, key, map) => {
     items.push(Object.assign({name: key}, value));
   });
-  
+
   return items;
 }
 
@@ -1500,7 +1500,6 @@ HydraData.formatted = function (param) {
   itemsText += ']'
   return itemsText;
 }
-
 
 // Get values from config data to update other states as needed.
 HydraData.get = function (name, key) {

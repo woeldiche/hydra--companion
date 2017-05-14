@@ -47,7 +47,11 @@
 }
 
 .flexbox-item-grow {
-    flex: 1; /* same as flex: 1 1 auto; */
+  flex: 1; /* same as flex: 1 1 auto; */
+}
+
+.flex-item-column {
+  flex: 1;
 }
 
 .fill-area {
@@ -70,4 +74,19 @@
 
 .button-main {
 
+}
+
+.footer {
+  padding: 12px 24px 0;
+  background-color: #eee;
+  height: 72px;
+}
+
+.subheader {
+  color: rgba(0, 0, 0, 0.54);
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 500;
+  display: block;
 }

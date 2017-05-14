@@ -1,7 +1,8 @@
 import React from 'react';
 import Header from './Header';
 import SpellCalculator from '../containers/SpellCalculator';
-// import LabResult from '../LabResult';
+import LabResult from '../containers/LabResult';
+import Footer from './Footer';
 // import LabStatus from '../LabStatus';
 
 const LabPage = () => (
@@ -10,8 +11,10 @@ const LabPage = () => (
     <div className="fill-area flexbox-item-grow">
       <SpellCalculator />
     </div>
-    {/* <LabResult />
-      <LabStatus /> */}
+    <Footer>
+      <LabResult />
+      {/* <LabStatus /> */}
+    </Footer>
   </div>
 )
 
