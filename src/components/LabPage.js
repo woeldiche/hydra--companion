@@ -8,10 +8,10 @@ const LabPage = () => (
   <div className="flexbox-parent">
     <Header title="Lab" />
     <div className="fill-area flexbox-item-grow">
-    <SpellCalculator />
-      {/* <LabResult />
-      <LabStatus /> */}
+      <SpellCalculator />
     </div>
+    {/* <LabResult />
+      <LabStatus /> */}
   </div>
 )
 

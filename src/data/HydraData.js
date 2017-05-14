@@ -1,6 +1,6 @@
-const Data = {};
+const HydraData = {};
 
-Data.school = new Map([
+HydraData.school = new Map([
   ["Arcana & Divine Esoterica"],
   ["Abjuration"],
   ["Conjuration"],
@@ -14,338 +14,1231 @@ Data.school = new Map([
   ["Transmutation (Body Enhancement)"],
 ]);
 
-Data.effect = new Map([
-  ["Arcana & Divine Esoterica",
-    {children: new Map([
-      ["Arcane Mark", {diff: 1}],
-      ["Prestidigitation", {diff: 1}],
-      ["Read Magic", {diff: 1}],
-    ])}
-  ],
-  ["Abjuration",
-    {children: new Map([
-      ["Alarm", {diff: 1}],
-      ["Antimagic Field", {diff: 15}],
-      ["Armor force", {diff: 5}],
-      ["Dimensional Anchor", {diff: 5}],
-      ["Dispel Magic", {diff: 10}],
-      ["Endure Elements", {diff: 1}],
-      ["Hold Portal", {diff: 1}],
-      ["Obscure Object", {diff: 5}],
-      ["Shield force", {diff: 5}],
-      ["Element Resistance", {diff: 5}],
-      ["Repulsion", {diff: 5}],
-      ["Resistance", {diff: 5}],
-    ])}
-  ],
-  ["Conjuration",
-    {children: new Map([
-      ["Conjure Cold", {diff: 0, damage: true}],
-      ["Conjure Fire", {diff: 0, damage: true}],
-      ["Conjure Acid", {diff: 0, damage: true}],
-      ["Conjure Air", {diff: 0, damage: true}],
-      ["Conjure Holy or Unholy", {diff: 0, damage: true}],
-      ["Obscuring Mist", {diff: 1}],
-      ["Unseen Servant", {diff: 1}],
-      ["Glitterdust", {diff: 5}],
-      ["Web", {diff: 5}],
-      ["Phantom Steed", {diff: 5}],
-      ["Sleet Storm", {diff: 10}],
-      ["Wall of Stone", {diff: 10}],
-      ["Wall of Iron", {diff: 10}],
-      ["Phase Door", {diff: 10}],
-      ["Trap the Soul", {diff: 10}],
-      ["Summon Monster (arcane)", {diff: 5}],
-      ["Summon natures ally (faith)", {diff: 5}],
-    ])}
-  ],
-  ["Conjuration (Healing)",
-    {children: new Map([
-      ["Cure Wounds, 1D6", {diff: 3}],
-      ["Cure Wounds, 2D6", {diff: 6}],
-      ["Cure Wounds, 3D6", {diff: 12}],
-      ["Cure Wounds, 4D6", {diff: 18}],
-      ["Cure Wounds, 5D6 (touch only)", {diff: 24, area: false}],
-      ["Cure Blinded", {diff: 5}],
-      ["Breath of life", {diff: 15}],
-      ["Confused", {diff: 5}],
-      ["Remove Curse", {diff: 10}],
-      ["Cure Dazed", {diff: 5}],
-      ["Cure Dazzled", {diff: 1}],
-      ["Cure Deafened", {diff: 5}],
-      ["Cure Diseased", {diff: 5}],
-      ["Restoration Lesser (Ability damage)", {diff: 10}],
-      ["Cure Exhausted", {diff: 5}],
-      ["Cure Fatigued", {diff: 1}],
-      ["Cure Feebleminded", {diff: 5}],
-      ["Cure Insanity", {diff: 5}],
-      ["Cure Nauseated", {diff: 5}],
-      ["Restoration Greater (Negativ levels)", {diff: 5}],
-      ["Cure Poisoned", {diff: 5}],
-      ["Cure Sickened", {diff: 5}],
-      ["Cure Stunned", {diff: 5}],
-    ])}
-  ],
-  ["Divination",
-    {children: new Map([
-      ["True Strike", {diff: 5}],
-      ["See Invisibility", {diff: 5}],
-      ["Clairaudience or Clairvoyance", {diff: 5}],
-      ["Comprehend Language", {diff: 1}],
-      ["Detect Alignment", {diff: 1}],
-      ["Detect Poison", {diff: 5}],
-      ["Detect Disease", {diff: 5}],
-      ["Detect Magic", {diff: 5}],
-      ["Detect Undead", {diff: 5}],
-      ["Detect Secret doors", {diff: 5}],
-      ["Detect Thoughts", {diff: 5}],
-      ["Detect Scrying", {diff: 5}],
-      ["Detect Object", {diff: 5}],
-      ["Detect Creature", {diff: 5}],
-      ["Tongues", {diff: 5}],
-      ["Identify", {diff: 10}],
-      ["Arcane Eye", {diff: 10}],
-      ["Telepathic Bond", {diff: 5}],
-      ["Legend Lore", {diff: 10}],
-      ["True Seeing", {diff: 10}],
-    ])}
-  ],
-  ["Enchantment Charm",
-    {children: new Map([
-      ["Charm Person", {diff: 5}],
-      ["Hypnotism", {diff: 5}],
-      ["Sleep", {diff: 5}],
-      ["Hideous Laughter", {diff: 10}],
-      ["Touch of Idiocy", {diff: 15}],
-      ["Heroism", {diff: 5}],
-      ["Rage", {diff: 5}],
-      ["Suggestion", {diff: 10}],
-      ["Confusion", {diff: 10}],
-      ["Crushing Despair", {diff: 5}],
-      ["Feeblemind", {diff: 15}],
-      ["Mind Fog", {diff: 15}],
-      ["Symbol of Sleep", {diff: 10}],
-      ["Symbol of Persuasion", {diff: 10}],
-      ["Symbol of Stunning", {diff: 10}],
-      ["Antipathy", {diff: 5}],
-      ["Binding", {diff: 5}],
-      ["Power Word Stun", {diff: 10}],
-      ["Symbol of Insanity", {diff: 15}],
-      ["Sympathy", {diff: 5}],
-      ["Enchanment Touch: Confuse", {diff: 10}],
-      ["Enchanment Touch: Daze", {diff: 5}],
-      ["Enchanment Touch: Feeblemind", {diff: 5}],
-      ["Enchanment Touch: Insanity", {diff: 5}],
-      ["Enchanment Touch: Paralyse", {diff: 10}],
-    ])}
-  ],
-  ["Evocation",
-    {children: new Map([
-      ["Light", {diff: 1}],
-      ["Darkness", {diff: 1}],
-      ["Daylight", {diff: 10}],
-      ["Elemental Acid", {diff: 0, damage: true}],
-      ["Elemental Air", {diff: 0, damage: true}],
-      ["Elemental Cold", {diff: 0, damage: true}],
-      ["Elemental Electricity", {diff: 0, damage: true}],
-      ["Elemental Fire", {diff: 0, damage: true}],
-      ["Elemental Force", {diff: 0, damage: true}],
-      ["Elemental Sonic", {diff: 0, damage: true}],
-      ["Flare", {diff: 1}],
-      ["Floating Disk", {diff: 1}],
-      ["Gust of Wind", {diff: 1}],
-      ["Shatter", {diff: 5}],
-      ["Sending", {diff: 5}],
-      ["Stun", {diff: 5}],
-      ["Contingency", {diff: 10}],
-      ["Mage's Sword", {diff: 15}],
-      ["Wind Wall", {diff: 5}],
-      ["Tiny Hut", {diff: 5}],
-      ["Interposing Hand", {diff: 5}],
-    ])}
-  ],
-  ["Illusion",
-    {children: new Map([
-      ["Light", {diff: 1}],
-      ["Ghost Sound", {diff: 1}],
-      ["Disguise Self", {diff: 1}],
-      ["Silent Image", {diff: 5}],
-      ["Ventriloquism", {diff: 1}],
-      ["Blur", {diff: 5}],
-      ["Hypnotic Pattern", {diff: 5}],
-      ["Invisibility", {diff: 1}],
-      ["Invisibility, Greater", {diff: 5}],
-      ["Misdirection", {diff: 5}],
-      ["Phantom Trap", {diff: 5}],
-      ["Phantasmal Killer", {diff: 10}],
-      ["Rainbow Pattern", {diff: 5}],
-      ["Dream", {diff: 5}],
-      ["False Vision", {diff: 5}],
-      ["Silence", {diff: 5}],
-      ["Simulacrum", {diff: 75}],
-    ])}
-  ],
-  ["Necromancy",
-    {children: new Map([
-      ["Animate Dead", {diff: 5}],
-      ["Command Undead", {diff: 5}],
-      ["Create Undead: Ghoul", {diff: 10}],
-      ["Create Undead: Ghast", {diff: 15}],
-      ["Create Undead: Mummy", {diff: 20}],
-      ["Create Undead: Mohrg", {diff: 25}],
-      ["Create Greater Undead: Shadow", {diff: 30}],
-      ["Create Greater Undead: Wraith", {diff: 35}],
-      ["Create Greater Undead: Spectre", {diff: 40}],
-      ["Create Greater Undead: Devourer", {diff: 45}],
-      ["False Life", {diff: 5}],
-      ["Gentle Repose", {diff: 5}],
-      ["Halt Undead", {diff: 5}],
-      ["Spectral Hand", {diff: 5}],
-      ["Blight", {diff: 5}],
-      ["Magic Jar", {diff: 15}],
-      ["Symbol of Pain", {diff: 5}],
-      ["Symbol of Fear", {diff: 5}],
-      ["Control Undead", {diff: 5}],
-      ["Symbol of Weakness", {diff: 5}],
-      ["Clone", {diff: 100}],
-      ["Symbol of Death", {diff: 5}],
-      ["Cause Wounds", {diff: 0, damage: true}],
-      ["Necro Touch: Ability damage", {diff: 10}],
-      ["Necro Touch: Blind", {diff: 5}],
-      ["Necro Touch: Deafen", {diff: 5}],
-      ["Necro Touch: Disease", {diff: 5}],
-      ["Necro Touch: Exhauste", {diff: 10}],
-      ["Necro Touch: Fatigue", {diff: 5}],
-      ["Necro Touch: Negativ levels", {diff: 10}],
-      ["Necro Touch: Sicken", {diff: 5}],
-      ["Curse: Baleful Polymorph", {diff: 10}],
-      ["Curse: Bestow Curse Trap", {diff: 10}],
-      ["Curse: Curse of the Ages", {diff: 10}],
-      ["Curse: Mummy Rot", {diff: 10}],
-      ["Curse: Unluck", {diff: 10}],
-      ["Curse: Werewolf Lycanthropy", {diff: 10}],
-    ])}
-  ],
-  ["Transmutation",
-    {children: new Map([
-      ["Dimension Door", {diff: 10}],
-      ["Fly", {diff: 5}],
-      ["Jump", {diff: 1}],
-      ["Levitate", {diff: 1}],
-      ["Light", {diff: 1}],
-      ["Movement", {diff: 1}],
-      ["Spider climb", {diff: 5}],
-      ["Telekinese", {diff: 5}],
-      ["Teleport", {diff: 15}],
-      ["Temporal Stasis", {diff: 5}],
-      ["Transmutation touch: Entangle", {diff: 5}],
-      ["Transmutation touch: Petrify", {diff: 10}],
-      /*["Web", {diff: 10}],*/
-    ])
-  }],
-  ["Transmutation (Body Enhancement)",
-    {children: new Map([
-      ["Stat enhancement", {diff: 5}],
-      ["All-Around", {diff: 5}],
-      ["Amorphous", {diff: 10}],
-      ["Amphibious", {diff: 10}],
-      ["Bleed", {diff: 10}],
-      ["Blindsense", {diff: 10}],
-      ["Blindsight", {diff: 10}],
-      ["Blood Drain", {diff: 10}],
-      ["Blood Rage", {diff: 10}],
-      ["Breath Weapon", {diff: 10}],
-      ["Compression", {diff: 10}],
-      ["Construct Traits", {diff: 10}],
-      ["Fast healing", {diff: 1}],
-      ["Regeneration", {diff: 10}],
-      ["Ferocity", {diff: 10}],
-      ["Fortification", {diff: 10}],
-      ["Freeze", {diff: 10}],
-      ["Frightful Presence", {diff: 10}],
-      ["Gaze", {diff: 10}],
-      ["Grab", {diff: 10}],
-      ["Greensight", {diff: 10}],
-      ["Hold Breath", {diff: 10}],
-      ["Immunity", {diff: 10}],
-      ["Incorporeal", {diff: 10}],
-      ["Jet", {diff: 10}],
-      ["Keen Scent", {diff: 10}],
-      ["Lifesense", {diff: 10}],
-      ["Low-Light Vision", {diff: 5}],
-      ["Mistsight", {diff: 10}],
-      ["Natural Attacks", {diff: 10}],
-      ["No Breath", {diff: 5}],
-      ["Plant Traits", {diff: 10}],
-      ["Plantbringer", {diff: 10}],
-      ["Poison", {diff: 10}],
-      ["Poisonous Blood", {diff: 10}],
-      ["Pounce", {diff: 5}],
-      ["Powerful Charge", {diff: 10}],
-      ["Push", {diff: 10}],
-      ["Rake", {diff: 10}],
-      ["Rend", {diff: 10}],
-      ["Rock Catching", {diff: 10}],
-      ["Scent", {diff: 5}],
-      ["See in Darkness", {diff: 10}],
-      ["Split", {diff: 10}],
-      ["Strangle", {diff: 10}],
-      ["Trample", {diff: 10}],
-      ["Transform Self: Enlarge Person", {diff: 5}],
-      ["Transform Self: Elemental Body", {diff: 10}],
-      ["Transform Self: Form of the Dragon", {diff: 15}],
-      ["Transform Self: Giant Form", {diff: 20}],
-      ["Transform Self: Beast Shape", {diff: 5}],
-      ["Transform Self: Demon Lord Traits", {diff: 20}],
-      ["Transform Self: Empyreal Lord Traits", {diff: 20}],
-      ["Transform Self: Formian Traits", {diff: 20}],
-      ["Tremorsense", {diff: 10}],
-      ["Unnatural Aura", {diff: 5}],
-      ["Water Breathing", {diff: 5}],
-    ])}
-  ],
+HydraData.effect = new Map([
+    ["Arcane Mark", {
+      school: "Arcana & Divine Esoterica",
+      diff: 1,
+      damage: false,
+    }],
+    ["Prestidigitation", {
+      school: "Arcana & Divine Esoterica",
+      diff: 1,
+      damage: false,
+    }],
+    ["Read Magic", {
+      school: "Arcana & Divine Esoterica",
+      diff: 1,
+      damage: false,
+    }],
+    ["Alarm", {
+      school: "Abjuration",
+      diff: 1,
+      damage: false,
+    }],
+    ["Antimagic Field", {
+      school: "Abjuration",
+      diff: 15,
+      damage: false,
+    }],
+    ["Armor force", {
+      school: "Abjuration",
+      diff: 5,
+      damage: false,
+    }],
+    ["Dimensional Anchor", {
+      school: "Abjuration",
+      diff: 5,
+      damage: false,
+    }],
+    ["Dispel Magic", {
+      school: "Abjuration",
+      diff: 10,
+      damage: false,
+    }],
+    ["Endure Elements", {
+      school: "Abjuration",
+      diff: 1,
+      damage: false,
+    }],
+    ["Hold Portal", {
+      school: "Abjuration",
+      diff: 1,
+      damage: false,
+    }],
+    ["Obscure Object", {
+      school: "Abjuration",
+      diff: 5,
+      damage: false,
+    }],
+    ["Shield force", {
+      school: "Abjuration",
+      diff: 5,
+      damage: false,
+    }],
+    ["Element Resistance", {
+      school: "Abjuration",
+      diff: 5,
+      damage: false,
+    }],
+    ["Repulsion", {
+      school: "Abjuration",
+      diff: 5,
+      damage: false,
+    }],
+    ["Resistance", {
+      school: "Abjuration",
+      diff: 5,
+      damage: false,
+    }],
+    ["Conjure Cold", {
+      school: "Conjuration",
+      diff: 0,
+      damage: true,
+    }],
+    ["Conjure Fire", {
+      school: "Conjuration",
+      diff: 0,
+      damage: true,
+    }],
+    ["Conjure Acid", {
+      school: "Conjuration",
+      diff: 0,
+      damage: true,
+    }],
+    ["Conjure Air", {
+      school: "Conjuration",
+      diff: 0,
+      damage: true,
+    }],
+    ["Conjure Holy or Unholy", {
+      school: "Conjuration",
+      diff: 0,
+      damage: true,
+    }],
+    ["Obscuring Mist", {
+      school: "Conjuration",
+      diff: 1,
+      damage: false,
+    }],
+    ["Unseen Servant", {
+      school: "Conjuration",
+      diff: 1,
+      damage: false,
+    }],
+    ["Glitterdust", {
+      school: "Conjuration",
+      diff: 5,
+      damage: false,
+    }],
+    ["Web", {
+      school: "Conjuration",
+      diff: 5,
+      damage: false,
+    }],
+    ["Phantom Steed", {
+      school: "Conjuration",
+      diff: 5,
+      damage: false,
+    }],
+    ["Sleet Storm", {
+      school: "Conjuration",
+      diff: 10,
+      damage: false,
+    }],
+    ["Wall of Stone", {
+      school: "Conjuration",
+      diff: 10,
+      damage: false,
+    }],
+    ["Wall of Iron", {
+      school: "Conjuration",
+      diff: 10,
+      damage: false,
+    }],
+    ["Phase Door", {
+      school: "Conjuration",
+      diff: 10,
+      damage: false,
+    }],
+    ["Trap the Soul", {
+      school: "Conjuration",
+      diff: 10,
+      damage: false,
+    }],
+    ["Summon Monster (arcane)", {
+      school: "Conjuration",
+      diff: 5,
+      damage: false,
+    }],
+    ["Summon natures ally (faith)", {
+      school: "Conjuration",
+      diff: 5,
+      damage: false,
+    }],
+    ["Cure Wounds, 1D6", {
+      school: "Conjuration (Healing)",
+      diff: 3,
+      damage: false,
+    }],
+    ["Cure Wounds, 2D6", {
+      school: "Conjuration (Healing)",
+      diff: 6,
+      damage: false,
+    }],
+    ["Cure Wounds, 3D6", {
+      school: "Conjuration (Healing)",
+      diff: 12,
+      damage: false,
+    }],
+    ["Cure Wounds, 4D6", {
+      school: "Conjuration (Healing)",
+      diff: 18,
+      damage: false,
+    }],
+    ["Cure Wounds, 5D6 (touch only)", {
+      school: "Conjuration (Healing)",
+      diff: 24,
+      area: false,
+      damage: false,
+    }],
+    ["Cure Blinded", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Breath of life", {
+      school: "Conjuration (Healing)",
+      diff: 15,
+      damage: false,
+    }],
+    ["Confused", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Remove Curse", {
+      school: "Conjuration (Healing)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Cure Dazed", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Cure Dazzled", {
+      school: "Conjuration (Healing)",
+      diff: 1,
+      damage: false,
+    }],
+    ["Cure Deafened", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Cure Diseased", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Restoration Lesser (Ability damage)", {
+      school: "Conjuration (Healing)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Cure Exhausted", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Cure Fatigued", {
+      school: "Conjuration (Healing)",
+      diff: 1,
+      damage: false,
+    }],
+    ["Cure Feebleminded", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Cure Insanity", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Cure Nauseated", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Restoration Greater (Negativ levels)", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Cure Poisoned", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Cure Sickened", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Cure Stunned", {
+      school: "Conjuration (Healing)",
+      diff: 5,
+      damage: false,
+    }],
+    ["True Strike", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["See Invisibility", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Clairaudience or Clairvoyance", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Comprehend Language", {
+      school: "Divination",
+      diff: 1,
+      damage: false,
+    }],
+    ["Detect Alignment", {
+      school: "Divination",
+      diff: 1,
+      damage: false,
+    }],
+    ["Detect Poison", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Detect Disease", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Detect Magic", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Detect Undead", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Detect Secret doors", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Detect Thoughts", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Detect Scrying", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Detect Object", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Detect Creature", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Tongues", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Identify", {
+      school: "Divination",
+      diff: 10,
+      damage: false,
+    }],
+    ["Arcane Eye", {
+      school: "Divination",
+      diff: 10,
+      damage: false,
+    }],
+    ["Telepathic Bond", {
+      school: "Divination",
+      diff: 5,
+      damage: false,
+    }],
+    ["Legend Lore", {
+      school: "Divination",
+      diff: 10,
+      damage: false,
+    }],
+    ["True Seeing", {
+      school: "Divination",
+      diff: 10,
+      damage: false,
+    }],
+    ["Charm Person", {
+      school: "Enchantment Charm",
+      diff: 5,
+      damage: false,
+    }],
+    ["Hypnotism", {
+      school: "Enchantment Charm",
+      diff: 5,
+      damage: false,
+    }],
+    ["Sleep", {
+      school: "Enchantment Charm",
+      diff: 5,
+      damage: false,
+    }],
+    ["Hideous Laughter", {
+      school: "Enchantment Charm",
+      diff: 10,
+      damage: false,
+    }],
+    ["Touch of Idiocy", {
+      school: "Enchantment Charm",
+      diff: 15,
+      damage: false,
+    }],
+    ["Heroism", {
+      school: "Enchantment Charm",
+      diff: 5,
+      damage: false,
+    }],
+    ["Rage", {
+      school: "Enchantment Charm",
+      diff: 5,
+      damage: false,
+    }],
+    ["Suggestion", {
+      school: "Enchantment Charm",
+      diff: 10,
+      damage: false,
+    }],
+    ["Confusion", {
+      school: "Enchantment Charm",
+      diff: 10,
+      damage: false,
+    }],
+    ["Crushing Despair", {
+      school: "Enchantment Charm",
+      diff: 5,
+      damage: false,
+    }],
+    ["Feeblemind", {
+      school: "Enchantment Charm",
+      diff: 15,
+      damage: false,
+    }],
+    ["Mind Fog", {
+      school: "Enchantment Charm",
+      diff: 15,
+      damage: false,
+    }],
+    ["Symbol of Sleep", {
+      school: "Enchantment Charm",
+      diff: 10,
+      damage: false,
+    }],
+    ["Symbol of Persuasion", {
+      school: "Enchantment Charm",
+      diff: 10,
+      damage: false,
+    }],
+    ["Symbol of Stunning", {
+      school: "Enchantment Charm",
+      diff: 10,
+      damage: false,
+    }],
+    ["Antipathy", {
+      school: "Enchantment Charm",
+      diff: 5,
+      damage: false,
+    }],
+    ["Binding", {
+      school: "Enchantment Charm",
+      diff: 5,
+      damage: false,
+    }],
+    ["Power Word Stun", {
+      school: "Enchantment Charm",
+      diff: 10,
+      damage: false,
+    }],
+    ["Symbol of Insanity", {
+      school: "Enchantment Charm",
+      diff: 15,
+      damage: false,
+    }],
+    ["Sympathy", {
+      school: "Enchantment Charm",
+      diff: 5,
+      damage: false,
+    }],
+    ["Enchanment Touch: Confuse", {
+      school: "Enchantment Charm",
+      diff: 10,
+      damage: false,
+    }],
+    ["Enchanment Touch: Daze", {
+      school: "Enchantment Charm",
+      diff: 5,
+      damage: false,
+    }],
+    ["Enchanment Touch: Feeblemind", {
+      school: "Enchantment Charm",
+      diff: 5,
+      damage: false,
+    }],
+    ["Enchanment Touch: Insanity", {
+      school: "Enchantment Charm",
+      diff: 5,
+      damage: false,
+    }],
+    ["Enchanment Touch: Paralyse", {
+      school: "Enchantment Charm",
+      diff: 10,
+      damage: false,
+    }],
+    ["Light", {
+      school: "Evocation",
+      diff: 1,
+      damage: false,
+    }],
+    ["Darkness", {
+      school: "Evocation",
+      diff: 1,
+      damage: false,
+    }],
+    ["Daylight", {
+      school: "Evocation",
+      diff: 10,
+      damage: false,
+    }],
+    ["Elemental Acid", {
+      school: "Evocation",
+      diff: 0,
+      damage: true,
+    }],
+    ["Elemental Air", {
+      school: "Evocation",
+      diff: 0,
+      damage: true,
+    }],
+    ["Elemental Cold", {
+      school: "Evocation",
+      diff: 0,
+      damage: true,
+    }],
+    ["Elemental Electricity", {
+      school: "Evocation",
+      diff: 0,
+      damage: true,
+    }],
+    ["Elemental Fire", {
+      school: "Evocation",
+      diff: 0,
+      damage: true,
+    }],
+    ["Elemental Force", {
+      school: "Evocation",
+      diff: 0,
+      damage: true,
+    }],
+    ["Elemental Sonic", {
+      school: "Evocation",
+      diff: 0,
+      damage: true,
+    }],
+    ["Flare", {
+      school: "Evocation",
+      diff: 1,
+      damage: false,
+    }],
+    ["Floating Disk", {
+      school: "Evocation",
+      diff: 1,
+      damage: false,
+    }],
+    ["Gust of Wind", {
+      school: "Evocation",
+      diff: 1,
+      damage: false,
+    }],
+    ["Shatter", {
+      school: "Evocation",
+      diff: 5,
+      damage: false,
+    }],
+    ["Sending", {
+      school: "Evocation",
+      diff: 5,
+      damage: false,
+    }],
+    ["Stun", {
+      school: "Evocation",
+      diff: 5,
+      damage: false,
+    }],
+    ["Contingency", {
+      school: "Evocation",
+      diff: 10,
+      damage: false,
+    }],
+    ["Mage's Sword", {
+      school: "Evocation",
+      diff: 15,
+      damage: false,
+    }],
+    ["Wind Wall", {
+      school: "Evocation",
+      diff: 5,
+      damage: false,
+    }],
+    ["Tiny Hut", {
+      school: "Evocation",
+      diff: 5,
+      damage: false,
+    }],
+    ["Interposing Hand", {
+      school: "Evocation",
+      diff: 5,
+      damage: false,
+    }],
+    ["Light", {
+      school: "Illusion",
+      diff: 1,
+      damage: false,
+    }],
+    ["Ghost Sound", {
+      school: "Illusion",
+      diff: 1,
+      damage: false,
+    }],
+    ["Disguise Self", {
+      school: "Illusion",
+      diff: 1,
+      damage: false,
+    }],
+    ["Silent Image", {
+      school: "Illusion",
+      diff: 5,
+      damage: false,
+    }],
+    ["Ventriloquism", {
+      school: "Illusion",
+      diff: 1,
+      damage: false,
+    }],
+    ["Blur", {
+      school: "Illusion",
+      diff: 5,
+      damage: false,
+    }],
+    ["Hypnotic Pattern", {
+      school: "Illusion",
+      diff: 5,
+      damage: false,
+    }],
+    ["Invisibility", {
+      school: "Illusion",
+      diff: 1,
+      damage: false,
+    }],
+    ["Invisibility, Greater", {
+      school: "Illusion",
+      diff: 5,
+      damage: false,
+    }],
+    ["Misdirection", {
+      school: "Illusion",
+      diff: 5,
+      damage: false,
+    }],
+    ["Phantom Trap", {
+      school: "Illusion",
+      diff: 5,
+      damage: false,
+    }],
+    ["Phantasmal Killer", {
+      school: "Illusion",
+      diff: 10,
+      damage: false,
+    }],
+    ["Rainbow Pattern", {
+      school: "Illusion",
+      diff: 5,
+      damage: false,
+    }],
+    ["Dream", {
+      school: "Illusion",
+      diff: 5,
+      damage: false,
+    }],
+    ["False Vision", {
+      school: "Illusion",
+      diff: 5,
+      damage: false,
+    }],
+    ["Silence", {
+      school: "Illusion",
+      diff: 5,
+      damage: false,
+    }],
+    ["Simulacrum", {
+      school: "Illusion",
+      diff: 75,
+      damage: false,
+    }],
+    ["Animate Dead", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Command Undead", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Create Undead: Ghoul", {
+      school: "Necromancy",
+      diff: 10,
+      damage: false,
+    }],
+    ["Create Undead: Ghast", {
+      school: "Necromancy",
+      diff: 15,
+      damage: false,
+    }],
+    ["Create Undead: Mummy", {
+      school: "Necromancy",
+      diff: 20,
+      damage: false,
+    }],
+    ["Create Undead: Mohrg", {
+      school: "Necromancy",
+      diff: 25,
+      damage: false,
+    }],
+    ["Create Greater Undead: Shadow", {
+      school: "Necromancy",
+      diff: 30,
+      damage: false,
+    }],
+    ["Create Greater Undead: Wraith", {
+      school: "Necromancy",
+      diff: 35,
+      damage: false,
+    }],
+    ["Create Greater Undead: Spectre", {
+      school: "Necromancy",
+      diff: 40,
+      damage: false,
+    }],
+    ["Create Greater Undead: Devourer", {
+      school: "Necromancy",
+      diff: 45,
+      damage: false,
+    }],
+    ["False Life", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Gentle Repose", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Halt Undead", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Spectral Hand", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Blight", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Magic Jar", {
+      school: "Necromancy",
+      diff: 15,
+      damage: false,
+    }],
+    ["Symbol of Pain", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Symbol of Fear", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Control Undead", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Symbol of Weakness", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Clone", {
+      school: "Necromancy",
+      diff: 100,
+      damage: false,
+    }],
+    ["Symbol of Death", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Cause Wounds", {
+      school: "Necromancy",
+      diff: 0,
+      damage: true,
+    }],
+    ["Necro Touch: Ability damage", {
+      school: "Necromancy",
+      diff: 10,
+      damage: false,
+    }],
+    ["Necro Touch: Blind", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Necro Touch: Deafen", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Necro Touch: Disease", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Necro Touch: Exhauste", {
+      school: "Necromancy",
+      diff: 10,
+      damage: false,
+    }],
+    ["Necro Touch: Fatigue", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Necro Touch: Negativ levels", {
+      school: "Necromancy",
+      diff: 10,
+      damage: false,
+    }],
+    ["Necro Touch: Sicken", {
+      school: "Necromancy",
+      diff: 5,
+      damage: false,
+    }],
+    ["Curse: Baleful Polymorph", {
+      school: "Necromancy",
+      diff: 10,
+      damage: false,
+    }],
+    ["Curse: Bestow Curse Trap", {
+      school: "Necromancy",
+      diff: 10,
+      damage: false,
+    }],
+    ["Curse: Curse of the Ages", {
+      school: "Necromancy",
+      diff: 10,
+      damage: false,
+    }],
+    ["Curse: Mummy Rot", {
+      school: "Necromancy",
+      diff: 10,
+      damage: false,
+    }],
+    ["Curse: Unluck", {
+      school: "Necromancy",
+      diff: 10,
+      damage: false,
+    }],
+    ["Curse: Werewolf Lycanthropy", {
+      school: "Necromancy",
+      diff: 10,
+      damage: false,
+    }],
+    ["Dimension Door", {
+      school: "Transmutation",
+      diff: 10,
+      damage: false,
+    }],
+    ["Fly", {
+      school: "Transmutation",
+      diff: 5,
+      damage: false,
+    }],
+    ["Jump", {
+      school: "Transmutation",
+      diff: 1,
+      damage: false,
+    }],
+    ["Levitate", {
+      school: "Transmutation",
+      diff: 1,
+      damage: false,
+    }],
+    ["Light", {
+      school: "Transmutation",
+      diff: 1,
+      damage: false,
+    }],
+    ["Movement", {
+      school: "Transmutation",
+      diff: 1,
+      damage: false,
+    }],
+    ["Spider climb", {
+      school: "Transmutation",
+      diff: 5,
+      damage: false,
+    }],
+    ["Telekinese", {
+      school: "Transmutation",
+      diff: 5,
+      damage: false,
+    }],
+    ["Teleport", {
+      school: "Transmutation",
+      diff: 15,
+      damage: false,
+    }],
+    ["Temporal Stasis", {
+      school: "Transmutation",
+      diff: 5,
+      damage: false,
+    }],
+    ["Transmutation touch: Entangle", {
+      school: "Transmutation",
+      diff: 5,
+      damage: false,
+    }],
+    ["Transmutation touch: Petrify", {
+      school: "Transmutation",
+      diff: 10,
+      damage: false,
+    }],
+    ["Stat enhancement", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 5,
+      damage: false,
+    }],
+    ["All-Around", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Amorphous", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Amphibious", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Bleed", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Blindsense", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Blindsight", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Blood Drain", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Blood Rage", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Breath Weapon", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Compression", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Construct Traits", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Fast healing", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 1,
+      damage: false,
+    }],
+    ["Regeneration", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Ferocity", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Fortification", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Freeze", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Frightful Presence", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Gaze", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Grab", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Greensight", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Hold Breath", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Immunity", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Incorporeal", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Jet", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Keen Scent", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Lifesense", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Low-Light Vision", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Mistsight", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Natural Attacks", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["No Breath", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Plant Traits", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Plantbringer", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Poison", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Poisonous Blood", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Pounce", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Powerful Charge", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Push", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Rake", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Rend", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Rock Catching", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Scent", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 5,
+      damage: false,
+    }],
+    ["See in Darkness", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Split", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Strangle", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Trample", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Transform Self: Enlarge Person", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Transform Self: Elemental Body", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Transform Self: Form of the Dragon", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 15,
+      damage: false,
+    }],
+    ["Transform Self: Giant Form", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 20,
+      damage: false,
+    }],
+    ["Transform Self: Beast Shape", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Transform Self: Demon Lord Traits", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 20,
+      damage: false,
+    }],
+    ["Transform Self: Empyreal Lord Traits", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 20,
+      damage: false,
+    }],
+    ["Transform Self: Formian Traits", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 20,
+      damage: false,
+    }],
+    ["Tremorsense", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 10,
+      damage: false,
+    }],
+    ["Unnatural Aura", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 5,
+      damage: false,
+    }],
+    ["Water Breathing", {
+      school: "Transmutation (Body Enhancement)",
+      diff: 5,
+      damage: false,
+    }],
+  ]);
 
-    /*
-    {Poison	Name 	Necro	5
-    Arsenic
-    Belladonna
-    Black Adder Venom
-    Black Lotus Extract
-    Bloodroot
-    Blue Whinnis
-    Burnt Othur Fumes
-    Dark Reaver Powder
-    Deathblade
-    Dragon Bile
-    Drow Poison
-    Giant Wasp Poison
-    Greenblood Oil
-    Green Prismatic Poison
-    Hemlock
-    Id Moss
-    Insanity Mist
-    King's Sleep
-    Large Scorpion Venom
-    Lich Dust
-    Malyass Root Paste
-    Medium Spider Venom
-    Nightmare Vapor
-    Nitharit
-    Oil of Taggit
-    Purple Worm Poison
-    Sassone Leaf Residue
-    Shadow Essence
-    Small Centipede Poison
-    Striped Toadstool
-    Tears of Death
-    Terinav Root
-    Ungol Dust
-    Wolfsbane
-    Wyvern Poison}
-    */
-]);
-
-Data.time = new Map([
+HydraData.time = new Map([
   ["Immediate action", {diff: 25}],
   ["Swift Action", {diff: 15}],
   ["Standard Action", {diff: 2}],
@@ -358,7 +1251,7 @@ Data.time = new Map([
   ["Ritual Site 3 Month", {diff: -60}],
 ]);
 
-Data.components = new Map([
+HydraData.components = new Map([
   ["V, S, M, F", {diff: 0}],
   ["V, S, M", {diff: 10}],
   ["V, M, F", {diff: 5}],
@@ -377,14 +1270,14 @@ Data.components = new Map([
   ["None Sorcerer", {diff: 0}],
 ]);
 
-Data.delivery = new Map([
+HydraData.delivery = new Map([
   ["Personal", {diff: 0, range: false, area: false}],
   ["Melee Touch", {diff: 0, range: false, area: false}],
   ["Ranged Touch", {diff: -5, range: true, area: false}],
   ["Area", {diff: 0, range: true, area: true}],
 ]);
 
-Data.range = new Map([
+HydraData.range = new Map([
   ["Melee & Personal", {
     diff: 0,
     label: function() {
@@ -420,7 +1313,7 @@ Data.range = new Map([
   }],
 ]);
 
-Data.area = new Map([
+HydraData.area = new Map([
   ["None", 0],
   ["Cone 1.5 m, 30 grader", {diff: 3}],
   ["Cone 2.5 m, 30 grader", {diff: 6}],
@@ -484,7 +1377,7 @@ Data.area = new Map([
   }],
 ]);
 
-Data.addon = new Map([
+HydraData.addon = new Map([
   ["None", {diff: 0}],
   ["Charged 1", {diff: 1}],
   ["Charged 1pr 6 skill", {diff: 5}],
@@ -503,7 +1396,7 @@ Data.addon = new Map([
   ["Ranged Touch 1 atk * 1skil max 3 m apart", {diff: 30}],
 ]);
 
-Data.duration = new Map([
+HydraData.duration = new Map([
   ["Instant", {diff: 1}],
   ["Concentration Skill * 5 rounds", {diff: 10}],
   ["Permanent", {diff: 100}],
@@ -534,14 +1427,14 @@ Data.duration = new Map([
   }],
 ]);
 
-Data.save = new Map([
+HydraData.save = new Map([
   ["none"],
   ["Reflex"],
   ["Will"],
   ["Fortitude"],
 ]);
 
-Data.damage = new Map([
+HydraData.damage = new Map([
   ["none", {diff: 0}],
   ["1d6", {diff: 3}],
   ["2d6", {diff: 6}],
@@ -550,11 +1443,70 @@ Data.damage = new Map([
   ["5d6", {diff: 24, area: false}],
 ]);
 
+HydraData.options = function (param, filter = false) {
+  let items = [];
+
+  HydraData[param].forEach((value, key, map) => {
+    items.push(Object.assign({name: key}, value));
+  });
+  
+  return items;
+}
+
+HydraData.formatted = function (param) {
+  let itemsText = '[\n';
+
+  HydraData[param].forEach((value, key, map) => {
+    if (value === Object(value)) {
+      if (value.hasOwnProperty('children')) {
+        let parent = key;
+
+        value.children.forEach((childValue, childKey, childMap) => {
+          itemsText += '  ["' + childKey + '", {\n    school: "' + parent + '",';
+
+          if (param === 'effect' && !childValue.hasOwnProperty('damage')) {
+            childValue.damage = false
+          };
+
+          Object.getOwnPropertyNames(childValue).forEach(
+            function (val, idx, array) {
+              itemsText += '\n    ' + val + ': ' + childValue[val] + ',';
+            }
+          );
+
+          itemsText += '\n  }],\n';
+
+
+        });
+      } else {
+
+        itemsText += '  ["' + key + '"';
+        itemsText += ', {';
+
+        Object.getOwnPropertyNames(value).forEach(
+          function (val, idx, array) {
+            itemsText += val + ': ' + value[val] + ', ';
+          }
+        );
+
+        itemsText += '}]\n';
+      }
+    } else {
+      itemsText += '  ["' + key + '"]\n';
+    }
+
+  });
+
+  itemsText += ']'
+  return itemsText;
+}
+
+
 // Get values from config data to update other states as needed.
-Data.get = function (name, key) {
+HydraData.get = function (name, key) {
   // Check if hierarchy of keys exists to get the second level.
   const keyArray = key.split("/");
-  const selectedKeyValue = keyArray.length > 1 ? Data[name].get(keyArray[0]).children.get(keyArray[1]) : Data[name].get(keyArray[0]);
+  const selectedKeyValue = keyArray.length > 1 ? HydraData[name].get(keyArray[0]).children.get(keyArray[1]) : HydraData[name].get(keyArray[0]);
   let newDiff = 0;
   let newLabel = key;
   let damage = null;
@@ -595,4 +1547,5 @@ Data.get = function (name, key) {
     range: range
   }
 }
-export default Data;
+
+export default HydraData;

@@ -1,7 +1,5 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import ParamSelector from './ParamSelector';
 
@@ -18,7 +16,7 @@ const DAMAGE = 'damage';
 // const SAVE = 'save';
 const DURATION = 'duration';
 
-const SpellParameters = ({ name, school, effect, time, components, delivery, range, area, addon, damage, duration, save, onParamChange, onDiffChange }) => (
+const SpellParameters = ({ name, school, effect, time, components, delivery, range, area, addon, damage, duration, save, onParamChange, onDiffChange, paramOptions }) => (
   <div className="section">
     <div className="form-row">
       <TextField
@@ -30,35 +28,19 @@ const SpellParameters = ({ name, school, effect, time, components, delivery, ran
       />
     </div>
 
-    <div className="form-row">
-      <SelectField
-        name={SCHOOL}
-        value={school.value}
-        onChange={onParamChange(SCHOOL)}
-        className="form-input col-main"
-        floatingLabelText="School of magic"
-      >
-        {school.items.map(item =>
-          <MenuItem
-            key={item}
-            value={item}
-            primaryText={item}
-          />
-        )}
-      </SelectField>
-    </div>
+    <ParamSelector name={SCHOOL} param={school} options={paramOptions[SCHOOL]} onParamChange={onParamChange(SCHOOL)} />
 
     <Divider style={{marginTop: '25px',}} />
 
-    <ParamSelector name={EFFECT} param={effect} onParamChange={onParamChange(EFFECT)} onDiffChange={onDiffChange(EFFECT)} />
-    <ParamSelector name={COMPONENTS} param={components} onParamChange={onParamChange(COMPONENTS)} onDiffChange={onDiffChange(COMPONENTS)} />
-    <ParamSelector name={TIME} param={time} onParamChange={onParamChange(TIME)} onDiffChange={onDiffChange(TIME)} />
-    <ParamSelector name={DURATION} param={duration} onParamChange={onParamChange(DURATION)} onDiffChange={onDiffChange(DURATION)} />
-    <ParamSelector name={DELIVERY} param={delivery} onParamChange={onParamChange(DELIVERY)} onDiffChange={onDiffChange(DELIVERY)} />
-    <ParamSelector name={RANGE} param={range} onParamChange={onParamChange(RANGE)} onDiffChange={onDiffChange(RANGE)} />
-    <ParamSelector name={AREA} param={area} onParamChange={onParamChange(AREA)} onDiffChange={onDiffChange(AREA)} />
-    <ParamSelector name={ADDON} param={addon} onParamChange={onParamChange(ADDON)} onDiffChange={onDiffChange(ADDON)} />
-    <ParamSelector name={DAMAGE} param={damage} onParamChange={onParamChange(DAMAGE)} onDiffChange={onDiffChange(DAMAGE)} />
+    <ParamSelector name={EFFECT} param={effect} options={paramOptions[EFFECT]} onParamChange={onParamChange(EFFECT)} onDiffChange={onDiffChange(EFFECT)} />
+    <ParamSelector name={COMPONENTS} param={components} options={paramOptions[COMPONENTS]} onParamChange={onParamChange(COMPONENTS)} onDiffChange={onDiffChange(COMPONENTS)} />
+    <ParamSelector name={TIME} param={time} options={paramOptions[TIME]} onParamChange={onParamChange(TIME)} onDiffChange={onDiffChange(TIME)} />
+    <ParamSelector name={DURATION} param={duration} options={paramOptions[DURATION]} onParamChange={onParamChange(DURATION)} onDiffChange={onDiffChange(DURATION)} />
+    <ParamSelector name={DELIVERY} param={delivery} options={paramOptions[DELIVERY]} onParamChange={onParamChange(DELIVERY)} onDiffChange={onDiffChange(DELIVERY)} />
+    <ParamSelector name={RANGE} param={range} options={paramOptions[RANGE]} onParamChange={onParamChange(RANGE)} onDiffChange={onDiffChange(RANGE)} />
+    <ParamSelector name={AREA} param={area} options={paramOptions[AREA]} onParamChange={onParamChange(AREA)} onDiffChange={onDiffChange(AREA)} />
+    <ParamSelector name={ADDON} param={addon} options={paramOptions[ADDON]} onParamChange={onParamChange(ADDON)} onDiffChange={onDiffChange(ADDON)} />
+    <ParamSelector name={DAMAGE} param={damage} options={paramOptions[DAMAGE]} onParamChange={onParamChange(DAMAGE)} onDiffChange={onDiffChange(DAMAGE)} />
 
     {/*
     <div className="form-row">

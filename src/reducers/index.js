@@ -1,98 +1,63 @@
 import { combineReducers } from 'redux'
 import { UPDATE_PARAMETER, UPDATE_DIFF } from '../actions';
+import HydraData from '../data/HydraData';
 
 const initialState = {
   spellLab: {
-    name: {
-      value: '',
-    },
-    school: {
-      value: '',
-      items: [ "Option 1", "Option 2", "Option 3" ],
-    },
-    effect: {
-      value: '',
-      diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
-    },
-    time: {
-      value: '',
-      diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
-    },
-    components: {
-      value: '',
-      diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
-    },
-    delivery: {
-      value: '',
-      diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
-    },
-    range: {
-      value: '',
-      diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
-    },
-    area: {
-      value: '',
-      diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
-    },
-    addon: {
-      value: '',
-      diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
-    },
-    duration: {
-      value: '',
-      diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
-    },
-    save: {
-      value: '',
-      diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
-    },
-    damage: {
-      value: '',
-      diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-    },
   }
 }
 
 function getDiff (type, key) {
-  return 0;
-}
-
-function getItems (type) {
-  return [
-    type + ": Option 1",
-    type + ": Option 2",
-    type + ": Option 3",
-    type + ": Option 4",
-  ]
+  const values = HydraData.get(type, key);
+  return values.diff;
 }
 
 function handleUpdateParameter (state, action) {
-  return Object.assign({}, state, {
-    [action.parameter]: {
-      value: action.value,
-      diff: getDiff(action.parameter, action.value),
-      items: getItems(action.parameter)
-    }
-  });
+  let diff;
+
+  switch (action.parameter) {
+    case 'school':
+
+      let effectStateUpdates = {
+        filterBy: 'school',
+        filterStr: action.value
+      };
+
+      if (state.effect.hasOwnProperty('filterStr') && state.effect.filterStr === effectStateUpdates.filterStr) {
+        return Object.assign({}, state, {
+          [action.parameter]: {
+            value: action.value
+          }
+        });
+      } else {
+        return Object.assign({}, state, {
+          [action.parameter]: {
+            value: action.value
+          },
+          effect: {
+            filterBy: effectStateUpdates.filterBy,
+            filterStr: effectStateUpdates.filterStr,
+            value: '',
+            diff: 0
+          }
+        });
+      }
+
+
+    case 'name':
+      return Object.assign({}, state, {
+        [action.parameter]: {
+          value: action.value
+        }
+      });
+
+    default:
+      diff = getDiff(action.parameter, action.value);
+      return Object.assign({}, state, {
+        [action.parameter]: Object.assign({}, state[action.parameter], { value: action.value, diff: diff })
+      });
+  }
+
 }
 
 function spellLab (state = initialState, action) {
