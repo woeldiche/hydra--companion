@@ -16,6 +16,6 @@ const LabPage = () => (
       {/* <LabStatus /> */}
     </Footer>
   </div>
-)
+);
 
 export default LabPage;

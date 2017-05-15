@@ -4,36 +4,30 @@ import MenuItem from 'material-ui/MenuItem';
 
 const SelectOptions = ({ items }) => (
   <div>
-  {items.map(item =>
-    <MenuItem
-      key={item.value}
-      value={item.value}
-      primaryText={item.value}
-    />
-  )}
+    {items.map(item => (
+      <MenuItem key={item.value} value={item.value} primaryText={item.value} />
+    ))}
   </div>
-)
+);
 
 const TodoList = ({ todos, onTodoClick }) => (
   <ul>
-    {todos.map(todo =>
-      <Todo
-        key={todo.id}
-        {...todo}
-        onClick={() => onTodoClick(todo.id)}
-      />
-    )}
+    {todos.map(todo => (
+      <Todo key={todo.id} {...todo} onClick={() => onTodoClick(todo.id)} />
+    ))}
   </ul>
-)
+);
 
 TodoList.propTypes = {
-  todos: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    completed: PropTypes.bool.isRequired,
-    text: PropTypes.string.isRequired
-  }).isRequired).isRequired,
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      completed: PropTypes.bool.isRequired,
+      text: PropTypes.string.isRequired
+    }).isRequired
+  ).isRequired,
   onTodoClick: PropTypes.func.isRequired
-}
+};
 
 export default SelectOptions;
 

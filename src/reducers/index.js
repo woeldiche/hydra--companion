@@ -1,29 +1,30 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 import { UPDATE_PARAMETER, UPDATE_DIFF } from '../actions';
 import HydraData from '../data/HydraData';
 
 const initialState = {
-  spellLab: {
-  }
-}
+  spellLab: {}
+};
 
-function getDiff (type, key) {
+function getDiff(type, key) {
   const values = HydraData.get(type, key);
   return values.diff;
 }
 
-function handleUpdateParameter (state, action) {
+function handleUpdateParameter(state, action) {
   let diff;
 
   switch (action.parameter) {
     case 'school':
-
       let effectStateUpdates = {
         filterBy: 'school',
         filterStr: action.value
       };
 
-      if (state.effect.hasOwnProperty('filterStr') && state.effect.filterStr === effectStateUpdates.filterStr) {
+      if (
+        state.effect.hasOwnProperty('filterStr') &&
+        state.effect.filterStr === effectStateUpdates.filterStr
+      ) {
         return Object.assign({}, state, {
           [action.parameter]: {
             value: action.value
@@ -43,7 +44,6 @@ function handleUpdateParameter (state, action) {
         });
       }
 
-
     case 'name':
       return Object.assign({}, state, {
         [action.parameter]: {
@@ -54,12 +54,15 @@ function handleUpdateParameter (state, action) {
     default:
       diff = getDiff(action.parameter, action.value);
       return Object.assign({}, state, {
-        [action.parameter]: Object.assign({}, state[action.parameter], { value: action.value, diff: diff })
+        [action.parameter]: Object.assign({}, state[action.parameter], {
+          value: action.value,
+          diff: diff
+        })
       });
   }
 }
 
-function spellLab (state = initialState, action) {
+function spellLab(state = initialState, action) {
   switch (action.type) {
     case UPDATE_PARAMETER:
       return handleUpdateParameter(state, action);
@@ -68,11 +71,13 @@ function spellLab (state = initialState, action) {
       // If empty string set to zero.
       const value = !!action.value ? action.value : 0;
       return Object.assign({}, state, {
-        [action.parameter]: Object.assign({}, state[action.parameter], { diff: parseInt(value, 10) })
+        [action.parameter]: Object.assign({}, state[action.parameter], {
+          diff: parseInt(value, 10)
+        })
       });
 
     default:
-    break;
+      break;
   }
 
   return state;

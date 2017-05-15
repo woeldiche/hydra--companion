@@ -47,85 +47,72 @@ const stateShape = {
           area: false,
           addon: false,
           damage: '3D6',
-          save: 'Fortitude',
+          save: 'Fortitude'
         }
       ]
     }
   },
   spellLab: {
     name: {
-      value: '',
+      value: ''
     },
     school: {
       value: '',
-      items: [ "Option 1", "Option 2", "Option 3" ],
+      items: ['Option 1', 'Option 2', 'Option 3']
     },
     effect: {
       value: '',
       diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
+      items: ['Option 1', 'Option 2', 'Option 3']
     },
     time: {
       value: '',
       diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
+      items: ['Option 1', 'Option 2', 'Option 3']
     },
     components: {
       value: '',
       diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
+      items: ['Option 1', 'Option 2', 'Option 3']
     },
     delivery: {
       value: '',
       diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
+      items: ['Option 1', 'Option 2', 'Option 3']
     },
     range: {
       value: '',
       diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
+      items: ['Option 1', 'Option 2', 'Option 3']
     },
     area: {
       value: '',
       diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
+      items: ['Option 1', 'Option 2', 'Option 3']
     },
     addon: {
       value: '',
       diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
+      items: ['Option 1', 'Option 2', 'Option 3']
     },
     duration: {
       value: '',
       diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
+      items: ['Option 1', 'Option 2', 'Option 3']
     },
     save: {
       value: '',
       diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-
+      items: ['Option 1', 'Option 2', 'Option 3']
     },
     damage: {
       value: '',
       diff: 0,
-      items: [ "Option 1", "Option 2", "Option 3" ],
-    },
+      items: ['Option 1', 'Option 2', 'Option 3']
+    }
   },
-  hydraData: {
-
-  },
-  hydraConfig: {
-
-  }
-}
+  hydraData: {},
+  hydraConfig: {}
+};
 
 export default stateShape;

@@ -4,37 +4,61 @@ import React, { Component } from 'react';
 // import SelectField from 'material-ui/SelectField';
 // import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
-import {List, ListItem} from 'material-ui/List';
+import { List, ListItem } from 'material-ui/List';
 import ActionLabel from 'material-ui/svg-icons/action/label';
 
 class SpellCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      difficulty: function (values) {
+      difficulty: function(values) {
         let sum = 0;
         for (let prop in values) {
-          sum += Number.isNaN(parseInt(values[prop], 10)) ? 0 : parseInt(values[prop], 10);
+          sum += Number.isNaN(parseInt(values[prop], 10))
+            ? 0
+            : parseInt(values[prop], 10);
         }
         return sum;
       },
-      cost: function (diff) {
+      cost: function(diff) {
         return Math.round(diff / 5);
       },
       dc: function(diff, stat) {
-        return Math.floor(diff/5 + stat + 10);
-      },
-    }
+        return Math.floor(diff / 5 + stat + 10);
+      }
+    };
   }
 
   render() {
     return (
       <Paper className="section">
         <List>
-          <ListItem primaryText={this.props.spell.spellName} leftIcon={<ActionLabel />} />
-          <ListItem primaryText={"Difficulty: " + this.state.difficulty(this.props.diff)} insetChildren={true} />
-          <ListItem primaryText={"Cost: " + this.state.cost(this.state.difficulty(this.props.diff))} insetChildren={true} />
-          <ListItem primaryText={"DC: " + this.state.dc(this.state.difficulty(this.props.diff), this.props.caster.statBonus)} insetChildren={true} />
+          <ListItem
+            primaryText={this.props.spell.spellName}
+            leftIcon={<ActionLabel />}
+          />
+          <ListItem
+            primaryText={
+              'Difficulty: ' + this.state.difficulty(this.props.diff)
+            }
+            insetChildren={true}
+          />
+          <ListItem
+            primaryText={
+              'Cost: ' + this.state.cost(this.state.difficulty(this.props.diff))
+            }
+            insetChildren={true}
+          />
+          <ListItem
+            primaryText={
+              'DC: ' +
+                this.state.dc(
+                  this.state.difficulty(this.props.diff),
+                  this.props.caster.statBonus
+                )
+            }
+            insetChildren={true}
+          />
         </List>
 
         {/*

@@ -22,7 +22,6 @@ import './App.css';
 //   },
 // });
 
-
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -46,122 +45,154 @@ class App extends Component {
         addon: 0,
         duration: 0,
         save: 0,
-        damage: 0,
+        damage: 0
       },
       spell: {
         spellName: 'Spontaneous Spell',
         school: '',
         effect: {
           value: '',
-          label: function() {},
+          label: function() {}
         },
         time: {
           value: '',
-          label: function() {},
+          label: function() {}
         },
         components: {
           value: '',
-          label: function() {},
+          label: function() {}
         },
         delivery: {
           value: '',
-          label: function() {},
+          label: function() {}
         },
         range: {
           value: '',
-          label: function() {},
+          label: function() {}
         },
         area: {
           value: '',
-          label: function() {},
+          label: function() {}
         },
         addon: {
           value: '',
-          label: function() {},
+          label: function() {}
         },
         duration: {
           value: '',
-          label: function() {},
+          label: function() {}
         },
         save: {
           value: '',
-          label: function() {},
+          label: function() {}
         },
         damage: {
           value: '',
-          label: function() {},
-        },
-      },
+          label: function() {}
+        }
+      }
     };
 
     this.handleSpellChange = this.handleSpellChange.bind(this);
   }
 
-  handleSpellChange (newState) {
-    this.setState ((prevState) => ({
+  handleSpellChange(newState) {
+    this.setState(prevState => ({
       diff: Object.assign(prevState.diff, newState.diff),
-      spell: Object.assign(prevState.spell, newState.spell),
+      spell: Object.assign(prevState.spell, newState.spell)
     }));
   }
 
   render() {
     return (
       <MuiThemeProvider>
-      <Router>
+        <Router>
 
-          <Route path="/spellbook"  render={(props) =>
-            //  Spellbook.js
-            <div className="flexbox-parent">
-              <AppBar
-                title="Spellbook"
-                iconClassNameRight="muidocs-icon-navigation-expand-more"
-              />
-              <div className="fill-area flexbox-item-grow">
-                <Spellbook />
-                <LinkButton newpath="/lab/create" classes="button-action button-main">
-                  <ContentAdd />
-                </LinkButton>
+          <Route
+            path="/spellbook"
+            render={props => //  Spellbook.js
+            (
+              <div className="flexbox-parent">
+                <AppBar
+                  title="Spellbook"
+                  iconClassNameRight="muidocs-icon-navigation-expand-more"
+                />
+                <div className="fill-area flexbox-item-grow">
+                  <Spellbook />
+                  <LinkButton
+                    newpath="/lab/create"
+                    classes="button-action button-main"
+                  >
+                    <ContentAdd />
+                  </LinkButton>
+                </div>
               </div>
-            </div>
-          }/>
+            )}
+          />
 
-          <Route exact path="/spell" render={(props) =>
-            // Spellcard.js
-            <div className="flexbox-parent">
-              <AppBar
-                title="Spellbook"
-                iconClassNameRight="muidocs-icon-navigation-expand-more"
-              />
-              <div className="fill-area flexbox-item-grow">
-                <SpellCard spell={this.state.spell} diff={this.state.diff} caster={this.state.caster}/>
-                <LinkButton newpath="/lab/create" classes="button-action button-main">
-                  <ModeEdit />
-                </LinkButton>
-                <LinkButton newpath="/spellbook" classes="button-action button-main">
-                  <ModeEdit />
-                </LinkButton>
+          <Route
+            exact
+            path="/spell"
+            render={props => // Spellcard.js
+            (
+              <div className="flexbox-parent">
+                <AppBar
+                  title="Spellbook"
+                  iconClassNameRight="muidocs-icon-navigation-expand-more"
+                />
+                <div className="fill-area flexbox-item-grow">
+                  <SpellCard
+                    spell={this.state.spell}
+                    diff={this.state.diff}
+                    caster={this.state.caster}
+                  />
+                  <LinkButton
+                    newpath="/lab/create"
+                    classes="button-action button-main"
+                  >
+                    <ModeEdit />
+                  </LinkButton>
+                  <LinkButton
+                    newpath="/spellbook"
+                    classes="button-action button-main"
+                  >
+                    <ModeEdit />
+                  </LinkButton>
+                </div>
               </div>
-            </div>
-          }/>
+            )}
+          />
 
-          <Route exact path="/lab/create" render={(props) =>
-            // SpellLab.js
-            <div className="flexbox-parent">
-              <AppBar
-                title="Spellbook"
-                iconClassNameRight="muidocs-icon-navigation-expand-more"
-              />
-              <div className="fill-area flexbox-item-grow">
-                <SpellCalculator data={HydraData} spell={this.state.spell} diff={this.state.diff} updateState={this.handleSpellChange}/>
-                <LinkButton newpath="/spell" classes="button-action button-main">
-                  <ContentSave />
-                </LinkButton>
+          <Route
+            exact
+            path="/lab/create"
+            render={props => // SpellLab.js
+            (
+              <div className="flexbox-parent">
+                <AppBar
+                  title="Spellbook"
+                  iconClassNameRight="muidocs-icon-navigation-expand-more"
+                />
+                <div className="fill-area flexbox-item-grow">
+                  <SpellCalculator
+                    data={HydraData}
+                    spell={this.state.spell}
+                    diff={this.state.diff}
+                    updateState={this.handleSpellChange}
+                  />
+                  <LinkButton
+                    newpath="/spell"
+                    classes="button-action button-main"
+                  >
+                    <ContentSave />
+                  </LinkButton>
+                </div>
               </div>
-            </div>
-          }/>
+            )}
+          />
 
-      </Router>
-    </MuiThemeProvider>
+        </Router>
+      </MuiThemeProvider>
     );
   }
 }

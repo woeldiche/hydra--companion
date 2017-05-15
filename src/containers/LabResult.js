@@ -15,6 +15,19 @@ const calcDiff = (state) => {
   return sum;
 }
 
+const allowSave = (state) => {
+  // Check for a name, longer than 3 chars
+
+  // Check for a school, effect, delivery, time, duration
+
+  // if delivery allows range, check for range
+  // if delivery allows area, check for area
+
+  // if effect allows damage, check for damage
+
+  return false;
+}
+
 const mapStateToProps = (state) => {
   const difficulty = calcDiff(state.spellLab);
   const stat = 4;
@@ -24,6 +37,7 @@ const mapStateToProps = (state) => {
     diff: difficulty,
     cost: cost,
     dc: Math.floor(difficulty/5 + stat + 10),
+    allowSave: allowSave(state.spellLab)
   };
 
   return props;

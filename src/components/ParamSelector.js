@@ -4,9 +4,9 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-const capitalizeFirstChar = (string) => {
+const capitalizeFirstChar = string => {
   return string.charAt(0).toUpperCase() + string.substring(1);
-}
+};
 
 const filteredList = (list, param) => {
   if (param.hasOwnProperty('filterBy') && param.hasOwnProperty('filterStr')) {
@@ -14,14 +14,24 @@ const filteredList = (list, param) => {
     let filterStr = param.filterStr; // eg. 'conjuration'
 
     return list.filter(item => {
-      return item === Object(item) && item.hasOwnProperty(filterBy) && item[filterBy] === filterStr;
+      return (
+        item === Object(item) &&
+        item.hasOwnProperty(filterBy) &&
+        item[filterBy] === filterStr
+      );
     });
   } else {
     return list;
   }
-}
+};
 
-const ParamSelector = ({ name, param, options, onParamChange, onDiffChange }) => (
+const ParamSelector = ({
+  name,
+  param,
+  options,
+  onParamChange,
+  onDiffChange
+}) => (
   <div className="form-row">
     <SelectField
       name={name}
@@ -30,13 +40,9 @@ const ParamSelector = ({ name, param, options, onParamChange, onDiffChange }) =>
       className="form-select col-main"
       floatingLabelText={capitalizeFirstChar(name)}
     >
-      {filteredList(options, param).map(item =>
-        <MenuItem
-          key={item.name}
-          value={item.name}
-          primaryText={item.name}
-        />
-      )}
+      {filteredList(options, param).map(item => (
+        <MenuItem key={item.name} value={item.name} primaryText={item.name} />
+      ))}
     </SelectField>
 
     {param.hasOwnProperty('diff') &&
@@ -46,16 +52,15 @@ const ParamSelector = ({ name, param, options, onParamChange, onDiffChange }) =>
         onChange={onDiffChange}
         className="form-input col-right"
         floatingLabelText="Diff."
-      />
-    }
+      />}
   </div>
-)
+);
 
 ParamSelector.propTypes = {
   name: PropTypes.string.isRequired,
   param: PropTypes.shape({
     value: PropTypes.string.isRequired,
-    diff: PropTypes.number,
+    diff: PropTypes.number
   }).isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
@@ -66,7 +71,7 @@ ParamSelector.propTypes = {
     })
   ).isRequired,
   onParamChange: PropTypes.func,
-  onDiffChange: PropTypes.func,
-}
+  onDiffChange: PropTypes.func
+};
 
 export default ParamSelector;

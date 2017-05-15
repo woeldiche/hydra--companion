@@ -16,7 +16,23 @@ const DAMAGE = 'damage';
 // const SAVE = 'save';
 const DURATION = 'duration';
 
-const SpellParameters = ({ name, school, effect, time, components, delivery, range, area, addon, damage, duration, save, onParamChange, onDiffChange, paramOptions }) => (
+const SpellParameters = ({
+  name,
+  school,
+  effect,
+  time,
+  components,
+  delivery,
+  range,
+  area,
+  addon,
+  damage,
+  duration,
+  save,
+  onParamChange,
+  onDiffChange,
+  paramOptions
+}) => (
   <div className="section">
     <div className="form-row">
       <TextField
@@ -28,19 +44,78 @@ const SpellParameters = ({ name, school, effect, time, components, delivery, ran
       />
     </div>
 
-    <ParamSelector name={SCHOOL} param={school} options={paramOptions[SCHOOL]} onParamChange={onParamChange(SCHOOL)} />
+    <ParamSelector
+      name={SCHOOL}
+      param={school}
+      options={paramOptions[SCHOOL]}
+      onParamChange={onParamChange(SCHOOL)}
+    />
 
-    <Divider style={{marginTop: '25px',}} />
+    <Divider style={{ marginTop: '25px' }} />
 
-    <ParamSelector name={EFFECT} param={effect} options={paramOptions[EFFECT]} onParamChange={onParamChange(EFFECT)} onDiffChange={onDiffChange(EFFECT)} />
-    <ParamSelector name={COMPONENTS} param={components} options={paramOptions[COMPONENTS]} onParamChange={onParamChange(COMPONENTS)} onDiffChange={onDiffChange(COMPONENTS)} />
-    <ParamSelector name={TIME} param={time} options={paramOptions[TIME]} onParamChange={onParamChange(TIME)} onDiffChange={onDiffChange(TIME)} />
-    <ParamSelector name={DURATION} param={duration} options={paramOptions[DURATION]} onParamChange={onParamChange(DURATION)} onDiffChange={onDiffChange(DURATION)} />
-    <ParamSelector name={DELIVERY} param={delivery} options={paramOptions[DELIVERY]} onParamChange={onParamChange(DELIVERY)} onDiffChange={onDiffChange(DELIVERY)} />
-    <ParamSelector name={RANGE} param={range} options={paramOptions[RANGE]} onParamChange={onParamChange(RANGE)} onDiffChange={onDiffChange(RANGE)} />
-    <ParamSelector name={AREA} param={area} options={paramOptions[AREA]} onParamChange={onParamChange(AREA)} onDiffChange={onDiffChange(AREA)} />
-    <ParamSelector name={ADDON} param={addon} options={paramOptions[ADDON]} onParamChange={onParamChange(ADDON)} onDiffChange={onDiffChange(ADDON)} />
-    <ParamSelector name={DAMAGE} param={damage} options={paramOptions[DAMAGE]} onParamChange={onParamChange(DAMAGE)} onDiffChange={onDiffChange(DAMAGE)} />
+    <ParamSelector
+      name={EFFECT}
+      param={effect}
+      options={paramOptions[EFFECT]}
+      onParamChange={onParamChange(EFFECT)}
+      onDiffChange={onDiffChange(EFFECT)}
+    />
+    <ParamSelector
+      name={COMPONENTS}
+      param={components}
+      options={paramOptions[COMPONENTS]}
+      onParamChange={onParamChange(COMPONENTS)}
+      onDiffChange={onDiffChange(COMPONENTS)}
+    />
+    <ParamSelector
+      name={TIME}
+      param={time}
+      options={paramOptions[TIME]}
+      onParamChange={onParamChange(TIME)}
+      onDiffChange={onDiffChange(TIME)}
+    />
+    <ParamSelector
+      name={DURATION}
+      param={duration}
+      options={paramOptions[DURATION]}
+      onParamChange={onParamChange(DURATION)}
+      onDiffChange={onDiffChange(DURATION)}
+    />
+    <ParamSelector
+      name={DELIVERY}
+      param={delivery}
+      options={paramOptions[DELIVERY]}
+      onParamChange={onParamChange(DELIVERY)}
+      onDiffChange={onDiffChange(DELIVERY)}
+    />
+    <ParamSelector
+      name={RANGE}
+      param={range}
+      options={paramOptions[RANGE]}
+      onParamChange={onParamChange(RANGE)}
+      onDiffChange={onDiffChange(RANGE)}
+    />
+    <ParamSelector
+      name={AREA}
+      param={area}
+      options={paramOptions[AREA]}
+      onParamChange={onParamChange(AREA)}
+      onDiffChange={onDiffChange(AREA)}
+    />
+    <ParamSelector
+      name={ADDON}
+      param={addon}
+      options={paramOptions[ADDON]}
+      onParamChange={onParamChange(ADDON)}
+      onDiffChange={onDiffChange(ADDON)}
+    />
+    <ParamSelector
+      name={DAMAGE}
+      param={damage}
+      options={paramOptions[DAMAGE]}
+      onParamChange={onParamChange(DAMAGE)}
+      onDiffChange={onDiffChange(DAMAGE)}
+    />
 
     {/*
     <div className="form-row">
@@ -56,6 +131,6 @@ const SpellParameters = ({ name, school, effect, time, components, delivery, ran
     </div>
     */}
   </div>
-)
+);
 
 export default SpellParameters;

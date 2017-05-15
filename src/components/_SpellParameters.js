@@ -17,7 +17,7 @@ class SpellCalculator extends Component {
       showRange: false,
       showArea: false,
       showDamage: false
-    }
+    };
   }
 
   // fx     range, delivery
@@ -26,19 +26,20 @@ class SpellCalculator extends Component {
     let config = false;
     const props = this.props;
 
-
     controllingField.forEach(function(item) {
       const entry = props.spell[item];
-      const value = (entry === Object(entry) && entry.hasOwnProperty('value') ? entry.value : entry);
+      const value = entry === Object(entry) && entry.hasOwnProperty('value')
+        ? entry.value
+        : entry;
 
-      if (value !== "") {
+      if (value !== '') {
         keyArray.push(value);
       }
     });
 
-    const key = keyArray.join("/");
+    const key = keyArray.join('/');
 
-    if (key !== "") {
+    if (key !== '') {
       config = this.props.data.get(controllingField.pop(), key);
 
       if (config === Object(config) && config.hasOwnProperty(field)) {
@@ -52,28 +53,47 @@ class SpellCalculator extends Component {
     // return true;
   }
 
-  returnEffectItems (data, school = "") {
-    return school !== "" ? this.returnItems(data.get(school).children, true) : this.returnItems(data, false);
+  returnEffectItems(data, school = '') {
+    return school !== ''
+      ? this.returnItems(data.get(school).children, true)
+      : this.returnItems(data, false);
   }
 
   // Create Array of MenuItems for SelectFields
-  returnItems (data, shallow = false) {
+  returnItems(data, shallow = false) {
     let items = [];
-    let groupingStyles = { fontWeight: "bold", };
-    let childStyles = { paddingLeft: "2px", };
+    let groupingStyles = { fontWeight: 'bold' };
+    let childStyles = { paddingLeft: '2px' };
 
-    data.forEach(function(value, key, map) {
+    data.forEach(function(value, key, map) {
       // Check if returned value from map is an object with child entries.
-      if (value === Object(value) && shallow === false && value.hasOwnProperty('children')) {
+      if (
+        value === Object(value) &&
+        shallow === false &&
+        value.hasOwnProperty('children')
+      ) {
         let parent = key;
 
-        items.push(<MenuItem key={key} style={groupingStyles} value={key} primaryText={key} />);
-        value.children.forEach(function(value, key, map) {
-          items.push(<MenuItem key={parent + '/' + key} style={childStyles} value={parent + '/' + key} primaryText={'-- ' + key} label={key} />);
+        items.push(
+          <MenuItem
+            key={key}
+            style={groupingStyles}
+            value={key}
+            primaryText={key}
+          />
+        );
+        value.children.forEach(function(value, key, map) {
+          items.push(
+            <MenuItem
+              key={parent + '/' + key}
+              style={childStyles}
+              value={parent + '/' + key}
+              primaryText={'-- ' + key}
+              label={key}
+            />
+          );
         });
-      }
-
-      else {
+      } else {
         items.push(<MenuItem key={key} value={key} primaryText={key} />);
       }
     });
@@ -93,9 +113,12 @@ class SpellCalculator extends Component {
       // Get current value for parent prop.
       // We need this to look up data for effects children.
       const parentEntry = props.spell[names[0]];
-      const parentValue = (parentEntry === Object(parentEntry) && parentEntry.hasOwnProperty('value') ? parentEntry.value : parentEntry);
+      const parentValue = parentEntry === Object(parentEntry) &&
+        parentEntry.hasOwnProperty('value')
+        ? parentEntry.value
+        : parentEntry;
 
-      if (parentValue === "") {
+      if (parentValue === '') {
         // If no parentValue is chosen child should contain full hierarchy.
         dataKey = newValue;
       } else {
@@ -109,15 +132,15 @@ class SpellCalculator extends Component {
     }
 
     switch (type) {
-      case "flat":
+      case 'flat':
         newSpellSettings = {
           spell: {
             [name]: newValue
           }
-        }
-      break;
+        };
+        break;
 
-      case "deep":
+      case 'deep':
         const data = this.props.data.get(name, dataKey);
 
         newSpellSettings = {
@@ -125,26 +148,28 @@ class SpellCalculator extends Component {
             [name]: {
               value: newValue,
               label: data.label
-            },
+            }
           },
           diff: {
-            [name]: data.diff,
+            [name]: data.diff
           }
-        }
-      break;
+        };
+        break;
 
-      case "diff":
+      case 'diff':
         newSpellSettings = {
           diff: {
-            [name]: Number.isNaN(parseInt(newValue, 10)) ? "" : parseInt(newValue, 10)
+            [name]: Number.isNaN(parseInt(newValue, 10))
+              ? ''
+              : parseInt(newValue, 10)
           }
-        }
-      break;
+        };
+        break;
       default:
     }
 
     this.props.updateState(newSpellSettings);
-  }
+  };
 
   render() {
     return (
@@ -152,36 +177,39 @@ class SpellCalculator extends Component {
         <TextField
           name="spellName"
           value={this.props.spell.spellName}
-          onChange={this.handleChange("flat", "spellName")}
+          onChange={this.handleChange('flat', 'spellName')}
           className="form-input col-main"
           floatingLabelText="Spell name"
         />
         <SelectField
           name="school"
           value={this.props.spell.school}
-          onChange={this.handleChange("flat", "school")}
+          onChange={this.handleChange('flat', 'school')}
           className="form-input col-main"
           floatingLabelText="School of magic"
         >
           {this.returnItems(this.props.data.effect, true)}
         </SelectField>
 
-        <Divider style={{marginTop: '25px',}} />
+        <Divider style={{ marginTop: '25px' }} />
 
         <SelectField
           name="effect"
           value={this.props.spell.effect.value}
-          onChange={this.handleChange("deep", ["school", "effect"])}
+          onChange={this.handleChange('deep', ['school', 'effect'])}
           className="form-select col-main"
           floatingLabelText="Base effect"
         >
-          {this.returnEffectItems(this.props.data.effect, this.props.spell.school)}
+          {this.returnEffectItems(
+            this.props.data.effect,
+            this.props.spell.school
+          )}
         </SelectField>
 
         <TextField
           name="effectDiff"
           value={this.props.diff.effect}
-          onChange={this.handleChange("diff", "effect")}
+          onChange={this.handleChange('diff', 'effect')}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
@@ -189,7 +217,7 @@ class SpellCalculator extends Component {
         <SelectField
           name="time"
           value={this.props.spell.time.value}
-          onChange={this.handleChange("deep", "time")}
+          onChange={this.handleChange('deep', 'time')}
           className="form-select col-main"
           floatingLabelText="Casting time"
         >
@@ -198,7 +226,7 @@ class SpellCalculator extends Component {
         <TextField
           name="timeDiff"
           value={this.props.diff.time}
-          onChange={this.handleChange("diff", "time")}
+          onChange={this.handleChange('diff', 'time')}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
@@ -206,7 +234,7 @@ class SpellCalculator extends Component {
         <SelectField
           name="components"
           value={this.props.spell.components.value}
-          onChange={this.handleChange("deep", "components")}
+          onChange={this.handleChange('deep', 'components')}
           className="form-select col-main"
           floatingLabelText="Components"
         >
@@ -215,7 +243,7 @@ class SpellCalculator extends Component {
         <TextField
           name="componentsDiff"
           value={this.props.diff.components}
-          onChange={this.handleChange("diff", "components")}
+          onChange={this.handleChange('diff', 'components')}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
@@ -223,7 +251,7 @@ class SpellCalculator extends Component {
         <SelectField
           name="delivery"
           value={this.props.spell.delivery.value}
-          onChange={this.handleChange("deep", "delivery")}
+          onChange={this.handleChange('deep', 'delivery')}
           className="form-select col-main"
           floatingLabelText="Delivery"
         >
@@ -232,17 +260,17 @@ class SpellCalculator extends Component {
         <TextField
           name="deliveryDiff"
           value={this.props.diff.delivery}
-          onChange={this.handleChange("diff", "delivery")}
+          onChange={this.handleChange('diff', 'delivery')}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
 
-        {this.showField("range", ["delivery"]) &&
+        {this.showField('range', ['delivery']) &&
           <div className="form-row">
             <SelectField
               name="range"
               value={this.props.spell.range.value}
-              onChange={this.handleChange("deep", "range")}
+              onChange={this.handleChange('deep', 'range')}
               className="form-select col-main"
               floatingLabelText="Range"
             >
@@ -251,19 +279,18 @@ class SpellCalculator extends Component {
             <TextField
               name="rangeDiff"
               value={this.props.diff.range}
-              onChange={this.handleChange("diff", "range")}
+              onChange={this.handleChange('diff', 'range')}
               className="form-input col-right"
               floatingLabelText="Diff."
             />
-          </div>
-        }
+          </div>}
 
-        {this.showField("area", ["delivery"]) &&
+        {this.showField('area', ['delivery']) &&
           <div className="form-row">
             <SelectField
               name="area"
               value={this.props.spell.area.value}
-              onChange={this.handleChange("deep", "area")}
+              onChange={this.handleChange('deep', 'area')}
               className="form-select col-main"
               floatingLabelText="Area"
             >
@@ -272,17 +299,16 @@ class SpellCalculator extends Component {
             <TextField
               name="areaDiff"
               value={this.props.diff.area}
-              onChange={this.handleChange("diff", "area")}
+              onChange={this.handleChange('diff', 'area')}
               className="form-input col-right"
               floatingLabelText="Diff."
             />
-          </div>
-        }
+          </div>}
 
         <SelectField
           name="addon"
           value={this.props.spell.addon.value}
-          onChange={this.handleChange("deep", "addon")}
+          onChange={this.handleChange('deep', 'addon')}
           className="form-select col-main"
           floatingLabelText="Add-on"
         >
@@ -291,7 +317,7 @@ class SpellCalculator extends Component {
         <TextField
           name="addonDiff"
           value={this.props.diff.addon}
-          onChange={this.handleChange("diff", "addon")}
+          onChange={this.handleChange('diff', 'addon')}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
@@ -299,7 +325,7 @@ class SpellCalculator extends Component {
         <SelectField
           name="duration"
           value={this.props.spell.duration.value}
-          onChange={this.handleChange("deep", "duration")}
+          onChange={this.handleChange('deep', 'duration')}
           className="form-select col-main"
           floatingLabelText="Duration"
         >
@@ -308,7 +334,7 @@ class SpellCalculator extends Component {
         <TextField
           name="durationDiff"
           value={this.props.diff.duration}
-          onChange={this.handleChange("diff", "duration")}
+          onChange={this.handleChange('diff', 'duration')}
           className="form-input col-right"
           floatingLabelText="Diff."
         />
@@ -316,19 +342,19 @@ class SpellCalculator extends Component {
         <SelectField
           name="save"
           value={this.props.spell.save.value}
-          onChange={this.handleChange("deep", "save")}
+          onChange={this.handleChange('deep', 'save')}
           className="form-select col-main"
           floatingLabelText="Save"
         >
           {this.returnItems(this.props.data.save)}
         </SelectField>
 
-        {this.showField("damage", ["school", "effect"]) &&
+        {this.showField('damage', ['school', 'effect']) &&
           <div className="form-row">
             <SelectField
               name="damage"
               value={this.props.spell.damage.value}
-              onChange={this.handleChange("deep", "damage")}
+              onChange={this.handleChange('deep', 'damage')}
               className="form-select col-main"
               floatingLabelText="Damage"
             >
@@ -337,12 +363,11 @@ class SpellCalculator extends Component {
             <TextField
               name="damageDiff"
               value={this.props.diff.damage}
-              onChange={this.handleChange("diff", "damage")}
+              onChange={this.handleChange('diff', 'damage')}
               className="form-input col-right"
               floatingLabelText="Diff."
             />
-          </div>
-        }
+          </div>}
       </Paper>
     );
   }
