@@ -2324,7 +2324,7 @@ HydraData.get = function(name, key) {
     ? HydraData[name].get(keyArray[0]).children.get(keyArray[1])
     : HydraData[name].get(keyArray[0]);
   let newDiff = 0;
-  let newLabel = key;
+  let newLabel = null;
   let damage = null;
   let area = null;
   let range = null;
@@ -2357,7 +2357,7 @@ HydraData.get = function(name, key) {
   return {
     diff: newDiff,
     label: newLabel,
-    key: key,
+    value: key,
     damage: damage,
     area: area,
     range: range
