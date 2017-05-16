@@ -82,9 +82,11 @@ export function storeToDB() {
     dispatch(saveFormula(formula._id, formula.name));
 
     return DB.put(formula).then(function(doc) {
-      doc.ok
-        ? dispatch(saveFormulaSuccess(doc))
-        : dispatch(saveFormulaError(doc));
+      if (doc.ok) {
+        dispatch(saveFormulaSuccess(doc));
+      } else {
+        dispatch(saveFormulaError(doc));
+      }
     });
   };
 }
@@ -97,6 +99,18 @@ export function saveFormulaSuccess(response) {
 export const SAVE_FORMULA_ERROR = 'SAVE_FORMULA_ERROR';
 export function saveFormulaError(response) {
   return { type: SAVE_FORMULA_ERROR, response: response };
+}
+
+export const SAVE_FORMULA_SUCCESS_NOTIFIED = 'SAVE_FORMULA_SUCCESS_NOTIFIED';
+export function saveFormulaSuccessNotified() {
+  return { type: SAVE_FORMULA_SUCCESS_NOTIFIED };
+}
+
+export function saveFormulaNotify() {
+  return function(dispatch) {
+    dispatch(resetFormula());
+    dispatch(saveFormulaSuccessNotified());
+  };
 }
 
 // Spell List

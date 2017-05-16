@@ -79,7 +79,16 @@
 .footer {
   padding: 12px 24px 0;
   background-color: #eee;
-  height: 72px;
+  min-height: 72px;
+}
+
+.footer--addon {
+  margin: -12px -24px 0;
+  padding-bottom: 12px;
+}
+
+.footer--content {
+  min-height: 60px;
 }
 
 .subheader {

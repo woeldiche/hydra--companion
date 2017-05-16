@@ -1,13 +1,59 @@
 import {
   UPDATE_PARAMETER,
   UPDATE_DIFF,
-  SAVE_FORMULA,
-  SAVE_FORMULA_SUCCESS,
-  SAVE_FORMULA_ERROR,
-  UPDATE_NAME
+  UPDATE_NAME,
+  RESET_FORMULA
 } from '../actions';
 
-const initialState = {};
+const initialState = {
+  name: {
+    value: ''
+  },
+  school: {
+    value: ''
+  },
+  effect: {
+    value: '',
+    diff: 0
+  },
+  time: {
+    value: '',
+    diff: 0
+  },
+  components: {
+    value: '',
+    diff: 0
+  },
+  delivery: {
+    value: '',
+    diff: 0
+  },
+  range: {
+    value: '',
+    diff: 0
+  },
+  area: {
+    value: '',
+    diff: 0
+  },
+  addon: {
+    value: '',
+    diff: 0
+  },
+  duration: {
+    value: '',
+    diff: 0
+  },
+  save: {
+    value: '',
+    diff: 0
+  },
+  damage: {
+    value: '',
+    diff: 0
+  },
+  allowSave: true
+};
 
 const allowSave = ({
   area,
@@ -98,6 +144,9 @@ const handleUpdateParameter = (state, { parameter, data }) => {
 
 const spellLab = (state = initialState, action) => {
   switch (action.type) {
+    case RESET_FORMULA:
+      return initialState;
+
     case UPDATE_NAME:
       return Object.assign({}, state, {
         name: {
@@ -114,24 +163,6 @@ const spellLab = (state = initialState, action) => {
         [action.parameter]: Object.assign({}, state[action.parameter], {
           diff: action.value
         })
-      });
-
-    case SAVE_FORMULA:
-      return Object.assign({}, state, {
-        isSaving: true,
-        didSave: false
-      });
-
-    case SAVE_FORMULA_SUCCESS:
-      return Object.assign({}, state, {
-        isSaving: false,
-        didSave: true
-      });
-
-    case SAVE_FORMULA_ERROR:
-      return Object.assign({}, state, {
-        isSaving: false,
-        didSave: false
       });
 
     default:
