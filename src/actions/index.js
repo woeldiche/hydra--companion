@@ -1,3 +1,6 @@
+import HydraData from '../data/HydraData';
+import DB from '../data/DBStore';
+
 /**
   *  Bootstrap
   */
@@ -19,13 +22,25 @@ export function resetFormula() {
   return { type: RESET_FORMULA };
 }
 
+export const UPDATE_NAME = 'UPDATE_NAME';
+export function updateName(value) {
+  return { type: UPDATE_NAME, value: value };
+}
+
 export const UPDATE_PARAMETER = 'UPDATE_PARAMETER';
 export function updateParameter(param, value) {
-  return { type: UPDATE_PARAMETER, parameter: param, value: value };
+  return {
+    type: UPDATE_PARAMETER,
+    parameter: param,
+    data: HydraData.get(param, value)
+  };
 }
 
 export const UPDATE_DIFF = 'UPDATE_DIFF';
 export function updateDiff(param, value) {
+  value = parseInt(value, 10);
+  value = Number.isNaN(value) ? 0 : value;
+
   return { type: UPDATE_DIFF, parameter: param, value: value };
 }
 
@@ -35,13 +50,53 @@ export function setParameterVis(param, visible) {
 }
 
 export const SAVE_FORMULA = 'SAVE_FORMULA';
-export function saveFormula() {
-  return { type: SAVE_FORMULA };
+export function saveFormula(id, name) {
+  return { type: SAVE_FORMULA, id: id, name: name };
+}
+
+function createFormula({ spellLab }) {
+  return {
+    _id: spellLab.school.value +
+      '/' +
+      spellLab.name.value +
+      '/' +
+      Math.random(),
+    type: 'formula',
+    name: spellLab.name.value,
+    school: spellLab.school.value,
+    effect: spellLab.effect.value,
+    //effectLevel,
+    time: spellLab.time.value,
+    delivery: spellLab.delivery.value,
+    range: spellLab.range.value,
+    area: spellLab.area.value,
+    addon: spellLab.addon.value,
+    damage: spellLab.damage.value
+    //save,
+  };
+}
+
+export function storeToDB() {
+  return function(dispatch, getState) {
+    const formula = createFormula(getState());
+    dispatch(saveFormula(formula._id, formula.name));
+
+    return DB.put(formula).then(function(doc) {
+      doc.ok
+        ? dispatch(saveFormulaSuccess(doc))
+        : dispatch(saveFormulaError(doc));
+    });
+  };
 }
 
 export const SAVE_FORMULA_SUCCESS = 'SAVE_FORMULA_SUCCESS';
-export function saveFormulaSuccess(json) {
-  return { type: SAVE_FORMULA_SUCCESS, data: json };
+export function saveFormulaSuccess(response) {
+  return { type: SAVE_FORMULA_SUCCESS, id: response._id };
+}
+
+export const SAVE_FORMULA_ERROR = 'SAVE_FORMULA_ERROR';
+export function saveFormulaError(response) {
+  return { type: SAVE_FORMULA_ERROR, response: response };
 }
 
 // Spell List

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateParameter, updateDiff } from '../actions';
+import { updateParameter, updateDiff, updateName } from '../actions';
 import SpellParameters from '../components/SpellParameters';
 import HydraData from '../data/HydraData';
 
@@ -25,6 +25,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    onNameChange: event => {
+      dispatch(updateName(event.target.value));
+    },
     onParamChange: param => (event, index, value) => {
       // If value is undefined use event.target.value instead.
       // SelectFields use value, input fields use event.target.value

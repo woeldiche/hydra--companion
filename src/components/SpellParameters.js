@@ -31,6 +31,7 @@ const SpellParameters = ({
   save,
   onParamChange,
   onDiffChange,
+  onNameChange,
   paramOptions
 }) => (
   <div className="section">
@@ -38,7 +39,7 @@ const SpellParameters = ({
       <TextField
         name={NAME}
         value={name.value}
-        onChange={onParamChange(NAME)}
+        onChange={onNameChange}
         className="form-input col-main"
         floatingLabelText="Spell name"
       />

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { saveFormula } from '../actions';
+import { storeToDB } from '../actions';
 import LabFooter from '../components/LabFooter';
 
 const calcDiff = state => {
@@ -32,8 +32,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onClickSave: (param, value) => event => {
-      dispatch(saveFormula(param, event.target.value));
+    onClickSave: () => {
+      dispatch(storeToDB());
     }
   };
 };

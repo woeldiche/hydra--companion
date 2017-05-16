@@ -2318,50 +2318,12 @@ HydraData.formatted = function(param) {
 
 // Get values from config data to update other states as needed.
 HydraData.get = function(name, key) {
-  // Check if hierarchy of keys exists to get the second level.
-  const keyArray = key.split('/');
-  const selectedKeyValue = keyArray.length > 1
-    ? HydraData[name].get(keyArray[0]).children.get(keyArray[1])
-    : HydraData[name].get(keyArray[0]);
-  let newDiff = 0;
-  let newLabel = null;
-  let damage = null;
-  let area = null;
-  let range = null;
+  const mapValue = HydraData[name].get(key);
 
-  // Check if object exists, otherwise fall back to defaults.
-  if (selectedKeyValue === Object(selectedKeyValue)) {
-    // If diff exists use it, otherwise leave as default (0)
-    if (selectedKeyValue.hasOwnProperty('diff')) {
-      newDiff = selectedKeyValue.diff;
-    }
+  let selectedKeyValue = !!mapValue ? mapValue : {};
+  selectedKeyValue.value = key;
 
-    // If special calculated value exists use it, other reuse key as label
-    if (selectedKeyValue.hasOwnProperty('label')) {
-      newLabel = selectedKeyValue.label;
-    }
-
-    if (selectedKeyValue.hasOwnProperty('area')) {
-      area = selectedKeyValue.area;
-    }
-
-    if (selectedKeyValue.hasOwnProperty('damage')) {
-      damage = selectedKeyValue.damage;
-    }
-
-    if (selectedKeyValue.hasOwnProperty('range')) {
-      range = selectedKeyValue.range;
-    }
-  }
-
-  return {
-    diff: newDiff,
-    label: newLabel,
-    value: key,
-    damage: damage,
-    area: area,
-    range: range
-  };
+  return selectedKeyValue;
 };
 
 export default HydraData;
