@@ -52,7 +52,7 @@ const initialState = {
     value: '',
     diff: 0
   },
-  allowSave: true
+  allowSave: false
 };
 
 const allowSave = ({
@@ -63,8 +63,8 @@ const allowSave = ({
   duration,
   effect,
   name,
-  range,
   school,
+  range,
   time
 }) => {
   if (
@@ -118,10 +118,12 @@ const allowSave = ({
 };
 
 const handleUpdateParameter = (state, { parameter, data }) => {
+  let newState = {};
+
   switch (parameter) {
     // School is a special case. Sets filter on effect.
     case 'school':
-      return Object.assign({}, state, {
+      newState = Object.assign({}, state, {
         [parameter]: {
           value: data.value
         },
@@ -130,15 +132,19 @@ const handleUpdateParameter = (state, { parameter, data }) => {
           filterStr: data.value,
           value: '',
           diff: 0
-        },
-        allowSave: allowSave(state)
+        }
       });
+      newState.allowSave = allowSave(newState);
+
+      return newState;
 
     default:
-      return Object.assign({}, state, {
-        [parameter]: Object.assign({}, state[parameter], data),
-        allowSave: allowSave(state)
+      newState = Object.assign({}, state, {
+        [parameter]: Object.assign({}, state[parameter], data)
       });
+      newState.allowSave = allowSave(newState);
+
+      return newState;
   }
 };
 
@@ -148,12 +154,14 @@ const spellLab = (state = initialState, action) => {
       return initialState;
 
     case UPDATE_NAME:
-      return Object.assign({}, state, {
+      let newState = Object.assign({}, state, {
         name: {
           value: action.value
-        },
-        allowSave: allowSave(state)
+        }
       });
+      newState.allowSave = allowSave(newState);
+
+      return newState;
 
     case UPDATE_PARAMETER:
       return handleUpdateParameter(state, action);
