@@ -1,7 +1,8 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
-import Divider from 'material-ui/Divider';
 import ParamSelector from './ParamSelector';
+import Subheader from 'material-ui/Subheader';
+import Paper from 'material-ui/Paper';
 
 const NAME = 'name';
 const SCHOOL = 'school';
@@ -35,88 +36,108 @@ const SpellParameters = ({
   paramOptions
 }) => (
   <div className="section">
-    <div className="form-row">
-      <TextField
-        name={NAME}
-        value={name.value}
-        onChange={onNameChange}
-        className="form-input col-main"
-        floatingLabelText="Spell name"
+
+    <Subheader style={{ marginTop: '16px' }}>Description</Subheader>
+    <Paper
+      rounded={false}
+      style={{
+        paddingBottom: '24px',
+        paddingTop: '12px',
+        marginBottom: '16px'
+      }}
+    >
+      <div className="form-row">
+        <TextField
+          name={NAME}
+          value={name.value}
+          onChange={onNameChange}
+          className="form-input col-main"
+          floatingLabelText="Spell name"
+        />
+      </div>
+
+      <ParamSelector
+        name={SCHOOL}
+        param={school}
+        options={paramOptions[SCHOOL]}
+        onParamChange={onParamChange(SCHOOL)}
       />
-    </div>
 
-    <ParamSelector
-      name={SCHOOL}
-      param={school}
-      options={paramOptions[SCHOOL]}
-      onParamChange={onParamChange(SCHOOL)}
-    />
+    </Paper>
 
-    <Divider style={{ marginTop: '25px' }} />
-
-    <ParamSelector
-      name={EFFECT}
-      param={effect}
-      options={paramOptions[EFFECT]}
-      onParamChange={onParamChange(EFFECT)}
-      onDiffChange={onDiffChange(EFFECT)}
-    />
-    <ParamSelector
-      name={COMPONENTS}
-      param={components}
-      options={paramOptions[COMPONENTS]}
-      onParamChange={onParamChange(COMPONENTS)}
-      onDiffChange={onDiffChange(COMPONENTS)}
-    />
-    <ParamSelector
-      name={TIME}
-      param={time}
-      options={paramOptions[TIME]}
-      onParamChange={onParamChange(TIME)}
-      onDiffChange={onDiffChange(TIME)}
-    />
-    <ParamSelector
-      name={DURATION}
-      param={duration}
-      options={paramOptions[DURATION]}
-      onParamChange={onParamChange(DURATION)}
-      onDiffChange={onDiffChange(DURATION)}
-    />
-    <ParamSelector
-      name={DELIVERY}
-      param={delivery}
-      options={paramOptions[DELIVERY]}
-      onParamChange={onParamChange(DELIVERY)}
-      onDiffChange={onDiffChange(DELIVERY)}
-    />
-    <ParamSelector
-      name={RANGE}
-      param={range}
-      options={paramOptions[RANGE]}
-      onParamChange={onParamChange(RANGE)}
-      onDiffChange={onDiffChange(RANGE)}
-    />
-    <ParamSelector
-      name={AREA}
-      param={area}
-      options={paramOptions[AREA]}
-      onParamChange={onParamChange(AREA)}
-      onDiffChange={onDiffChange(AREA)}
-    />
-    <ParamSelector
-      name={ADDON}
-      param={addon}
-      options={paramOptions[ADDON]}
-      onParamChange={onParamChange(ADDON)}
-      onDiffChange={onDiffChange(ADDON)}
-    />
-    <ParamSelector
-      name={DAMAGE}
-      param={damage}
-      options={paramOptions[DAMAGE]}
-      onParamChange={onParamChange(DAMAGE)}
-      onDiffChange={onDiffChange(DAMAGE)}
-    />
+    <Subheader style={{ marginTop: '16px' }}>Paramters</Subheader>
+    <Paper
+      rounded={false}
+      style={{
+        paddingBottom: '24px',
+        paddingTop: '12px',
+        marginBottom: '16px'
+      }}
+    >
+      <ParamSelector
+        name={EFFECT}
+        param={effect}
+        options={paramOptions[EFFECT]}
+        onParamChange={onParamChange(EFFECT)}
+        onDiffChange={onDiffChange(EFFECT)}
+      />
+      <ParamSelector
+        name={COMPONENTS}
+        param={components}
+        options={paramOptions[COMPONENTS]}
+        onParamChange={onParamChange(COMPONENTS)}
+        onDiffChange={onDiffChange(COMPONENTS)}
+      />
+      <ParamSelector
+        name={TIME}
+        param={time}
+        options={paramOptions[TIME]}
+        onParamChange={onParamChange(TIME)}
+        onDiffChange={onDiffChange(TIME)}
+      />
+      <ParamSelector
+        name={DURATION}
+        param={duration}
+        options={paramOptions[DURATION]}
+        onParamChange={onParamChange(DURATION)}
+        onDiffChange={onDiffChange(DURATION)}
+      />
+      <ParamSelector
+        name={DELIVERY}
+        param={delivery}
+        options={paramOptions[DELIVERY]}
+        onParamChange={onParamChange(DELIVERY)}
+        onDiffChange={onDiffChange(DELIVERY)}
+      />
+      <ParamSelector
+        name={RANGE}
+        param={range}
+        options={paramOptions[RANGE]}
+        onParamChange={onParamChange(RANGE)}
+        onDiffChange={onDiffChange(RANGE)}
+      />
+      <ParamSelector
+        name={AREA}
+        param={area}
+        options={paramOptions[AREA]}
+        onParamChange={onParamChange(AREA)}
+        onDiffChange={onDiffChange(AREA)}
+      />
+      <ParamSelector
+        name={ADDON}
+        param={addon}
+        options={paramOptions[ADDON]}
+        onParamChange={onParamChange(ADDON)}
+        onDiffChange={onDiffChange(ADDON)}
+      />
+      <ParamSelector
+        name={DAMAGE}
+        param={damage}
+        options={paramOptions[DAMAGE]}
+        onParamChange={onParamChange(DAMAGE)}
+        onDiffChange={onDiffChange(DAMAGE)}
+      />
+    </Paper>
 
     {/*
     <div className="form-row">

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { updateParameter, updateDiff, updateName } from '../actions';
+import { withRouter } from 'react-router-dom';
 import SpellParameters from '../components/SpellParameters';
 import HydraData from '../data/HydraData';
 
@@ -39,8 +40,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const SpellCalculator = connect(mapStateToProps, mapDispatchToProps)(
-  SpellParameters
+const SpellCalculator = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SpellParameters)
 );
 
 export default SpellCalculator;

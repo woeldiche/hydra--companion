@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { storeToDB } from '../actions';
+import { withRouter } from 'react-router-dom';
 import LabFooter from '../components/LabFooter';
 
 const calcDiff = state => {
@@ -38,6 +39,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const LabResult = connect(mapStateToProps, mapDispatchToProps)(LabFooter);
+const LabResult = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(LabFooter)
+);
 
 export default LabResult;

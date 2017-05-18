@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import { saveFormulaNotify } from '../actions';
+import { withRouter } from 'react-router-dom';
 import LabNetworkFeedback from '../components/LabNetworkFeedback';
 
 const mapStateToProps = state => {
-  return state.networkActions;
+  return state.networkActions.spellBook;
 };
 
 const mapDispatchToProps = dispatch => {
@@ -14,8 +15,8 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const LabStatus = connect(mapStateToProps, mapDispatchToProps)(
-  LabNetworkFeedback
+const LabStatus = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(LabNetworkFeedback)
 );
 
 export default LabStatus;

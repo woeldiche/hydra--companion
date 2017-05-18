@@ -19,19 +19,30 @@
   vertical-align: bottom !important;
 }
 
+.form-row {
+  padding: 0 16px;
+}
+
 .section {
   width: 100%;
 }
 
 .col-main {
   width: 70% !important;
-  margin-left: 3%;
-  margin-right: 3%;
+}
+
+.col-med {
+  width: 43% !important;
+  margin-left: 16px;
+}
+
+.col-med:first-child {
+  margin-left: 0;
 }
 
 .col-right {
-  width:  20% !important;
-  margin-right: 3%;
+  width:  15% !important;
+  margin-left: 16px;
 }
 
 .flexbox-parent {
@@ -56,13 +67,19 @@
 
 .fill-area {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
     justify-content: flex-start; /* align items in Main Axis */
     align-items: stretch; /* align items in Cross Axis */
     align-content: stretch; /* Extra space in Cross Axis */
     overflow: auto;
 
+    background-color: #f3f3f3;
+}
+
+.flex-parent--row {
+  display: flex;
+  flex-direction: row;
 }
 
 .button-action {
@@ -78,7 +95,7 @@
 
 .footer {
   padding: 12px 24px 0;
-  background-color: #eee;
+  background-color: #eee !important;
   min-height: 72px;
 }
 

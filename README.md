@@ -54,6 +54,7 @@ schema: {
   types: [
     formula: {
       _id: ':school/:name/math.rand()',
+      caster: ':id',
       type: 'formula',
       name: ':name',
       school,
@@ -61,10 +62,10 @@ schema: {
       effectLevel,
       time,
       delivery,
-      (range),
-      (area),
-      (addon),
-      (damage),
+      range,
+      area,
+      addon,
+      damage,
       save,
     },
     caster: {

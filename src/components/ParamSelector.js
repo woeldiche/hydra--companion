@@ -30,7 +30,8 @@ const ParamSelector = ({
   param,
   options,
   onParamChange,
-  onDiffChange
+  onDiffChange,
+  multiple
 }) => (
   <div className="form-row">
     <SelectField
@@ -38,11 +39,30 @@ const ParamSelector = ({
       value={param.value}
       onChange={onParamChange}
       className="form-select col-main"
+      multiple={multiple}
       floatingLabelText={capitalizeFirstChar(name)}
     >
-      {filteredList(options, param).map(item => (
-        <MenuItem key={item.name} value={item.name} primaryText={item.name} />
-      ))}
+      {filteredList(options, param).map(item => {
+        if (multiple) {
+          return (
+            <MenuItem
+              key={item.name}
+              insetChildren={true}
+              checked={param.value && param.value.indexOf(item.name) > -1}
+              value={item.name}
+              primaryText={item.name}
+            />
+          );
+        } else {
+          return (
+            <MenuItem
+              key={item.name}
+              value={item.name}
+              primaryText={item.name}
+            />
+          );
+        }
+      })}
     </SelectField>
 
     {param.hasOwnProperty('diff') &&
@@ -59,7 +79,7 @@ const ParamSelector = ({
 ParamSelector.propTypes = {
   name: PropTypes.string.isRequired,
   param: PropTypes.shape({
-    value: PropTypes.string.isRequired,
+    //value: PropTypes.string.isRequired,
     diff: PropTypes.number
   }).isRequired,
   options: PropTypes.arrayOf(

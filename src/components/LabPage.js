@@ -8,7 +8,7 @@ import Footer from './Footer';
 
 const LabPage = () => (
   <div className="flexbox-parent">
-    <Header title="Lab" />
+    <Header title="Lab" backlink="/" />
     <div className="fill-area flexbox-item-grow">
       <SpellCalculator />
     </div>
