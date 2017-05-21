@@ -4,7 +4,7 @@ import Subheader from 'material-ui/Subheader';
 
 export default ({ title, children }) => (
   <div>
-    <Subheader style={{ marginTop: '16px' }}>{title}</Subheader>
+    {!!title && <Subheader style={{ marginTop: '16px' }}>{title}</Subheader>}
     <Paper
       rounded={false}
       style={{

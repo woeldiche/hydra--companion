@@ -9,8 +9,13 @@ const mapStateToProps = state => {
   const userErrorText = state.config.isUserValid
     ? ''
     : 'Submit a valid e-mail address.';
+  const userRepeatErrorText = state.config.isUserValid &&
+    state.config.user !== state.config.userRepeat
+    ? "E-mail addresses don't match."
+    : '';
   return Object.assign({}, state.config, state.networkActions.config, {
-    userErrorText: userErrorText
+    userErrorText: userErrorText,
+    userRepeatErrorText: userRepeatErrorText
   });
 };
 
@@ -24,21 +29,15 @@ const mapDispatchToProps = dispatch => {
 
 const FormComponent = ({
   user,
+  userRepeat,
   isSaving,
   didSave,
   onValueChange,
   onSave,
-  userErrorText
+  userErrorText,
+  userRepeatErrorText
 }) => (
   <div>
-    <Subheader style={{ marginTop: '16px' }}>
-      {isSaving &&
-        <span style={{ paddingLeft: '48px', color: '#ccc' }}>Saving...</span>}
-      {didSave &&
-        <span style={{ paddingLeft: '48px', color: '#ccc' }}>
-          Saved.
-        </span>}
-    </Subheader>
     <TextField
       name="user"
       value={user}
@@ -48,6 +47,28 @@ const FormComponent = ({
       fullWidth={true}
       errorText={userErrorText}
     />
+    <TextField
+      name="userRepeat"
+      value={userRepeat}
+      onChange={onValueChange('userRepeat')}
+      className="form-input"
+      floatingLabelText="Repeat e-mail"
+      fullWidth={true}
+      errorText={userRepeatErrorText}
+    />
+    <p>
+      Before you can use the app you must create a user by typing in your e-mail address.
+    </p><p>
+      {' '}
+      We are only using your e-mail to uniquely identify you and maybe syncing your data between devices in the future.
+    </p>
+    <Subheader style={{ paddingLeft: 0 }}>
+      {isSaving && <span style={{ color: '#ccc' }}>Saving...</span>}
+      {didSave &&
+        <span style={{ color: '#ccc' }}>
+          Saved!
+        </span>}
+    </Subheader>
   </div>
 );
 

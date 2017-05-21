@@ -17,14 +17,14 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 const mapStateToProps = state => {
-  const { user, isUserValid } = state.config;
+  const { user, userRepeat, isUserValid } = state.config;
   const { didSave, isSaving } = state.networkActions.config;
   const showModal = user === '' || !isUserValid || !didSave ? true : false;
 
   const props = {
     didFetch: state.networkActions.config.didFetch,
     showModal: showModal,
-    allowModalClose: isUserValid && !isSaving,
+    allowModalClose: isUserValid && !isSaving && user === userRepeat,
     didSave: didSave
   };
 
