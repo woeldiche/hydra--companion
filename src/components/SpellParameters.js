@@ -1,8 +1,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import ParamSelector from './ParamSelector';
-import Subheader from 'material-ui/Subheader';
-import Paper from 'material-ui/Paper';
+import Section from './Section';
 
 const NAME = 'name';
 const SCHOOL = 'school';
@@ -37,15 +36,7 @@ const SpellParameters = ({
 }) => (
   <div className="section">
 
-    <Subheader style={{ marginTop: '16px' }}>Description</Subheader>
-    <Paper
-      rounded={false}
-      style={{
-        paddingBottom: '24px',
-        paddingTop: '12px',
-        marginBottom: '16px'
-      }}
-    >
+    <Section title="Description">
       <div className="form-row">
         <TextField
           name={NAME}
@@ -63,17 +54,9 @@ const SpellParameters = ({
         onParamChange={onParamChange(SCHOOL)}
       />
 
-    </Paper>
+    </Section>
 
-    <Subheader style={{ marginTop: '16px' }}>Parameters</Subheader>
-    <Paper
-      rounded={false}
-      style={{
-        paddingBottom: '24px',
-        paddingTop: '12px',
-        marginBottom: '16px'
-      }}
-    >
+    <Section title="Parameters">
       <ParamSelector
         name={EFFECT}
         param={effect}
@@ -137,21 +120,7 @@ const SpellParameters = ({
         onParamChange={onParamChange(DAMAGE)}
         onDiffChange={onDiffChange(DAMAGE)}
       />
-    </Paper>
-
-    {/*
-    <div className="form-row">
-      <SelectField
-        name="save"
-        value={save.value}
-        onChange={this.handleChange("deep", "save")}
-        className="form-select col-main"
-        floatingLabelText="Save"
-        >
-          {this.returnItems(this.props.data.save)}
-      </SelectField>
-    </div>
-    */}
+    </Section>
   </div>
 );
 

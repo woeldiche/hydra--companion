@@ -86,7 +86,7 @@ class SettingsWrapper extends Component {
     const { isFetching, didFetch, ...props } = this.props;
 
     return (
-      <div className="page">
+      <div className="fill-area flexbox-item-grow">
         {!didFetch || isFetching
           ? <Loader />
           : <div>

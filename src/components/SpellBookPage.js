@@ -5,9 +5,7 @@ import SpellBook from '../containers/SpellBook';
 const SpellBookPage = () => (
   <div className="flexbox-parent">
     <Header title="Spellbook" />
-    <div className="fill-area flexbox-item-grow">
-      <SpellBook />
-    </div>
+    <SpellBook />
   </div>
 );
 

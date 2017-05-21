@@ -6,9 +6,7 @@ import Settings from '../containers/Settings';
 const SettingsPage = () => (
   <div className="flexbox-parent">
     <Header title="Settings" backlink="/" />
-    <div className="fill-area flexbox-item-grow">
-      <Settings />
-    </div>
+    <Settings />
   </div>
 );
 

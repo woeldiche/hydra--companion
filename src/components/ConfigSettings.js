@@ -1,7 +1,6 @@
 import React from 'react';
-import Subheader from 'material-ui/Subheader';
-import Paper from 'material-ui/Paper';
 import Toggle from 'material-ui/Toggle';
+import Section from './Section.js';
 
 const SettingsForm = ({
   isConfigSaving,
@@ -9,9 +8,9 @@ const SettingsForm = ({
   lastConfigSaved,
   onValueToggle,
   limitEffectsByKnown
-}) => (
-  <div>
-    <Subheader style={{ marginTop: '16px' }}>
+}) => {
+  const ConfigHeader = (
+    <span>
       Other Settings
       {isConfigSaving &&
         <span style={{ paddingLeft: '48px', color: '#ccc' }}>
@@ -21,16 +20,11 @@ const SettingsForm = ({
         <span style={{ paddingLeft: '48px', color: '#ccc' }}>
           Saved {lastConfigSaved}
         </span>}
-    </Subheader>
+    </span>
+  );
 
-    <Paper
-      rounded={false}
-      style={{
-        paddingBottom: '24px',
-        paddingTop: '12px',
-        marginBottom: '16px'
-      }}
-    >
+  return (
+    <Section title={ConfigHeader}>
       <div className="form-row">
         <Toggle
           label="Show only known spell effects in lab."
@@ -40,8 +34,8 @@ const SettingsForm = ({
           toggled={limitEffectsByKnown}
         />
       </div>
-    </Paper>
-  </div>
-);
+    </Section>
+  );
+};
 
 export default SettingsForm;
