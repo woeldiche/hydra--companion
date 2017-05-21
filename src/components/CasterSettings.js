@@ -1,7 +1,6 @@
 import React from 'react';
 import Subheader from 'material-ui/Subheader';
 import TextField from 'material-ui/TextField';
-import Toggle from 'material-ui/Toggle';
 import Paper from 'material-ui/Paper';
 import { List, ListItem } from 'material-ui/List';
 import ParamSelector from './ParamSelector';
@@ -14,11 +13,25 @@ const SettingsForm = ({
   allEffects,
   onNameChange,
   onValueChange,
-  onSpellsChange
+  onSpellsChange,
+  onSave,
+  isSaving,
+  didSave,
+  lastSaved
 }) => (
-  <div className="section section--gray">
+  <div>
+    <Subheader style={{ marginTop: '16px' }}>
+      Caster
+      {isSaving &&
+        <span style={{ paddingLeft: '48px', color: '#ccc' }}>
+          Saving...
+        </span>}
+      {didSave &&
+        <span style={{ paddingLeft: '48px', color: '#ccc' }}>
+          Saved {lastSaved}
+        </span>}
+    </Subheader>
 
-    <Subheader style={{ marginTop: '16px' }}>Caster</Subheader>
     <Paper
       rounded={false}
       style={{
@@ -32,6 +45,7 @@ const SettingsForm = ({
           name="name"
           value={name}
           onChange={onNameChange}
+          onBlur={onSave}
           className="form-input col-main"
           floatingLabelText="Name"
         />
@@ -41,6 +55,8 @@ const SettingsForm = ({
           name="primaryStat"
           value={primaryStat}
           onChange={onValueChange('primaryStat')}
+          onBlur={onSave}
+          disabled={!name}
           className="form-input col-med"
           floatingLabelText="Primary casting stat"
         />
@@ -48,6 +64,8 @@ const SettingsForm = ({
           name="primarySkill"
           value={primarySkill}
           onChange={onValueChange('primarySkill')}
+          onBlur={onSave}
+          disabled={!name}
           className="form-input col-med"
           floatingLabelText="Concentration skill"
         />
@@ -71,6 +89,7 @@ const SettingsForm = ({
         options={allEffects}
         onParamChange={onSpellsChange}
         multiple={true}
+        disabled={!name}
       />
     </Paper>
 
@@ -83,13 +102,6 @@ const SettingsForm = ({
           rounded={false}
           style={{ paddingBottom: '24px', paddingTop: '12px' }}
         >
-          <div className="form-row">
-            <Toggle
-              label="Show only known spell effects in lab."
-              labelPosition="right"
-              style={{ paddingTop: '8px' }}
-            />
-          </div>
           <List>
             {knownEffects.map(item => {
               return <ListItem primaryText={item} key={item} />;
@@ -99,14 +111,5 @@ const SettingsForm = ({
       </div>}
   </div>
 );
-
-/*
-_id: undefined,
-name: '',
-casterType: 'Psion',
-primaryStat: 0,
-primarySkill: 0,
-knownEffects: []
-*/
 
 export default SettingsForm;

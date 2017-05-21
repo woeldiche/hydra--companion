@@ -6,6 +6,7 @@
     "extends": "react-app"
   },
   "dependencies": {
+    "email-validator": "^1.0.7",
     "es6-promise": "^4.1.0",
     "pouchdb": "^6.2.0",
     "pouchdb-find": "^6.2.0",

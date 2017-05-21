@@ -1,8 +1,11 @@
 import HydraData from '../data/HydraData';
 import DB from '../data/DBStore';
 
-export const FETCH_DATA = 'FETCH_DATA';
-export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
+export const UPDATE_CONFIG = 'UPDATE_CONFIG';
+export const FETCH_CONFIG = 'FETCH_DATA';
+export const FETCH_CONFIG_SUCCESS = 'FETCH_DATA_SUCCESS';
+export const SAVE_CONFIG = 'SAVE_CONFIG';
+export const SAVE_CONFIG_SUCCESS = 'SAVE_CONFIG_SUCCESS';
 export const CHANGE_URL = 'CHANGE_URL';
 
 // SpellLab
@@ -27,8 +30,8 @@ export const SAVE_FORMULA_SUCCESS_NOTIFIED = 'SAVE_FORMULA_SUCCESS_NOTIFIED';
 export const FETCH_FORMULAS = 'FETCH_FORMULAS';
 export const FETCH_FORMULAS_SUCCESS = 'FETCH_FORMULAS_SUCCESS';
 
-export const FETCH_PROFILE = 'FETCH_PROFILE';
-export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
+export const FETCH_CASTER = 'FETCH_CASTER';
+export const FETCH_CASTER_SUCCESS = 'FETCH_CASTER_SUCCESS';
 
 export const DELETE_FORMULA = 'DELETE_FORMULA';
 export const DELETE_FORMULA_SUCCESS = 'DELETE_FORMULA_SUCCESS';
@@ -39,12 +42,65 @@ export const UPDATE_PROFILE_SUCCESS = 'SAVE_PROFILE_SUCCESS';
 /**
   *  Bootstrap
   */
-export function fetchData() {
-  return { type: FETCH_DATA };
+export function updateConfig(param, value) {
+  return { type: UPDATE_CONFIG, param: param, value: value };
 }
 
-export function fetchDataSuccess(data) {
-  return { type: FETCH_DATA_SUCCESS, data };
+export function getConfig() {
+  return function(dispatch, getState) {
+    dispatch(fetchConfig);
+
+    DB.get('@@config')
+      .then(function(doc) {
+        dispatch(fetchConfigSuccess(doc));
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  };
+}
+
+export function fetchConfig() {
+  return { type: FETCH_CONFIG };
+}
+
+export function putConfig() {
+  return function(dispatch, getState) {
+    const config = Object.assign(getState().config, { _id: '@@config' });
+
+    dispatch(saveConfig);
+
+    DB.get('@@config')
+      .then(function(doc) {
+        return DB.put(Object.assign(doc, config));
+      })
+      .then(function(doc) {
+        dispatch(saveConfigSuccess(doc, Date.now()));
+      })
+      .catch(function(err) {
+        if (err.status === 404) {
+          return DB.put(config)
+            .then(function(doc) {
+              dispatch(saveConfigSuccess(doc, Date.now()));
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        }
+      });
+  };
+}
+
+export function saveConfig() {
+  return { type: SAVE_CONFIG };
+}
+
+export function saveConfigSuccess(json, time) {
+  return { type: SAVE_CONFIG_SUCCESS, response: json, time: time };
+}
+
+export function fetchConfigSuccess(data) {
+  return { type: FETCH_CONFIG_SUCCESS, data };
 }
 
 export function changeUrl(path, location) {
@@ -113,11 +169,104 @@ export function updateCasterSpelllist(items) {
   return { type: UPDATE_CASTER_SPELLLIST, items: items };
 }
 
-export function saveCaster() {}
+export function saveCaster() {
+  return { type: SAVE_CASTER };
+}
+
+export function saveCasterSuccess(json, time) {
+  return { type: SAVE_CASTER_SUCCESS, response: json, time: time };
+}
+
+export function saveCasterToDB() {
+  return function(dispatch, getState) {
+    const { caster, config } = getState();
+    dispatch(saveCaster());
+
+    if (!!caster._id) {
+      return DB.get(caster._id).then(function(doc) {
+        Object.assign(doc, {
+          name: caster.name,
+          casterType: caster.casterType,
+          primaryStat: caster.primaryStat,
+          primarySkill: caster.primarySkill,
+          concentrationSkill: caster.concentrationSkill,
+          knownEffects: caster.knownEffects
+        });
+        DB.put(doc).then(function(response) {
+          if (response.ok) {
+            dispatch(saveCasterSuccess(response, Date.now()));
+          }
+        });
+      });
+    } else {
+      const casterDoc = Object.assign(caster, {
+        _id: caster.name + Math.random(),
+        type: 'caster',
+        user: config.user
+      });
+
+      const configDoc = Object.assign(config, { caster: casterDoc._id });
+
+      const docs = [casterDoc, configDoc];
+
+      return DB.bulkDocs(docs).then(function(response) {
+        if (response.ok) {
+          dispatch(saveCasterSuccess(response, Date.now()));
+        }
+      });
+    }
+  };
+}
+
+// Spell List
+export function loadCasterIfNeeded() {
+  return function(dispatch, getState) {
+    const state = getState();
+
+    const { isFetching, didInvalidate } = state.networkActions.caster;
+
+    if (didInvalidate && !isFetching) {
+      return dispatch(loadCaster());
+    } else {
+      return dispatch(fetchCasterSuccess(state.caster));
+    }
+  };
+}
+
+export function loadCaster(casterId) {
+  return function(dispatch) {
+    dispatch(fetchCaster());
+
+    // Get all spells with linked to the caster with id.
+    DB.get('@@config')
+      .then(function(config) {
+        if (config.caster) {
+          return DB.get(config.caster);
+        } else {
+          dispatch(fetchCasterSuccess({}));
+        }
+      })
+      .then(function(result) {
+        dispatch(fetchCasterSuccess(result));
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+  };
+}
+
+export function fetchCaster() {
+  return { type: FETCH_CASTER };
+}
+
+export function fetchCasterSuccess(json) {
+  return { type: FETCH_CASTER_SUCCESS, items: json };
+}
+
 /**
  * Network actions
  */
-function createFormula({ spellLab }) {
+function createFormula({ spellLab, caster }) {
   return {
     _id: spellLab.school.value +
       '/' +
@@ -134,7 +283,8 @@ function createFormula({ spellLab }) {
     range: spellLab.range.value,
     area: spellLab.area.value,
     addon: spellLab.addon.value,
-    damage: spellLab.damage.value
+    damage: spellLab.damage.value,
+    caster: caster._id
     //save,
   };
 }
@@ -142,6 +292,7 @@ function createFormula({ spellLab }) {
 export function storeToDB() {
   return function(dispatch, getState) {
     const formula = createFormula(getState());
+    console.log(formula);
     dispatch(saveFormula(formula._id, formula.name));
 
     return DB.put(formula).then(function(doc) {
@@ -212,7 +363,6 @@ export function fetchFormulas() {
 }
 
 export function fetchFormulasSuccess(json) {
-  console.log(json);
   return { type: FETCH_FORMULAS_SUCCESS, items: json };
 }
 

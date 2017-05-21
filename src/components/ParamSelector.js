@@ -31,7 +31,8 @@ const ParamSelector = ({
   options,
   onParamChange,
   onDiffChange,
-  multiple
+  multiple,
+  disabled
 }) => (
   <div className="form-row">
     <SelectField
@@ -40,6 +41,7 @@ const ParamSelector = ({
       onChange={onParamChange}
       className="form-select col-main"
       multiple={multiple}
+      disabled={disabled}
       floatingLabelText={capitalizeFirstChar(name)}
     >
       {filteredList(options, param).map(item => {

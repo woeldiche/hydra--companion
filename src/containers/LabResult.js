@@ -18,13 +18,14 @@ const calcDiff = state => {
 
 const mapStateToProps = state => {
   const difficulty = calcDiff(state.spellLab);
-  const stat = 4;
+  const statMod = Math.floor((state.caster.primaryStat - 10) / 2);
   const cost = Math.round(difficulty / 5) >= 1 ? Math.round(difficulty / 5) : 1;
 
   let props = {
     diff: difficulty,
     cost: cost,
-    dc: Math.floor(difficulty / 5 + stat + 10),
+    dc: Math.floor(difficulty / 5 + statMod + 10),
+    casterSet: !!state.caster._id,
     allowSave: state.spellLab.allowSave
   };
 

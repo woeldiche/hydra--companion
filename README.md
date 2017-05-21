@@ -78,6 +78,13 @@ schema: {
       concentrationSkill: integer,
       knownEffects: [:ids],
     },
+    config: {
+      _id: '@@config',
+      user: 'email@email.com',
+      type: 'config',
+      caster: ':caster._id',
+      limitEffectsByKnown: false
+    }
   ]
 }
 ```

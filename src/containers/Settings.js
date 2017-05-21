@@ -1,23 +1,60 @@
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HydraData from '../data/HydraData';
+import Loader from '../components/Loader';
 
 import {
   updateCasterName,
   updateCasterValue,
-  saveCaster,
-  updateCasterSpelllist
+  saveCasterToDB,
+  updateCasterSpelllist,
+  loadCaster,
+  putConfig,
+  updateConfig
 } from '../actions';
 import { withRouter } from 'react-router-dom';
-import SettingsForm from '../components/SettingsForm';
+import CasterSettings from '../components/CasterSettings';
+import ConfigSettings from '../components/ConfigSettings';
+
+function checkTime(i) {
+  if (i < 10) {
+    i = '0' + i;
+  }
+  return i;
+}
+
+function printTime(dateString) {
+  const date = new Date(dateString);
+
+  let h = date.getHours();
+  let m = date.getMinutes();
+  let s = date.getSeconds();
+  // add a zero in front of numbers<10
+  m = checkTime(m);
+  s = checkTime(s);
+
+  return h + ':' + m + ':' + s;
+}
 
 const mapStateToProps = state => {
-  return Object.assign({}, state.caster, {
-    allEffects: HydraData.options('effect')
+  return Object.assign({}, state.caster, state.config, {
+    allEffects: HydraData.options('effect'),
+    isFetching: state.networkActions.caster.isFetching,
+    didFetch: state.networkActions.caster.didFetch,
+    isSaving: state.networkActions.caster.isSaving,
+    didSave: state.networkActions.caster.didSave,
+    lastSaved: printTime(state.networkActions.caster.lastSaved),
+    isConfigSaving: state.networkActions.config.isSaving,
+    didConfigSave: state.networkActions.config.didSave,
+    lastConfigSaved: printTime(state.networkActions.config.lastSaved)
   });
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    loadData: () => {
+      dispatch(loadCaster());
+    },
     onNameChange: event => {
       dispatch(updateCasterName(event.target.value));
     },
@@ -28,15 +65,41 @@ const mapDispatchToProps = dispatch => {
     },
     onSpellsChange: (event, index, values) => {
       dispatch(updateCasterSpelllist(values));
+      dispatch(saveCasterToDB());
     },
-    onSave: (param, value) => event => {
-      dispatch(saveCaster());
+    onSave: event => {
+      dispatch(saveCasterToDB());
+    },
+    onValueToggle: param => (event, isChecked) => {
+      dispatch(updateConfig(param, isChecked));
+      dispatch(putConfig());
     }
   };
 };
 
+class SettingsWrapper extends Component {
+  componentDidMount() {
+    this.props.loadData();
+  }
+
+  render() {
+    const { isFetching, didFetch, ...props } = this.props;
+
+    return (
+      <div className="page">
+        {!didFetch || isFetching
+          ? <Loader />
+          : <div>
+              <CasterSettings {...props} />
+              <ConfigSettings {...props} />
+            </div>}
+      </div>
+    );
+  }
+}
+
 const SpellCalculator = withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(SettingsForm)
+  connect(mapStateToProps, mapDispatchToProps)(SettingsWrapper)
 );
 
 export default SpellCalculator;

@@ -102,7 +102,12 @@ const stateShape = {
     }
   },
   hydraData: {},
-  hydraConfig: {}
+  config: {
+    user: 'email@email.com',
+    type: 'config',
+    caster: ':caster._id',
+    limitEffectsByKnown: false
+  }
 };
 
 export default stateShape;

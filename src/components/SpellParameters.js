@@ -65,7 +65,7 @@ const SpellParameters = ({
 
     </Paper>
 
-    <Subheader style={{ marginTop: '16px' }}>Paramters</Subheader>
+    <Subheader style={{ marginTop: '16px' }}>Parameters</Subheader>
     <Paper
       rounded={false}
       style={{

@@ -1,7 +1,8 @@
 import {
   UPDATE_CASTER_NAME,
   UPDATE_CASTER_VALUE,
-  UPDATE_CASTER_SPELLLIST
+  UPDATE_CASTER_SPELLLIST,
+  FETCH_CASTER_SUCCESS
 } from '../actions';
 
 const initialState = {
@@ -23,6 +24,9 @@ const caster = (state = initialState, action) => {
 
     case UPDATE_CASTER_SPELLLIST:
       return Object.assign({}, state, { knownEffects: action.items });
+
+    case FETCH_CASTER_SUCCESS:
+      return Object.assign({}, state, action.items);
 
     default:
       break;
