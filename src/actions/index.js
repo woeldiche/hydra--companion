@@ -325,17 +325,16 @@ export function saveFormulaNotify() {
 }
 
 // Spell List
-export function loadFormulasIfNeeded() {
+export function loadFormulasIfNeeded(caster) {
   return function(dispatch, getState) {
-    const state = getState().spellBooks;
+    const { spellBook, networkActions, caster } = getState();
+    const { isFetching, didInvalidate } = networkActions.spellBook;
+    const items = !!spellBook ? spellBook.items : [];
+    const _id = caster._id;
 
-    const { _id, isFetching, didInvalidate, items } = state[
-      Object.keys(state)[0]
-    ];
-
-    if (!isFetching && !didInvalidate && items.length > 0) {
+    if (!isFetching && !didInvalidate) {
       return dispatch(fetchFormulasSuccess(items));
-    } else {
+    } else if (!isFetching) {
       return dispatch(loadFormulas(_id));
     }
   };
@@ -343,7 +342,7 @@ export function loadFormulasIfNeeded() {
 
 export function loadFormulas(casterId) {
   return function(dispatch) {
-    dispatch(fetchFormulas());
+    dispatch(fetchFormulas(casterId));
 
     // Get all spells with linked to the caster with id.
     DB.find({
@@ -358,8 +357,8 @@ export function loadFormulas(casterId) {
   };
 }
 
-export function fetchFormulas() {
-  return { type: FETCH_FORMULAS };
+export function fetchFormulas(id) {
+  return { type: FETCH_FORMULAS, caster: id };
 }
 
 export function fetchFormulasSuccess(json) {

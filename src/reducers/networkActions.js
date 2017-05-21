@@ -3,6 +3,8 @@ import {
   SAVE_FORMULA_SUCCESS,
   SAVE_FORMULA_SUCCESS_NOTIFIED,
   SAVE_FORMULA_ERROR,
+  FETCH_FORMULAS,
+  FETCH_FORMULAS_SUCCESS,
   SAVE_CASTER,
   SAVE_CASTER_SUCCESS,
   SAVE_CASTER_SUCCESS_NOTIFIED,
@@ -18,8 +20,10 @@ const initialState = {
   spellBook: {
     isSaving: false,
     isFetching: false,
+    didFetch: false,
     didSave: false,
-    didNotify: false
+    didNotify: false,
+    didInvalidate: true
   },
   caster: {
     isFetching: false,
@@ -50,7 +54,8 @@ const spellBook = (state, action) => {
     case SAVE_FORMULA_SUCCESS:
       return Object.assign({}, state, {
         isSaving: false,
-        didSave: true
+        didSave: true,
+        didInvalidate: true
       });
 
     case SAVE_FORMULA_ERROR:
@@ -62,6 +67,17 @@ const spellBook = (state, action) => {
     case SAVE_FORMULA_SUCCESS_NOTIFIED:
       return Object.assign({}, state, {
         didNotify: true
+      });
+
+    case FETCH_FORMULAS:
+      return Object.assign({}, state, {
+        isFetching: true
+      });
+
+    case FETCH_FORMULAS_SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        didFetch: true
       });
 
     default:
@@ -139,6 +155,8 @@ const networkActions = (state = initialState, action) => {
     case SAVE_FORMULA_SUCCESS:
     case SAVE_FORMULA_ERROR:
     case SAVE_FORMULA_SUCCESS_NOTIFIED:
+    case FETCH_FORMULAS:
+    case FETCH_FORMULAS_SUCCESS:
       return Object.assign({}, state, {
         spellBook: spellBook(state.spellBook, action)
       });

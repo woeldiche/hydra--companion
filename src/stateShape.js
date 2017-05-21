@@ -22,9 +22,6 @@ const stateShape = {
   },
   spellBook: {
     _id: ':profile/date()',
-    isFetching: false,
-    didInvalidate: false,
-    lastUpdated: 1439478405547,
     items: [
       {
         _id: ':school/:effect/date()',

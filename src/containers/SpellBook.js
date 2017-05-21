@@ -12,10 +12,16 @@ const mapStateToProps = state => {
   let props = {
     btnPath: '/lab',
     btnClasses: 'button-action button-main',
-    casterSet: !!state.caster._id
+    casterSet: !!state.caster._id,
+    caster: state.caster._id
   };
 
-  return props;
+  return Object.assign(
+    {},
+    state.spellBook,
+    state.networkActions.spellBook,
+    props
+  );
 };
 
 const mapDispatchToProps = dispatch => {
@@ -23,8 +29,10 @@ const mapDispatchToProps = dispatch => {
     btnAction: (path, existingPath) => {
       dispatch(changeUrl(path, existingPath));
     },
-    loadItems: () => {
-      dispatch(loadFormulasIfNeeded());
+    loadItems: (caster, didInvalidate) => {
+      if (didInvalidate) {
+        dispatch(loadFormulasIfNeeded(caster));
+      }
     }
   };
 };
@@ -37,8 +45,8 @@ const SpellBookWrapper = ({
   ...props
 }) => (
   <div className="fill-area flexbox-item-grow">
-    {false
-      ? <Formulalist />
+    {casterSet
+      ? <Formulalist {...props} />
       : <Section title="Notice">
           <div
             style={{
