@@ -18,7 +18,9 @@ const calcDiff = state => {
 
 const mapStateToProps = state => {
   const difficulty = calcDiff(state.spellLab);
-  const statMod = Math.floor((state.caster.primaryStat - 10) / 2);
+  const statMod = state.caster.primaryStat !== 0
+    ? Math.floor((state.caster.primaryStat - 10) / 2)
+    : 0;
   const cost = Math.round(difficulty / 5) >= 1 ? Math.round(difficulty / 5) : 1;
 
   let props = {

@@ -9,11 +9,7 @@ import {
   SAVE_CASTER_SUCCESS,
   SAVE_CASTER_SUCCESS_NOTIFIED,
   FETCH_CASTER_SUCCESS,
-  FETCH_CASTER,
-  FETCH_CONFIG,
-  FETCH_CONFIG_SUCCESS,
-  SAVE_CONFIG,
-  SAVE_CONFIG_SUCCESS
+  FETCH_CASTER
 } from '../actions';
 
 const initialState = {
@@ -33,13 +29,6 @@ const initialState = {
     didNotify: false,
     lastSaved: 0,
     didInvalidate: true
-  },
-  config: {
-    idFetch: true,
-    isSaving: false,
-    didSave: false,
-    didNotify: false,
-    lastSaved: 0
   }
 };
 
@@ -123,32 +112,6 @@ const caster = (state, action) => {
   }
 };
 
-const config = (state, action) => {
-  switch (action.type) {
-    case FETCH_CONFIG:
-      return Object.assign({}, state, { didFetch: false });
-
-    case FETCH_CONFIG_SUCCESS:
-      return Object.assign({}, state, {
-        didFetch: true,
-        didSave: true
-      });
-
-    case SAVE_CONFIG:
-      return Object.assign({}, state, { isSaving: true });
-
-    case SAVE_CONFIG_SUCCESS:
-      return Object.assign({}, state, {
-        isSaving: false,
-        didSave: true,
-        lastSaved: action.time
-      });
-
-    default:
-      break;
-  }
-};
-
 const networkActions = (state = initialState, action) => {
   switch (action.type) {
     case SAVE_FORMULA:
@@ -168,14 +131,6 @@ const networkActions = (state = initialState, action) => {
     case FETCH_CASTER_SUCCESS:
       return Object.assign({}, state, {
         caster: caster(state.caster, action)
-      });
-
-    case FETCH_CONFIG:
-    case FETCH_CONFIG_SUCCESS:
-    case SAVE_CONFIG:
-    case SAVE_CONFIG_SUCCESS:
-      return Object.assign({}, state, {
-        config: config(state.config, action)
       });
 
     default:

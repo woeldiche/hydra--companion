@@ -8,7 +8,6 @@ import {
   updateCasterValue,
   saveCasterToDB,
   updateCasterSpelllist,
-  loadCaster,
   putConfig,
   updateConfig
 } from '../actions';
@@ -44,17 +43,14 @@ const mapStateToProps = state => {
     isSaving: state.networkActions.caster.isSaving,
     didSave: state.networkActions.caster.didSave,
     lastSaved: printTime(state.networkActions.caster.lastSaved),
-    isConfigSaving: state.networkActions.config.isSaving,
-    didConfigSave: state.networkActions.config.didSave,
-    lastConfigSaved: printTime(state.networkActions.config.lastSaved)
+    isConfigSaving: state.config.isSaving,
+    didConfigSave: state.config.didSave,
+    lastConfigSaved: printTime(state.config.lastSaved)
   });
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadData: () => {
-      dispatch(loadCaster());
-    },
     onNameChange: event => {
       dispatch(updateCasterName(event.target.value));
     },
@@ -78,16 +74,12 @@ const mapDispatchToProps = dispatch => {
 };
 
 class SettingsWrapper extends Component {
-  componentDidMount() {
-    this.props.loadData();
-  }
-
   render() {
     const { isFetching, didFetch, ...props } = this.props;
 
     return (
       <div className="fill-area flexbox-item-grow">
-        {!didFetch || isFetching
+        {isFetching
           ? <Loader />
           : <div>
               <CasterSettings {...props} />

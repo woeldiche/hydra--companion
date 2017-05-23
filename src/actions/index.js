@@ -2,10 +2,11 @@ import HydraData from '../data/HydraData';
 import DB from '../data/DBStore';
 
 export const UPDATE_CONFIG = 'UPDATE_CONFIG';
-export const FETCH_CONFIG = 'FETCH_DATA';
-export const FETCH_CONFIG_SUCCESS = 'FETCH_DATA_SUCCESS';
+export const FETCH_CONFIG = 'FETCH_CONFIG';
+export const FETCH_CONFIG_SUCCESS = 'FETCH_CONFIG_SUCCESS';
 export const SAVE_CONFIG = 'SAVE_CONFIG';
 export const SAVE_CONFIG_SUCCESS = 'SAVE_CONFIG_SUCCESS';
+export const FETCH_CONFIG_ERROR = 'FETCH_CONFIG_ERROR';
 export const CHANGE_URL = 'CHANGE_URL';
 
 // SpellLab
@@ -48,25 +49,50 @@ export function updateConfig(param, value) {
 
 export function getConfig() {
   return function(dispatch, getState) {
-    dispatch(fetchConfig);
+    const { caster } = getState().config;
+    dispatch(fetchConfig());
 
     DB.get('@@config')
       .then(function(doc) {
         dispatch(fetchConfigSuccess(doc));
+
+        if (caster === undefined && doc.hasOwnProperty('caster')) {
+          DB.get(doc.caster).then(function(doc) {
+            dispatch(fetchCasterSuccess(doc));
+          });
+        }
       })
       .catch(function(err) {
-        console.log(err);
+        if (err.status === 404) {
+          return DB.put({ _id: '@@config', type: 'config' }).then(function(
+            doc
+          ) {
+            dispatch(fetchConfigSuccess({}));
+          });
+        } else {
+          dispatch(fetchConfigError(err));
+        }
       });
   };
 }
 
-export function fetchConfig() {
-  return { type: FETCH_CONFIG };
-}
-
 export function putConfig() {
   return function(dispatch, getState) {
-    const config = Object.assign(getState().config, { _id: '@@config' });
+    const {
+      limitEffectsByKnown,
+      user,
+      caster,
+      userCreated
+    } = getState().config;
+
+    const config = {
+      _id: '@@config',
+      type: 'config',
+      limitEffectsByKnown: limitEffectsByKnown,
+      user: user,
+      caster: caster,
+      userCreated: userCreated
+    };
 
     dispatch(saveConfig);
 
@@ -78,17 +104,13 @@ export function putConfig() {
         dispatch(saveConfigSuccess(doc, Date.now()));
       })
       .catch(function(err) {
-        if (err.status === 404) {
-          return DB.put(config)
-            .then(function(doc) {
-              dispatch(saveConfigSuccess(doc, Date.now()));
-            })
-            .catch(function(err) {
-              console.log(err);
-            });
-        }
+        console.log(err);
       });
   };
+}
+
+export function fetchConfig() {
+  return { type: FETCH_CONFIG };
 }
 
 export function saveConfig() {
@@ -101,6 +123,10 @@ export function saveConfigSuccess(json, time) {
 
 export function fetchConfigSuccess(data) {
   return { type: FETCH_CONFIG_SUCCESS, data };
+}
+
+export function fetchConfigError(data) {
+  return { type: FETCH_CONFIG_ERROR, data: data };
 }
 
 export function changeUrl(path, location) {
@@ -234,24 +260,29 @@ export function loadCasterIfNeeded() {
 }
 
 export function loadCaster(casterId) {
-  return function(dispatch) {
+  return function(dispatch, getState) {
     dispatch(fetchCaster());
 
-    // Get all spells with linked to the caster with id.
-    DB.get('@@config')
-      .then(function(config) {
-        if (config.caster) {
-          return DB.get(config.caster);
-        } else {
-          dispatch(fetchCasterSuccess({}));
-        }
-      })
-      .then(function(result) {
-        dispatch(fetchCasterSuccess(result));
-      })
-      .catch(function(err) {
-        console.log(err);
+    if (casterId === undefined) {
+      DB.find({ selector: { type: 'caster' } }).then(function(result) {
+        dispatch(fetchCasterSuccess(result.docs));
       });
+    } else if (typeof casterId === 'string') {
+      return DB.get(casterId)
+        .then(function(result) {
+          dispatch(fetchCasterSuccess(result));
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
+    } else {
+      const LoadException = {
+        message: 'loadCaster() expects a string with ID or undefined'
+      };
+      throw LoadException;
+    }
+
+    // Get all spells with linked to the caster with id.
   };
 }
 

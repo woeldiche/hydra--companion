@@ -13,9 +13,15 @@ const mapStateToProps = state => {
     state.config.user !== state.config.userRepeat
     ? "E-mail addresses don't match."
     : '';
-  return Object.assign({}, state.config, state.networkActions.config, {
+
+  return Object.assign({}, state.config, {
     userErrorText: userErrorText,
-    userRepeatErrorText: userRepeatErrorText
+    userRepeatErrorText: userRepeatErrorText,
+    // If user/userRepeat is undefined, set to empty string.
+    user: state.config.user === undefined ? '' : state.config.user,
+    userRepeat: state.config.userRepeat === undefined
+      ? ''
+      : state.config.userRepeat
   });
 };
 

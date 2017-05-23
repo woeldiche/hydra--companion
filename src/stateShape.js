@@ -108,3 +108,53 @@ const stateShape = {
 };
 
 export default stateShape;
+
+const statesOnBootstrap = {
+  initial: {
+    state: {
+      userCreated: undefined,
+      isFetching: false,
+      didFetch: false,
+      isSaving: false,
+      didSave: false,
+      casterCreated: undefined,
+      user: undefined,
+      caster: undefined,
+      isUserValid: false
+    },
+    actions: {
+      default: 'getConfig'
+    }
+  },
+  getConfig: {
+    state: {
+      isFetching: true
+    },
+    actions: {
+      'no @@config exists in DB': {
+        action: 'putConfig({}).then(function() { getConfig() })'
+      },
+      '@@config & no valid user': {
+        dispatch: { action: 'FETCH_CONFIG_SUCCESS', response: 'doc' },
+        state: {
+          isFetching: false,
+          didFetch: true,
+          userCreated: false
+        }
+      },
+      '@@config & valid user exists': {
+        dispatch: [
+          { action: 'FETCH_CONFIG_SUCCESS', response: 'doc' },
+          'dispatch(getCaster())'
+        ],
+        state: {
+          userCreated: true,
+          isFetching: false,
+          didFetch: true,
+          user: ':email',
+          isUserValid: true
+        }
+      }
+    }
+  }
+};
