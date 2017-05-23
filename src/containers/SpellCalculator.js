@@ -5,10 +5,15 @@ import SpellParameters from '../components/SpellParameters';
 import HydraData from '../data/HydraData';
 
 const mapStateToProps = state => {
+  const allEffects = HydraData.options('effect');
+  const knownEffects = allEffects.filter(function(effect) {
+    return state.caster.knownEffects.includes(effect.name);
+  });
+
   const props = {
     paramOptions: {
       school: HydraData.options('school'),
-      effect: HydraData.options('effect'),
+      effect: state.config.limitEffectsByKnown ? knownEffects : allEffects,
       time: HydraData.options('time'),
       components: HydraData.options('components'),
       delivery: HydraData.options('delivery'),
