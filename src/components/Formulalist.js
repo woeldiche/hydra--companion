@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
 //import Divider from 'material-ui/Divider';
-import { List, ListItem } from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
-import ActionAssignment from 'material-ui/svg-icons/action/assignment';
-import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
-import IconButton from 'material-ui/IconButton';
-import Section from './Section.js';
+import Subheader from 'material-ui/Subheader';
 import Loader from './Loader';
-
-const rightIconMenu = (
-  <IconButton>
-    <ModeEdit />
-  </IconButton>
-);
+import SpellCard from './SpellCard';
 
 class FormulaList extends Component {
   componentDidMount() {
@@ -28,22 +18,31 @@ class FormulaList extends Component {
       <div>
         {!didFetch || isFetching
           ? <Loader />
-          : <Section title="Known Formulae">
-              <List style={{ width: '100%' }}>
-                {items.map(function(item) {
-                  return (
-                    <ListItem
+          : <div>
+              <Subheader style={{ marginTop: '16px' }}>
+                Known formulae
+              </Subheader>
+              {items.length > 0
+                ? items.map(function(item) {
+                    return <SpellCard key={item._id} {...item} />;
+                  })
+                : <div
+                    style={{
+                      paddingLeft: 16,
+                      paddingRight: 16
+                    }}
+                  >
+                    <p>No spells saved yet!</p>
+                  </div>}
+              {/* <ListItem
                       leftAvatar={<Avatar icon={<ActionAssignment />} />}
                       rightIconButton={rightIconMenu}
-                      primaryText={item.name}
+                      primaryText={`Spells name is ${item.name}`}
                       secondaryText={item.school}
                       style={{ paddingRight: '12px' }}
                       key={item._id}
-                    />
-                  );
-                })}
-              </List>
-            </Section>}
+                    /> */}
+            </div>}
       </div>
     );
   }

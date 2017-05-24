@@ -315,7 +315,8 @@ function createFormula({ spellLab, caster }) {
     area: spellLab.area.value,
     addon: spellLab.addon.value,
     damage: spellLab.damage.value,
-    caster: caster._id
+    caster: caster._id,
+    components: spellLab.components.value
     //save,
   };
 }
