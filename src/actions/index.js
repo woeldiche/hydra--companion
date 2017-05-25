@@ -82,7 +82,9 @@ export function putConfig() {
       limitEffectsByKnown,
       user,
       caster,
-      userCreated
+      userCreated,
+      version,
+      data
     } = getState().config;
 
     const config = {
@@ -91,7 +93,9 @@ export function putConfig() {
       limitEffectsByKnown: limitEffectsByKnown,
       user: user,
       caster: caster,
-      userCreated: userCreated
+      userCreated: userCreated,
+      version: version,
+      data: data
     };
 
     dispatch(saveConfig);

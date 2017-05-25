@@ -20,7 +20,9 @@ const initialState = {
   didSave: false,
   casterCreated: undefined,
   isUserValid: false,
-  lastSaved: 0
+  lastSaved: 0,
+  version: '2.0.0',
+  data: '1.1.0'
 };
 
 const config = (state = initialState, action) => {
