@@ -12,7 +12,13 @@ class FormulaList extends Component {
   }
 
   render() {
-    const { didFetch, isFetching, items } = this.props;
+    const {
+      didFetch,
+      isFetching,
+      items,
+      primaryStat,
+      primarySkill
+    } = this.props;
 
     return (
       <div>
@@ -24,7 +30,14 @@ class FormulaList extends Component {
               </Subheader>
               {items.length > 0
                 ? items.map(function(item) {
-                    return <SpellCard key={item._id} {...item} />;
+                    return (
+                      <SpellCard
+                        key={item._id}
+                        primarySkill={primarySkill}
+                        primaryStat={primaryStat}
+                        {...item}
+                      />
+                    );
                   })
                 : <div
                     style={{
@@ -34,14 +47,6 @@ class FormulaList extends Component {
                   >
                     <p>No spells saved yet!</p>
                   </div>}
-              {/* <ListItem
-                      leftAvatar={<Avatar icon={<ActionAssignment />} />}
-                      rightIconButton={rightIconMenu}
-                      primaryText={`Spells name is ${item.name}`}
-                      secondaryText={item.school}
-                      style={{ paddingRight: '12px' }}
-                      key={item._id}
-                    /> */}
             </div>}
       </div>
     );

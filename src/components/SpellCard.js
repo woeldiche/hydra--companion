@@ -6,9 +6,31 @@ import {
   CardText,
   CardTitle
 } from 'material-ui/Card';
+import { List, ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 
 import ActionSettings from 'material-ui/svg-icons/action/settings';
+
+const paramItems = (params, stat, skill) => {
+  let items = [];
+  for (let prop in params) {
+    if (
+      params[prop] !== undefined &&
+      params[prop].hasOwnProperty('value') &&
+      params[prop].value !== ''
+    ) {
+      items.push(
+        <ListItem
+          key={prop}
+          primaryText={params[prop].value}
+          secondaryText={prop}
+        />
+      );
+    }
+  }
+
+  return items;
+};
 
 const SpellCard = ({
   name,
@@ -23,33 +45,44 @@ const SpellCard = ({
   duration,
   damage,
   save,
-  diff,
+  difficulty,
   cost,
-  dc
+  dcBase,
+  primaryStat,
+  primarySkill
 }) => (
   <Card>
     <CardHeader
       title={`${name}`}
-      subtitle={`${diff} | ${cost} SP`}
+      subtitle={`D: ${difficulty}  /  ${cost} SP  /  DC ${dcBase + (primaryStat !== 0 ? Math.floor((primaryStat - 10) / 2) : 0)}`}
       actAsExpander={true}
       showExpandableButton={true}
     />
-    <CardTitle title={effect} subtitle={school} expandable={true} />
-    <CardText expandable={true}>
-      <ul style={{ listStyle: 'none' }}>
-        <li><b>Components</b> {components}</li>
-        <li><b>Time</b> {time}</li>
-        <li><b>Delivery</b> {delivery}</li>
-        {!!range && <li><b>Range</b> {range}</li>}
-        {!!area && <li><b>Area</b> {area}</li>}
-        {!!addon && <li><b>Additional targets</b> {addon}</li>}
-        {!!duration && <li><b>Duration</b> {duration}</li>}
-        {!!damage && <li><b>Damage</b> {damage}</li>}
-        {!!save && <li><b>Save</b> {save}</li>}
-        {!!dc && <li><b>DC</b> {dc}</li>}
-        {!!diff && <li><b>Difficulty</b> {diff}</li>}
-        {!!cost && <li><b>Cost</b> {cost} spell points</li>}
-      </ul>
+    <CardTitle title={effect.value} subtitle={school} expandable={true} />
+    <CardText
+      style={{ paddingLeft: 0, paddingRight: 0, paddingTop: 0 }}
+      expandable={true}
+      rel="cardText"
+    >
+
+      <List>
+        {paramItems(
+          {
+            time,
+            components,
+            delivery,
+            range,
+            area,
+            addon,
+            duration,
+            damage,
+            save
+          },
+          primaryStat,
+          primarySkill
+        )}
+      </List>
+
     </CardText>
     <CardActions expandable={true}>
       <IconButton

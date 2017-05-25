@@ -314,6 +314,7 @@ function createFormula({ spellLab, caster }) {
     range: spellLab.range.value,
     area: spellLab.area.value,
     addon: spellLab.addon.value,
+    duration: spellLab.duration.value,
     damage: spellLab.damage.value,
     caster: caster._id,
     components: spellLab.components.value
@@ -324,7 +325,6 @@ function createFormula({ spellLab, caster }) {
 export function storeToDB() {
   return function(dispatch, getState) {
     const formula = createFormula(getState());
-    console.log(formula);
     dispatch(saveFormula(formula._id, formula.name));
 
     return DB.put(formula).then(function(doc) {
@@ -372,6 +372,43 @@ export function loadFormulasIfNeeded(caster) {
   };
 }
 
+const sanitizeFormulas = result => {
+  return result.docs.map(function(doc) {
+    const { _rev, ...props } = doc;
+    console.log(...props);
+    return { ...props };
+  });
+};
+
+const hydrateFormulas = items => {
+  const hydratedItems = items.map(function(item) {
+    const ignored = ['_id', 'name', 'type', 'caster', 'school'];
+    const hydratedItem = {};
+    let sum = 0;
+
+    for (let prop in item) {
+      if (!ignored.includes(prop)) {
+        hydratedItem[prop] = HydraData.get(prop, item[prop]);
+
+        let diff = hydratedItem[prop].hasOwnProperty('diff')
+          ? hydratedItem[prop].diff
+          : 0;
+        sum += diff;
+      } else {
+        hydratedItem[prop] = item[prop];
+      }
+    }
+
+    hydratedItem.difficulty = sum;
+    hydratedItem.cost = Math.round(sum / 5) >= 1 ? Math.round(sum / 5) : 1;
+    hydratedItem.dcBase = Math.floor(sum / 5 + 10);
+
+    return hydratedItem;
+  });
+
+  return hydratedItems;
+};
+
 export function loadFormulas(casterId) {
   return function(dispatch) {
     dispatch(fetchFormulas(casterId));
@@ -381,7 +418,9 @@ export function loadFormulas(casterId) {
       selector: { type: 'formula', caster: casterId }
     })
       .then(function(result) {
-        dispatch(fetchFormulasSuccess(result));
+        dispatch(
+          fetchFormulasSuccess(hydrateFormulas(sanitizeFormulas(result)))
+        );
       })
       .catch(function(err) {
         console.log(err);

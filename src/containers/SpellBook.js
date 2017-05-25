@@ -20,6 +20,7 @@ const mapStateToProps = state => {
     {},
     state.spellBook,
     state.networkActions.spellBook,
+    state.caster,
     props
   );
 };

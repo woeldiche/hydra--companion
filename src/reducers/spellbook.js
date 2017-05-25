@@ -11,13 +11,8 @@ const spellBook = (state = initialState, action) => {
       return Object.assign({}, state, { _id: action.caster });
 
     case FETCH_FORMULAS_SUCCESS:
-      let items = action.items.docs.map(function(doc) {
-        const { _rev, ...props } = doc;
-        return { ...props };
-      });
-
       return Object.assign({}, state, {
-        items: items
+        items: action.items
       });
 
     default:
