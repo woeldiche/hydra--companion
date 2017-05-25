@@ -9,7 +9,6 @@ const LinkButton = ({ classes, newPath, onUrlChange, children }) => (
       <FloatingActionButton
         className={classes}
         onClick={() => {
-          console.log(history, location);
           onUrlChange(newPath, location.pathname);
           history.push(newPath);
         }}

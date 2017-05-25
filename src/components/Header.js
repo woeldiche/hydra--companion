@@ -4,25 +4,32 @@ import { Route } from 'react-router-dom';
 import IconButton from 'material-ui/IconButton';
 
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
+import ActionSettings from 'material-ui/svg-icons/action/settings';
 
 const Header = ({ title, backlink }) => (
   <div>
-    {!backlink
-      ? <AppBar
-          title={title}
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
-        />
-      : <Route
-          render={({ history, location }) => (
-            <AppBar
+    <Route
+      render={({ history, location }) =>
+        !backlink
+          ? <AppBar
+              title={title}
+              iconElementRight={<IconButton><ActionSettings /></IconButton>}
+              onRightIconButtonTouchTap={() => {
+                history.push('/settings');
+              }}
+            />
+          : <AppBar
               title={title}
               onLeftIconButtonTouchTap={() => {
                 history.push(backlink);
               }}
+              onRightIconButtonTouchTap={() => {
+                history.push('/settings');
+              }}
+              iconElementRight={<IconButton><ActionSettings /></IconButton>}
               iconElementLeft={<IconButton><ArrowBack /></IconButton>}
-            />
-          )}
-        />}
+            />}
+    />
   </div>
 );
 
