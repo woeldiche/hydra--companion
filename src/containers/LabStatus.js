@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { saveFormulaNotify } from '../actions';
+import { saveFormulaNotify } from '../actions/lab';
 import { withRouter } from 'react-router-dom';
 import LabNetworkFeedback from '../components/LabNetworkFeedback';
 

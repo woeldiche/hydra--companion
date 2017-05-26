@@ -7,10 +7,9 @@ import {
   updateCasterName,
   updateCasterValue,
   saveCasterToDB,
-  updateCasterSpelllist,
-  putConfig,
-  updateConfig
-} from '../actions';
+  updateCasterSpelllist
+} from '../actions/caster';
+import { putConfig, updateConfig } from '../actions/config';
 import { withRouter } from 'react-router-dom';
 import CasterSettings from '../components/CasterSettings';
 import ConfigSettings from '../components/ConfigSettings';

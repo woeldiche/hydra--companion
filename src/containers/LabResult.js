@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { storeToDB } from '../actions';
+import { storeToDB } from '../actions/lab';
 import { withRouter } from 'react-router-dom';
 import LabFooter from '../components/LabFooter';
 

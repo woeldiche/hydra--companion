@@ -3,7 +3,7 @@ import {
   UPDATE_CASTER_VALUE,
   UPDATE_CASTER_SPELLLIST,
   FETCH_CASTER_SUCCESS
-} from '../actions';
+} from '../actions/caster';
 
 const initialState = {
   _id: undefined,

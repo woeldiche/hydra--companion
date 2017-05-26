@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  CardText,
-  CardTitle
-} from 'material-ui/Card';
+import { Card, CardTitle } from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 
@@ -52,47 +46,38 @@ const SpellCard = ({
   primarySkill
 }) => (
   <Card>
-    <CardHeader
-      title={`${name}`}
-      subtitle={`D: ${difficulty}  /  ${cost} SP  /  DC ${dcBase + (primaryStat !== 0 ? Math.floor((primaryStat - 10) / 2) : 0)}`}
-      actAsExpander={true}
-      showExpandableButton={true}
-    />
-    <CardTitle title={effect.value} subtitle={school} expandable={true} />
-    <CardText
-      style={{ paddingLeft: 0, paddingRight: 0, paddingTop: 0 }}
-      expandable={true}
-      rel="cardText"
+    <CardTitle title={name} subtitle={school} />
+    <List>
+      <ListItem primaryText={effect.value} secondaryText="Effect" />
+      {paramItems(
+        {
+          time,
+          components,
+          delivery,
+          range,
+          area,
+          addon,
+          duration,
+          damage,
+          save
+        },
+        primaryStat,
+        primarySkill
+      )}
+      <ListItem
+        primaryText={`DC ${dcBase + (primaryStat !== 0 ? Math.floor((primaryStat - 10) / 2) : 0)}`}
+        secondaryText="Save DC"
+      />
+      <ListItem primaryText={difficulty} secondaryText="Difficulty" />
+      <ListItem primaryText={`${cost} SP`} secondaryText="Cost" />
+    </List>
+    <IconButton
+      tooltip="Modify in lab"
+      touch={true}
+      tooltipPosition="top-right"
     >
-
-      <List>
-        {paramItems(
-          {
-            time,
-            components,
-            delivery,
-            range,
-            area,
-            addon,
-            duration,
-            damage,
-            save
-          },
-          primaryStat,
-          primarySkill
-        )}
-      </List>
-
-    </CardText>
-    <CardActions expandable={true}>
-      <IconButton
-        tooltip="Modify in lab"
-        touch={true}
-        tooltipPosition="top-right"
-      >
-        <ActionSettings />
-      </IconButton>
-    </CardActions>
+      <ActionSettings />
+    </IconButton>
   </Card>
 );
 

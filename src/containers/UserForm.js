@@ -2,7 +2,7 @@ import React from 'react';
 import TextField from 'material-ui/TextField';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { updateConfig } from '../actions/';
+import { updateConfig } from '../actions/config';
 import Subheader from 'material-ui/Subheader';
 
 const mapStateToProps = state => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { putConfig, getConfig } from '../actions';
+import { putConfig, getConfig } from '../actions/config';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Loader from '../components/Loader';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';

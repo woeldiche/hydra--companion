@@ -2,15 +2,16 @@ import {
   SAVE_FORMULA,
   SAVE_FORMULA_SUCCESS,
   SAVE_FORMULA_SUCCESS_NOTIFIED,
-  SAVE_FORMULA_ERROR,
-  FETCH_FORMULAS,
-  FETCH_FORMULAS_SUCCESS,
+  SAVE_FORMULA_ERROR
+} from '../actions/lab';
+import {
   SAVE_CASTER,
   SAVE_CASTER_SUCCESS,
   SAVE_CASTER_SUCCESS_NOTIFIED,
   FETCH_CASTER_SUCCESS,
   FETCH_CASTER
-} from '../actions';
+} from '../actions/caster';
+import { FETCH_FORMULAS, FETCH_FORMULAS_SUCCESS } from '../actions/spellbook';
 
 const initialState = {
   spellBook: {

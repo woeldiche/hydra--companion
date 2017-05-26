@@ -3,7 +3,7 @@ import {
   UPDATE_DIFF,
   UPDATE_NAME,
   RESET_FORMULA
-} from '../actions';
+} from '../actions/lab';
 
 const initialState = {
   name: {

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateConfig, storeConfig } from '../actions';
+import { updateConfig, storeConfig } from '../actions/config';
 import { withRouter } from 'react-router-dom';
 import LabFooter from '../components/ConfigModal';
 

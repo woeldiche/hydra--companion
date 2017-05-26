@@ -1,4 +1,4 @@
-import { FETCH_FORMULAS, FETCH_FORMULAS_SUCCESS } from '../actions';
+import { FETCH_FORMULAS, FETCH_FORMULAS_SUCCESS } from '../actions/spellbook';
 
 const initialState = {
   _id: undefined,

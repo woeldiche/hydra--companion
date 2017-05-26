@@ -4,9 +4,9 @@ import {
   FETCH_CONFIG_SUCCESS,
   FETCH_CONFIG_ERROR,
   SAVE_CONFIG,
-  SAVE_CONFIG_SUCCESS,
-  FETCH_CASTER_SUCCESS
-} from '../actions';
+  SAVE_CONFIG_SUCCESS
+} from '../actions/config';
+import { FETCH_CASTER_SUCCESS } from '../actions/caster';
 import validator from 'email-validator';
 
 const initialState = {

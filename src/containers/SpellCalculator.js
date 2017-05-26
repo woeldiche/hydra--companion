@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateParameter, updateDiff, updateName } from '../actions';
+import { updateParameter, updateDiff, updateName } from '../actions/lab';
 import { withRouter } from 'react-router-dom';
 import SpellParameters from '../components/SpellParameters';
 import HydraData from '../data/HydraData';

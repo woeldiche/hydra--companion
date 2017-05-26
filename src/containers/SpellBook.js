@@ -1,6 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { changeUrl, loadFormulasIfNeeded } from '../actions';
+import {
+  loadFormulasIfNeeded,
+  viewFormula,
+  toggleDrawer
+} from '../actions/spellbook';
+import { changeUrl } from '../actions/misc';
 import { withRouter } from 'react-router-dom';
 import Formulalist from '../components/Formulalist';
 import LinkButton from '../components/LinkButton';
@@ -34,6 +39,12 @@ const mapDispatchToProps = dispatch => {
       if (didInvalidate) {
         dispatch(loadFormulasIfNeeded(caster));
       }
+    },
+    showFormula: id => {
+      dispatch(viewFormula(id));
+    },
+    onDrawerChange: open => {
+      dispatch(toggleDrawer(open));
     }
   };
 };
