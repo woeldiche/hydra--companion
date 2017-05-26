@@ -40,7 +40,7 @@ const mapDispatchToProps = dispatch => {
         dispatch(loadFormulasIfNeeded(caster));
       }
     },
-    showFormula: id => {
+    showFormula: id => event => {
       dispatch(viewFormula(id));
     },
     onDrawerChange: open => {

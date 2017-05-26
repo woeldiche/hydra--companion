@@ -5,6 +5,7 @@ import DB from '../data/DBStore';
 //export const EDIT_FORMULA = 'EDIT_FORMULA';
 //export const FILTER_SPELL_LIST = 'FILTER_SPELL_LIST';
 export const VIEW_FORMULA = 'VIEW_FORMULA';
+export const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
 export const FETCH_FORMULAS = 'FETCH_FORMULAS';
 export const FETCH_FORMULAS_SUCCESS = 'FETCH_FORMULAS_SUCCESS';
 export const DELETE_FORMULA = 'DELETE_FORMULA';
@@ -13,9 +14,12 @@ export const DELETE_FORMULA_SUCCESS = 'DELETE_FORMULA_SUCCESS';
 /**
  * Spellbook views
  */
-export const viewFormula = (formula = {}) => {
-  console.log('View Formula');
-  return { type: VIEW_FORMULA, activeItem: formula };
+export const viewFormula = id => {
+  return { type: VIEW_FORMULA, item: id };
+};
+
+export const toggleDrawer = open => {
+  return { type: TOGGLE_DRAWER, open: open };
 };
 
 /**

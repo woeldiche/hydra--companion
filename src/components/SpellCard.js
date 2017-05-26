@@ -26,59 +26,32 @@ const paramItems = (params, stat, skill) => {
   return items;
 };
 
-const SpellCard = ({
-  name,
-  school,
-  effect,
-  time,
-  components,
-  delivery,
-  range,
-  area,
-  addon,
-  duration,
-  damage,
-  save,
-  difficulty,
-  cost,
-  dcBase,
-  primaryStat,
-  primarySkill
-}) => (
-  <Card>
-    <CardTitle title={name} subtitle={school} />
-    <List>
-      <ListItem primaryText={effect.value} secondaryText="Effect" />
-      {paramItems(
-        {
-          time,
-          components,
-          delivery,
-          range,
-          area,
-          addon,
-          duration,
-          damage,
-          save
-        },
-        primaryStat,
-        primarySkill
-      )}
-      <ListItem
-        primaryText={`DC ${dcBase + (primaryStat !== 0 ? Math.floor((primaryStat - 10) / 2) : 0)}`}
-        secondaryText="Save DC"
-      />
-      <ListItem primaryText={difficulty} secondaryText="Difficulty" />
-      <ListItem primaryText={`${cost} SP`} secondaryText="Cost" />
-    </List>
-    <IconButton
-      tooltip="Modify in lab"
-      touch={true}
-      tooltipPosition="top-right"
-    >
-      <ActionSettings />
-    </IconButton>
-  </Card>
-);
+const SpellCard = ({ showSpell, primaryStat, primarySkill }) => {
+  return (
+    <Card>
+      <CardTitle title={showSpell.name} subtitle={showSpell.school} />
+      <List>
+        <ListItem primaryText={showSpell.effect.value} secondaryText="Effect" />
+        {paramItems(showSpell, primaryStat, primarySkill)}
+        <ListItem
+          primaryText={`DC ${showSpell.dcBase + (primaryStat !== 0 ? Math.floor((primaryStat - 10) / 2) : 0)}`}
+          secondaryText="Save DC"
+        />
+        <ListItem
+          primaryText={showSpell.difficulty}
+          secondaryText="Difficulty"
+        />
+        <ListItem primaryText={`${showSpell.cost} SP`} secondaryText="Cost" />
+      </List>
+      <IconButton
+        tooltip="Modify in lab"
+        touch={true}
+        tooltipPosition="top-right"
+      >
+        <ActionSettings />
+      </IconButton>
+    </Card>
+  );
+};
 
 export default SpellCard;

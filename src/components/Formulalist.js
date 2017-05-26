@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-//import Divider from 'material-ui/Divider';
 import Drawer from 'material-ui/Drawer';
-import Divider from 'material-ui/Divider';
 import Section from './Section';
 import { List, ListItem } from 'material-ui/List';
 
@@ -60,17 +58,18 @@ class FormulaList extends Component {
                 </List>
               </Section>
               <Drawer
-                width={200}
+                docked={false}
+                width={'90%'}
                 openSecondary={true}
-                open={false}
-                //onRequestChange={onDrawerChange({ open })}
+                open={openDrawer}
+                onRequestChange={onDrawerChange}
                 disableSwipeToOpen={true}
               >
-                {/* <SpellCard
+                <SpellCard
                   primarySkill={primarySkill}
                   primaryStat={primaryStat}
                   showSpell={viewedFormula}
-                /> */}
+                />
               </Drawer>
             </div>}
       </div>
