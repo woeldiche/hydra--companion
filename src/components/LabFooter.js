@@ -3,7 +3,15 @@ import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 
-const LabFooter = ({ diff, dc, cost, allowSave, onClickSave, casterSet }) => (
+const LabFooter = ({
+  diff,
+  dc,
+  cost,
+  allowSave,
+  onClickSave,
+  casterSet,
+  saveLabel = 'Save'
+}) => (
   <div className="flex-parent--row footer--content">
     <div className="flex-item-column">
       <span className="subheader">Difficulty</span>
@@ -20,11 +28,11 @@ const LabFooter = ({ diff, dc, cost, allowSave, onClickSave, casterSet }) => (
     <div className="flex-item-column">
       {casterSet &&
         allowSave &&
-        <RaisedButton label="Save" primary={true} onClick={onClickSave} />}
+        <RaisedButton label={saveLabel} primary={true} onClick={onClickSave} />}
 
       {casterSet &&
         !allowSave &&
-        <RaisedButton label="Save" primary={true} disabled={true} />}
+        <RaisedButton label={saveLabel} primary={true} disabled={true} />}
 
       {!casterSet &&
         <IconButton

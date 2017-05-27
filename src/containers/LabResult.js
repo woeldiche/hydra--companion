@@ -28,7 +28,8 @@ const mapStateToProps = state => {
     cost: cost,
     dc: Math.floor(difficulty / 5 + statMod + 10),
     casterSet: !!state.caster._id,
-    allowSave: state.spellLab.allowSave
+    allowSave: state.spellLab.allowSave,
+    saveLabel: !!state.spellLab._id ? 'Update' : 'Save'
   };
 
   return props;

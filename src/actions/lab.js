@@ -11,6 +11,7 @@ export const SAVE_FORMULA = 'SAVE_FORMULA';
 export const SAVE_FORMULA_SUCCESS = 'SAVE_FORMULA_SUCCESS';
 export const SAVE_FORMULA_ERROR = 'SAVE_FORMULA_ERROR';
 export const SAVE_FORMULA_SUCCESS_NOTIFIED = 'SAVE_FORMULA_SUCCESS_NOTIFIED';
+export const EDIT_FORMULA = 'EDIT_FORMULA';
 
 /**
   *  Spell Lab
@@ -47,12 +48,12 @@ export function saveFormula(id, name) {
 }
 
 function createFormula({ spellLab, caster }) {
+  const update = !!spellLab._id.value;
+  const id =
+    spellLab.school.value + '/' + spellLab.name.value + '/' + Math.random();
+
   return {
-    _id: spellLab.school.value +
-      '/' +
-      spellLab.name.value +
-      '/' +
-      Math.random(),
+    _id: update ? spellLab._id.value : id,
     type: 'formula',
     name: spellLab.name.value,
     school: spellLab.school.value,
@@ -66,7 +67,8 @@ function createFormula({ spellLab, caster }) {
     duration: spellLab.duration.value,
     damage: spellLab.damage.value,
     caster: caster._id,
-    components: spellLab.components.value
+    components: spellLab.components.value,
+    update: update
     //save,
   };
 }
@@ -76,13 +78,27 @@ export function storeToDB() {
     const formula = createFormula(getState());
     dispatch(saveFormula(formula._id, formula.name));
 
-    return DB.put(formula).then(function(doc) {
-      if (doc.ok) {
-        dispatch(saveFormulaSuccess(doc));
-      } else {
-        dispatch(saveFormulaError(doc));
-      }
-    });
+    if (formula.update) {
+      DB.get(formula._id).then(function(doc) {
+        return DB.put(Object.assign(formula, { _rev: doc._rev })).then(function(
+          doc
+        ) {
+          if (doc.ok) {
+            dispatch(saveFormulaSuccess(doc));
+          } else {
+            dispatch(saveFormulaError(doc));
+          }
+        });
+      });
+    } else {
+      return DB.put(formula).then(function(doc) {
+        if (doc.ok) {
+          dispatch(saveFormulaSuccess(doc));
+        } else {
+          dispatch(saveFormulaError(doc));
+        }
+      });
+    }
   };
 }
 
@@ -103,4 +119,43 @@ export function saveFormulaNotify() {
     dispatch(resetFormula());
     dispatch(saveFormulaSuccessNotified());
   };
+}
+
+/**
+ * Edit formula
+ */
+export function editFormula(id, history, fork = false) {
+  return function(dispatch, getState) {
+    const { spellBook } = getState();
+    let filteredArray = spellBook.items.filter(function(item) {
+      return item._id === id;
+    });
+
+    let formula = {};
+
+    for (let prop in filteredArray[0]) {
+      if (
+        typeof filteredArray[0][prop] === 'string' ||
+        typeof filteredArray[0][prop] === 'number'
+      ) {
+        formula[prop] = {
+          value: filteredArray[0][prop]
+        };
+      } else {
+        formula[prop] = filteredArray[0][prop];
+      }
+    }
+
+    if (fork) {
+      formula._id = '';
+      formula.name.value = '';
+    }
+
+    history.push('/lab');
+    return dispatch(openFormula(formula));
+  };
+}
+
+export function openFormula(item) {
+  return { type: EDIT_FORMULA, item: item };
 }

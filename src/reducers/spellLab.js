@@ -2,7 +2,8 @@ import {
   UPDATE_PARAMETER,
   UPDATE_DIFF,
   UPDATE_NAME,
-  RESET_FORMULA
+  RESET_FORMULA,
+  EDIT_FORMULA
 } from '../actions/lab';
 
 const initialState = {
@@ -171,6 +172,11 @@ const spellLab = (state = initialState, action) => {
         [action.parameter]: Object.assign({}, state[action.parameter], {
           diff: action.value
         })
+      });
+
+    case EDIT_FORMULA:
+      return Object.assign({}, state, action.item, {
+        allowSave: allowSave(action.item)
       });
 
     default:

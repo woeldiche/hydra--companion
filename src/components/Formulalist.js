@@ -24,7 +24,8 @@ class FormulaList extends Component {
       viewedFormula,
       openDrawer,
       onDrawerChange,
-      showFormula
+      showFormula,
+      editFormula
     } = this.props;
 
     return (
@@ -69,6 +70,7 @@ class FormulaList extends Component {
                   primarySkill={primarySkill}
                   primaryStat={primaryStat}
                   showSpell={viewedFormula}
+                  editFormula={editFormula}
                 />
               </Drawer>
             </div>}

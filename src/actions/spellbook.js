@@ -2,7 +2,7 @@ import HydraData from '../data/HydraData';
 import DB from '../data/DBStore';
 
 // SpellBook
-//export const EDIT_FORMULA = 'EDIT_FORMULA';
+export const EDIT_FORMULA = 'EDIT_FORMULA';
 //export const FILTER_SPELL_LIST = 'FILTER_SPELL_LIST';
 export const VIEW_FORMULA = 'VIEW_FORMULA';
 export const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
@@ -27,8 +27,7 @@ export const toggleDrawer = open => {
  */
 const sanitizeFormulas = result => {
   return result.docs.map(function(doc) {
-    const { _rev, ...props } = doc;
-    console.log(...props);
+    const { _rev, update, ...props } = doc;
     return { ...props };
   });
 };
@@ -61,6 +60,29 @@ const hydrateFormulas = items => {
 
   return hydratedItems;
 };
+
+/**
+ * Edit formula
+ */
+export function editFormula(id, history) {
+  return function(dispatch, getState) {
+    const { spellBook } = getState();
+    const formula = spellBook.items.filter(function(item) {
+      return item._id === id;
+    });
+
+    history.push('/lab');
+    return dispatch(openFormula(formula[0]));
+  };
+}
+
+export function openFormula(item) {
+  return { type: EDIT_FORMULA, item: item };
+}
+
+export function deleteFormula(id) {
+  return function(dispatch, getState) {};
+}
 
 /**
  * Load formulas

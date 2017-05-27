@@ -5,6 +5,7 @@ import {
   viewFormula,
   toggleDrawer
 } from '../actions/spellbook';
+import { editFormula } from '../actions/lab';
 import { changeUrl } from '../actions/misc';
 import { withRouter } from 'react-router-dom';
 import Formulalist from '../components/Formulalist';
@@ -45,6 +46,9 @@ const mapDispatchToProps = dispatch => {
     },
     onDrawerChange: open => {
       dispatch(toggleDrawer(open));
+    },
+    editFormula: (id, history, fork) => event => {
+      dispatch(editFormula(id, history, fork));
     }
   };
 };
