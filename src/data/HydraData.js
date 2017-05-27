@@ -6,7 +6,7 @@ HydraData.school = new Map([
   ['Conjuration'],
   ['Conjuration (Healing)'],
   ['Divination'],
-  ['Enchantment'],
+  ['Enchantment Charm'],
   ['Evocation'],
   ['Illusion'],
   ['Necromancy'],
