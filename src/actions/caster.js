@@ -39,7 +39,6 @@ export function saveCasterSuccess(json, time) {
 export function saveCasterToDB() {
   return function(dispatch, getState) {
     const { caster, config } = getState();
-    console.log(caster, config);
     dispatch(saveCaster());
 
     if (!!caster._id) {
@@ -65,14 +64,15 @@ export function saveCasterToDB() {
         user: config.user
       });
 
-      const configDoc = Object.assign(config, { caster: casterDoc._id });
+      DB.get('@@config').then(function(doc) {
+        const configDoc = Object.assign(doc, { caster: casterDoc._id });
 
-      const docs = [casterDoc, configDoc];
-
-      return DB.bulkDocs(docs).then(function(response) {
-        if (response.ok) {
-          dispatch(saveCasterSuccess(response, Date.now()));
-        }
+        return DB.bulkDocs([casterDoc, configDoc]).then(function(response) {
+          if (response.ok) {
+            dispatch(saveCasterSuccess(response, Date.now()));
+          } else {
+          }
+        });
       });
     }
   };
