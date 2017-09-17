@@ -48,7 +48,8 @@ export function saveFormula(id, name) {
 }
 
 function createFormula({ spellLab, caster }) {
-  const update = !!spellLab._id.value;
+  const update =
+    typeof spellLab._id === 'undefined' ? false : !!spellLab._id.value;
   const id =
     spellLab.school.value + '/' + spellLab.name.value + '/' + Math.random();
 

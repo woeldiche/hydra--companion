@@ -8,6 +8,7 @@ PouchDB.plugin(PouchdbFind);
 
 // Create new Pouch
 let UserData = new PouchDB('hydraUserData');
+//let UserConfig = new PouchDB('hydraUserConfig');
 
 if (sync) {
   // Define remote sync

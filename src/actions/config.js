@@ -32,9 +32,10 @@ export function getConfig() {
       })
       .catch(function(err) {
         if (err.status === 404) {
-          return DB.put({ _id: '@@config', type: 'config' }).then(function(
-            doc
-          ) {
+          return DB.put({
+            _id: '@@config',
+            type: 'config'
+          }).then(function(doc) {
             dispatch(fetchConfigSuccess({}));
           });
         } else {
